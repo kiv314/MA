@@ -15,12 +15,14 @@ public class hauptclass {
 			System.out.println(Karte[i].getfarbe());
 		}*/
 		
+		Player1 Spieler1 = new Player1 (null, null);
 		
-		
-		tellCard(Karte[42]);
 		
 		arrayMix(Karte);
-		tellCard(Karte[42]);
+		
+		Spieler1.setBlatt1(Karte[0]);
+		
+		tellCard(Spieler1.getBlatt1());
 		
 	}
 
@@ -68,7 +70,9 @@ public class hauptclass {
 		System.out.println("Karte: " + farbeBuchstabe + nummerBuchstabe);
 		}
 	
-	
+	private static void spieleRunde() {
+		
+	}
 	
 	
 	
