@@ -32,9 +32,11 @@ public class Player1 {
 	
 	
 	public void machZug() {
-		if (Blatt1.nummer == Blatt2.nummer) {
+		if ((Blatt1.nummer == 1|| Blatt1.nummer == 13) && (Blatt2.nummer == 1|| Blatt2.nummer == 13)) {
+			if(!(Blatt1.nummer == Blatt2.nummer)) {
 			//System.out.println(spielerName + ": Habe ein Paar!");
-			anzahlBlattpaare+= 1;
+				anzahlBlattpaare+= 1;
+			}
 		}
 		
 	}

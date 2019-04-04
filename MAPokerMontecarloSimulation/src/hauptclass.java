@@ -30,7 +30,7 @@ public class hauptclass {
 			Spieler1.machZug();	
 		}
 		
-		float wahrscheinlichkeitFürPaar = Spieler1.getAnzahlBlattPaare()/runden;
+		float wahrscheinlichkeitFürPaar = (Spieler1.getAnzahlBlattPaare()/runden)*100;
 		System.out.println(wahrscheinlichkeitFürPaar);
 		//tellCard(Spieler1.Blatt1);
 		
