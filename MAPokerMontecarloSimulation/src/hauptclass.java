@@ -1,4 +1,4 @@
-
+import java.util.Random;
 public class hauptclass {
 		
 
@@ -19,8 +19,14 @@ public class hauptclass {
 		
 		tellCard(Karte[42]);
 		
+		arrayMix(Karte);
+		tellCard(Karte[42]);
+		
 	}
 
+	
+	
+	
 	private static void tellCard(Card card) {
 		String farbeBuchstabe = null;
 		String nummerBuchstabe = null;
@@ -59,9 +65,28 @@ public class hauptclass {
 		else {
 			nummerBuchstabe = Integer.toString(nummer);
 		}
-		
 		System.out.println("Karte: " + farbeBuchstabe + nummerBuchstabe);
-		
-	}
+		}
+	
+	
+	
+	
+	
 
+	private static Card[] arrayMix(Card[] karten) { 
+		Card tmp; 
+		int rand; 
+	    Random r = new Random(); 
+	    for (int i = 0; i < karten.length; i++) { 
+	    	rand = r.nextInt(karten.length); 
+	    	tmp = karten[i]; 
+            karten[i] = karten[rand]; 
+            karten[rand] = tmp; 
+	        } 
+	    return karten; 
+	    } 
+
+	   
+	
+	
 }
