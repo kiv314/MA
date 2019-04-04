@@ -3,7 +3,10 @@ public class hauptclass {
 		
 
 	public static void main(String[] args) {
-		
+		Card Flop1 = null;
+		Card Flop2 = null;
+		Card Flop3 = null;
+		int runden = 10000000;
 		
 		Card[] Karte;
 		Karte = new Card[52];
@@ -15,12 +18,22 @@ public class hauptclass {
 			System.out.println(Karte[i].getfarbe());
 		}*/
 		
-		
-		
-		tellCard(Karte[42]);
-		
+		Player1 Spieler1 = new Player1 ("Spieler1",null, null);
 		arrayMix(Karte);
-		tellCard(Karte[42]);
+		
+		
+		Flop1 = Karte[2];
+		
+		for(int i = 0; i < runden; i+=1) {
+			arrayMix(Karte);
+			gibSpielerBlatt(Spieler1, Karte[0], Karte[1]);
+			Spieler1.machZug();	
+		}
+		
+		float wahrscheinlichkeitFürPaar = (Spieler1.getAnzahlBlattPaare()/runden)*100;
+		System.out.println(wahrscheinlichkeitFürPaar);
+		//tellCard(Spieler1.Blatt1);
+		
 		
 	}
 
@@ -68,11 +81,18 @@ public class hauptclass {
 		System.out.println("Karte: " + farbeBuchstabe + nummerBuchstabe);
 		}
 	
+	/*private static void spieleRunde() {
+		
+	}*/
 	
 	
-	
-	
+	private static void gibSpielerBlatt(Player1 Spieler, Card Karte1, Card Karte2) {
+		Spieler.setBlatt1(Karte1);
+		Spieler.setBlatt2(Karte2);
+	}
 
+	//private static void gibFlop()
+	
 	private static Card[] arrayMix(Card[] karten) { 
 		Card tmp; 
 		int rand; 
