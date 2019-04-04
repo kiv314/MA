@@ -6,7 +6,7 @@ public class hauptclass {
 		Card Flop1 = null;
 		Card Flop2 = null;
 		Card Flop3 = null;
-		int runden = 10000000;
+		int runden = 10;
 		
 		Card[] Karte;
 		Karte = new Card[52];
@@ -18,7 +18,8 @@ public class hauptclass {
 			System.out.println(Karte[i].getfarbe());
 		}*/
 		
-		Player1 Spieler1 = new Player1 ("Spieler1",null, null);
+		Player1 Spieler1 = new Player1 ("Spieler1", false, null, null);
+		Player1 Spieler2 = new Player1 ("Spieler2", false ,null, null);
 		arrayMix(Karte);
 		
 		
@@ -38,7 +39,24 @@ public class hauptclass {
 	}
 
 	
+	private static void findeSieger(Player1 Spieler1, Player1 Spieler2) {
+	}
 	
+	
+	/*private static boolean isflush(Card... Karte) {
+		boolean isflush;
+		if(Karte[2] == null) {
+			isflush = false;
+		}
+		else if(Karte.length == 5) {
+			//if()
+		}
+		else {
+			isflush = false;
+		}
+		
+		return isflush;
+	}*/
 	
 	private static void tellCard(Card card) {
 		String farbeBuchstabe = null;
