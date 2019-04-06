@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Player1 {
 	String spielerName;
-	boolean inRunde = false;
+	boolean inRunde;
 	boolean manuel;
 	float anzahlBlattpaare = 0;
 	int position;
@@ -9,6 +9,7 @@ public class Player1 {
 	Card Blatt2 = null;;
 	Card Flop1 = null;
 	Card Flop2 = null;
+	private Scanner scanner;
 
 	public Player1(String spielerName, boolean manuel, boolean inRunde, Card Blatt1, Card Blatt2) { // Konstruktor
 		this.inRunde = inRunde;
@@ -26,7 +27,7 @@ public class Player1 {
 		this.Blatt2 = Blatt;
 	}
 
-	public void setInRunde(boolean inrunde) {
+	public void setInRunde(boolean inRunde) {
 		this.inRunde = inRunde;
 	}
 
@@ -49,11 +50,14 @@ public class Player1 {
 	public String machZug() {
 		if (manuel) {
 			System.out.println("machen Sie einen Zug");
-			Scanner scanner = new Scanner(System.in);
+			scanner = new Scanner(System.in);
 			String input = scanner.nextLine();
 			return input;
 		}
-		if ((Blatt1.nummer == 2 || Blatt1.nummer == 3) && (Blatt2.nummer == 2 || Blatt2.nummer == 3)) {
+		if ((Blatt1.getNummer() == Blatt2.getNummer()) && Blatt1.getNummer() > 5) {
+			return "check";
+		}
+		else if((Blatt1.getNummer() <= 8 && !(Blatt1.getNummer() == 1)) && (Blatt2.getNummer() <= 8 || !(Blatt1.getNummer() == 1))) {
 			return "fold";
 		} else {
 			return "check";
