@@ -18,6 +18,11 @@ public class Player1 {
 		this.Blatt1 = Blatt1;
 		this.Blatt2 = Blatt2;
 	}
+	
+	public Card[] Blatt() {
+		Card[] Blatt = {Blatt1, Blatt2};
+		return Blatt;
+	}
 
 	public void setBlatt1(Card Blatt) {
 		this.Blatt1 = Blatt;
