@@ -12,29 +12,31 @@ public class Table {
 		this.river = river;
 		this.turn = turn;
 	}
-	
-	public Card[] tischKarten(Card... Karte){
+
+	public Card[] tischKarten(Card... Karte) {
 		return Karte;
 	}
 
-	public Card[][] HändeVonSpieler(Card[] tk, Card[] Blatt){
-		Card[][] Hände = {  {Blatt[0], Blatt[1], tk[0], tk[1], tk[2]},
-							{Blatt[0], Blatt[1], tk[0], tk[1], tk[3]},
-							{Blatt[0], Blatt[1], tk[0], tk[1], tk[4]},
-							{Blatt[0], Blatt[1], tk[0], tk[2], tk[3]},
-							{Blatt[0], Blatt[1], tk[0], tk[2], tk[4]},
-							{Blatt[0], Blatt[1], tk[0], tk[3], tk[4]},
-							{Blatt[0], Blatt[1], tk[1], tk[2], tk[3]},
-							{Blatt[0], Blatt[1], tk[1], tk[2], tk[4]},
-							{Blatt[0], Blatt[1], tk[1], tk[3], tk[4]},
-							{Blatt[0], Blatt[1], tk[2], tk[3], tk[4]},				
-		}; 		
-		return Hände;	
+	public Card[][] HändeVonSpieler(Card[] tk, Card[] Blatt) {
+		if (tk.length == 3) {
+			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };	
+			return Hände;
+		} 
+		if (tk.length == 4) {
+			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
+					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[3] }};
+			return Hände;
+		}
+		else {
+			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
+					{ Blatt[0], Blatt[1], tk[0], tk[1], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[2], tk[3] },
+					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[3], tk[4] },
+					{ Blatt[0], Blatt[1], tk[1], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[4] },
+					{ Blatt[0], Blatt[1], tk[1], tk[3], tk[4] }, { Blatt[0], Blatt[1], tk[2], tk[3], tk[4] }, };
+			return Hände;
+		}
 	}
-	
-	
-	
-	
+
 	public void setflop1(Card flop1) {
 		this.flop1 = flop1;
 	}
@@ -49,12 +51,12 @@ public class Table {
 
 	public void setRiver(Card river) {
 		this.river = river;
-	} 
-	
+	}
+
 	public void setTurn(Card turn) {
 		this.turn = turn;
 	}
-	
+
 	public Card getflop1() {
 		return this.flop1;
 	}
@@ -62,7 +64,7 @@ public class Table {
 	public Card getflop2() {
 		return this.flop2;
 	}
-	
+
 	public Card getflop3() {
 		return this.flop3;
 	}
@@ -70,15 +72,15 @@ public class Table {
 	public Card getRiver() {
 		return this.river;
 	}
-	
+
 	public Card getTurn() {
 		return this.turn;
 	}
-	
+
 	public void gibFlopTisch(Card karte1, Card karte2, Card karte3) {
 		this.flop1 = karte1;
 		this.flop2 = karte2;
 		this.flop3 = karte3;
 	}
-	
+
 }
