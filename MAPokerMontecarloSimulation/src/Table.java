@@ -12,7 +12,29 @@ public class Table {
 		this.river = river;
 		this.turn = turn;
 	}
+	
+	public Card[] tischKarten(Card... Karte){
+		return Karte;
+	}
 
+	public Card[][] HändeVonSpieler(Card[] tk, Card[] Blatt){
+		Card[][] Hände = {  {Blatt[0], Blatt[1], tk[0], tk[1], tk[2]},
+							{Blatt[0], Blatt[1], tk[0], tk[1], tk[3]},
+							{Blatt[0], Blatt[1], tk[0], tk[1], tk[4]},
+							{Blatt[0], Blatt[1], tk[0], tk[2], tk[3]},
+							{Blatt[0], Blatt[1], tk[0], tk[2], tk[4]},
+							{Blatt[0], Blatt[1], tk[0], tk[3], tk[4]},
+							{Blatt[0], Blatt[1], tk[1], tk[2], tk[3]},
+							{Blatt[0], Blatt[1], tk[1], tk[2], tk[4]},
+							{Blatt[0], Blatt[1], tk[1], tk[3], tk[4]},
+							{Blatt[0], Blatt[1], tk[2], tk[3], tk[4]},				
+		}; 		
+		return Hände;	
+	}
+	
+	
+	
+	
 	public void setflop1(Card flop1) {
 		this.flop1 = flop1;
 	}
