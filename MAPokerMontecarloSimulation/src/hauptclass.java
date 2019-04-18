@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
-
+import java.util.ArrayList;
 public class hauptclass {
 
 	private static Scanner scanner;
@@ -13,7 +13,7 @@ public class hauptclass {
 		for (int i = 0; i < 52; i++) {
 			Karte[i] = new Card((i % 13) + 1, i % 4);
 		}
-		// 52 Karten erstellt mit Nummern: 1=ass; 2=2, etc bis 13=K, und farben
+		// 52 Karten erstellt mit Nummern: 1 =Ass, 2=2, etc bis 13=K, und farben
 		// 0=Heart(H), 1=Dimond(D), 2=Spade(S), 3clubs(C)
 		/*
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
@@ -49,6 +49,7 @@ public class hauptclass {
 			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
 			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
 			gibausKartenStapel(Spieler1Hände[0]);
+			Spieler1Hände[0] = Tisch.sortCards(Spieler1Hände[0]);
 			gibausKartenStapel(Spieler1Hände[0]);
 			//System.out.println("Wer hat gewonnen?");
 			
@@ -127,7 +128,6 @@ public class hauptclass {
 		if(Spieler1.inRunde && Spieler2.inRunde) { return false; }
 		else {return true;}
 	}
-	
 	
 	// private static void findeSieger(Player1 Spieler1, Player1 Spieler2) {
 	// }
