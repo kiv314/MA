@@ -62,9 +62,9 @@ public class Player1 {
 		if ((Blatt1.getNummer() == Blatt2.getNummer()) && Blatt1.getNummer() > 5) {
 			return "check";
 		}
-		else if((Blatt1.getNummer() <= 8 && !(Blatt1.getNummer() == 1)) && (Blatt2.getNummer() <= 8 || !(Blatt1.getNummer() == 1))) {
+		/*else if((Blatt1.getNummer() <= 8 && !(Blatt1.getNummer() == 1)) && (Blatt2.getNummer() <= 8 || !(Blatt1.getNummer() == 1))) {
 			return "fold";
-		} else {
+		}*/ else {
 			return "check";
 		}
 
