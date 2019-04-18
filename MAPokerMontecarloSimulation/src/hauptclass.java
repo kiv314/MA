@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class hauptclass {
 
@@ -47,17 +48,19 @@ public class hauptclass {
 			zeigSpielerBlatt(Spieler2);
 			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
 			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
-			System.out.println("Wer hat gewonnen?");
+			gibausKartenStapel(Spieler1Hände[0]);
+			gibausKartenStapel(Spieler1Hände[0]);
+			//System.out.println("Wer hat gewonnen?");
 			
-			System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", " + tellCard(Tisch.getflop2()) + ", " + 
-			tellCard(Tisch.getflop3()) + ", " + tellCard(Tisch.getRiver()) + ", " + tellCard(Tisch.getTurn()));
-			System.out.println("Comp: Dein Blatt: " + tellCard(Spieler1.getBlatt1()) + ", " + tellCard(Spieler1.getBlatt2()));
-			System.out.println("Comp: " + Spieler2.spielerName + " Blatt: " + tellCard(Spieler2.getBlatt1()) + ", "+ 
-			tellCard(Spieler2.getBlatt2()));
-			scanner = new Scanner(System.in);
-			String inputSpieler = scanner.nextLine();
-			if (Spieler1.spielerName == inputSpieler)  { Spieler2.setInRunde(false); break;}
-			if (Spieler2.spielerName == inputSpieler)  { Spieler1.setInRunde(false); break;} 
+			//System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", " + tellCard(Tisch.getflop2()) + ", " + 
+			//tellCard(Tisch.getflop3()) + ", " + tellCard(Tisch.getRiver()) + ", " + tellCard(Tisch.getTurn()));
+			//System.out.println("Comp: Dein Blatt: " + tellCard(Spieler1.getBlatt1()) + ", " + tellCard(Spieler1.getBlatt2()));
+			//System.out.println("Comp: " + Spieler2.spielerName + " Blatt: " + tellCard(Spieler2.getBlatt1()) + ", "+ 
+			//tellCard(Spieler2.getBlatt2()));
+			//scanner = new Scanner(System.in);
+			//String inputSpieler = scanner.nextLine();
+			//if (Spieler1.spielerName == inputSpieler)  { Spieler2.setInRunde(false); break;}
+			//if (Spieler2.spielerName == inputSpieler)  { Spieler1.setInRunde(false); break;} 
 			break;
 		}	
 		
@@ -183,6 +186,14 @@ public class hauptclass {
 		Spieler.setBlatt2(karte2);
 	}
 
+	private static void gibausKartenStapel(Card[] Karte) {
+		String Ausgabe = "";
+		for(int i = 0; i<Karte.length; i++) {
+			Ausgabe = Ausgabe + hauptclass.tellCard(Karte[i]);
+		}
+		System.out.println(Ausgabe);
+	}
+	
 	private static Card[] arrayMix(Card[] karten) {
 		Card tmp;
 		int rand;

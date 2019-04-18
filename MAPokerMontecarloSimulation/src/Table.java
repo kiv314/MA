@@ -19,20 +19,28 @@ public class Table {
 
 	public Card[][] HändeVonSpieler(Card[] tk, Card[] Blatt) {
 		if (tk.length == 3) {
-			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };	
-			return Hände;
-		} 
-		if (tk.length == 4) {
-			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
-					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[3] }};
+			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };
 			return Hände;
 		}
-		else {
+		if (tk.length == 4) {
+			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
+					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[3] },
+					{ Blatt[0], tk[0], tk[1], tk[2], tk[3] }, { Blatt[1], tk[0], tk[1], tk[2], tk[3] } };
+			return Hände;
+		} else {
 			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
 					{ Blatt[0], Blatt[1], tk[0], tk[1], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[2], tk[3] },
 					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[3], tk[4] },
 					{ Blatt[0], Blatt[1], tk[1], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[4] },
-					{ Blatt[0], Blatt[1], tk[1], tk[3], tk[4] }, { Blatt[0], Blatt[1], tk[2], tk[3], tk[4] }, };
+					{ Blatt[0], Blatt[1], tk[1], tk[3], tk[4] }, { Blatt[0], Blatt[1], tk[2], tk[3], tk[4] },
+
+					{ Blatt[0], tk[0], tk[1], tk[2], tk[3] }, { Blatt[0], tk[0], tk[1], tk[2], tk[4] },
+					{ Blatt[0], tk[0], tk[1], tk[3], tk[4] }, { Blatt[0], tk[0], tk[2], tk[3], tk[4] },
+					{ Blatt[0], tk[1], tk[2], tk[3], tk[4] },
+
+					{ Blatt[1], tk[0], tk[1], tk[2], tk[3] }, { Blatt[1], tk[0], tk[1], tk[2], tk[4] },
+					{ Blatt[1], tk[0], tk[1], tk[3], tk[4] }, { Blatt[1], tk[0], tk[2], tk[3], tk[4] },
+					{ Blatt[1], tk[1], tk[2], tk[3], tk[4] }, { tk[0], tk[1], tk[2], tk[3], tk[4] } };
 			return Hände;
 		}
 	}
