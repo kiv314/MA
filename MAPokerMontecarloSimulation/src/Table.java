@@ -95,7 +95,7 @@ public class Table {
 		this.flop3 = karte3;
 	}
 
-	public Card[] sortCards(Card[] alteKarte) {
+	public static Card[] sortCards(Card[] alteKarte) {
 
 		Card[] sortiert = {};
 		for (int k = 0; k < alteKarte.length; k++) {
@@ -118,6 +118,13 @@ public class Table {
 		return sortiert;
 	}
 
+	public Card[][] sortHands(Card[][] alteKarten){
+		for (int i = 0; i < alteKarten.length; i++) {
+			alteKarten[i] = Table.sortCards(alteKarten[i]);
+		}
+		return alteKarten;
+	}
+	
 	public int score(Card[] Karte) {
 		int flush = 100;
 		int score = 0;

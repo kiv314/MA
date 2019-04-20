@@ -49,7 +49,7 @@ public class hauptclass {
 			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
 			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
 			gibausKartenStapel(Spieler1Hände[0]);
-			Spieler1Hände[0] = Tisch.sortCards(Spieler1Hände[0]);
+			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
 			gibausKartenStapel(Spieler1Hände[0]);
 			//System.out.println("Wer hat gewonnen?");
 			
