@@ -125,25 +125,31 @@ public class Table {
 		return alteKarten;
 	}
 	
-	public int score(Card[] Karte) {
-		int flush = 100;
-		int score = 0;
+	public double score(Card[] Karte) {
+		double scoreWert = 0;
+		
 		if ((Karte[0].farbe == Karte[1].farbe) && (Karte[0].farbe == Karte[2].farbe)
 				&& (Karte[0].farbe == Karte[3].farbe) && (Karte[0].farbe == Karte[4].farbe)) { // prüfen auf Flush
-			flush = 10000;
+			
+			if((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && 
+					(Karte[3].nummer == 11) && (Karte[4].nummer == 10) ) { // prüfen auf Royal flush
+				
+				scoreWert = 14000000000; 
+			}
+		
 		}
 		if((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && 
 				(Karte[3].nummer == 11) && (Karte[4].nummer == 10) ) { // prüfen auf Ass-Straight
-			score = 140000*(flush/100);
+		
 		}
 		if((Karte[0].nummer > 1) && (Karte[1].nummer == (Karte[0].nummer)+1) && (Karte[1].nummer == (Karte[2].nummer)+1) && 
 				(Karte[2].nummer == (Karte[3].nummer)+1) && (Karte[3].nummer == (Karte[4].nummer)+1)) {//prüfen auf sonstige straight
-			score = Karte[0].nummer*10000*(flush/100);
+			
 		}
 		else {
-			if(Karte[0].nummer == 1) {score = 14;}
-			else {score = Karte[0].nummer;}// Highcrad 
+			if(Karte[0].nummer == 1) {scoreWert= 14;}
+			else {scoreWert = Karte[0].nummer;}// Highcrad 
 		}
-		return score;
+		return scoreWert;
 	}
 }
