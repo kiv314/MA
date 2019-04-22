@@ -46,9 +46,11 @@ public class hauptclass {
 			zeigSpielerBlatt(Spieler2);
 			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
 			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
-			gibausKartenStapel(Spieler1Hände[0]);
+			Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.Blatt());
 			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
+			Spieler2Hände = Tisch.sortHands(Spieler2Hände);
 			gibausKartenStapel(Spieler1Hände[0]);
+			
 			//System.out.println("Wer hat gewonnen?");
 			
 			//System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", " + tellCard(Tisch.getflop2()) + ", " + 

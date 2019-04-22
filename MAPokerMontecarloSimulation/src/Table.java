@@ -243,4 +243,12 @@ public class Table {
 		
 		return scoreWert;
 	}
+	
+	public Card[] bestHand(Card[][] Hand) {
+		Card[] aktuelleHand = Hand[0];
+		for(int i=0; i<Hand.length;i++) {
+				
+			}
+	}
+	
 }
