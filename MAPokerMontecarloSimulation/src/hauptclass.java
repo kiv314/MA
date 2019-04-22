@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 public class hauptclass {
 
-	private static Scanner scanner;
-
 	public static void main(String[] args) {
 
 		Card[] Karte;
