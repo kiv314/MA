@@ -19,28 +19,27 @@ public class hauptclass {
 		Table Tisch = new Table(null, null, null, null, null);
 		Player1 Spieler1 = new Player1("Ich", true, false, null, null);
 		Player1 Spieler2 = new Player1("Spieler2", false, false, null, null);
-		arrayMix(Karte);
 		
 		setzeSpielerInRunde(Spieler1, Spieler2);
 		while (Spieler1.getInRunde() && Spieler2.getInRunde())
 		{
-			gibSpielerBlatt(Spieler1, Karte[0], Karte[1]);
+			gibSpielerBlatt(Spieler1, Karte[0], Karte[12]);
 			gibSpielerBlatt(Spieler2, Karte[2], Karte[3]);
 			zeigSpielerBlatt(Spieler1);
-			zugAusführen(Spieler1);
-			zugAusführen(Spieler2);
+			//zugAusführen(Spieler1);
+			//zugAusführen(Spieler2);
 			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibFlop(Tisch, Karte[4], Karte[5], Karte[6]);
-			zugAusführen(Spieler1);
-			zugAusführen(Spieler2);
+			gibFlop(Tisch, Karte[8], Karte[10], Karte[11]);
+			//zugAusführen(Spieler1);
+			//zugAusführen(Spieler2);
 			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibRiver(Tisch, Karte[7]);
-			zugAusführen(Spieler1);
-			zugAusführen(Spieler2);
+			gibRiver(Tisch, Karte[9]);
+			//zugAusführen(Spieler1);
+			//zugAusführen(Spieler2);
 			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibTurn(Tisch, Karte[8]);
-			zugAusführen(Spieler1);
-			zugAusführen(Spieler2);
+			gibTurn(Tisch, Karte[37]);
+			//zugAusführen(Spieler1);
+			//zugAusführen(Spieler2);
 			if(nur1Spieler(Spieler1, Spieler2)) {break;}
 			zeigSpielerBlatt(Spieler1);
 			zeigSpielerBlatt(Spieler2);
@@ -48,9 +47,14 @@ public class hauptclass {
 			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
 			Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.Blatt());
 			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
-			Spieler2Hände = Tisch.sortHands(Spieler2Hände);
-			gibausKartenStapel(Spieler1Hände[0]);
-			
+			//Spieler2Hände = Tisch.sortHands(Spieler2Hände);
+			gibausKartenStapel(Spieler1Hände[6]);
+				System.out.println(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)));
+			gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
+			if(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) > Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
+				System.out.println(Spieler1.spielerName + " hat gewonnen!");
+			}
+			else{System.out.println(Spieler2.spielerName + " hat gewonnen!");}
 			//System.out.println("Wer hat gewonnen?");
 			
 			//System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", " + tellCard(Tisch.getflop2()) + ", " + 
@@ -65,13 +69,6 @@ public class hauptclass {
 			break;
 		}	
 		
-		if (Spieler1.inRunde) {
-			System.out.println("Comp: " + Spieler1.spielerName + " hat gewonnen!");
-		}
-		
-		if (Spieler2.inRunde) {
-			System.out.println("Comp: " + Spieler2.spielerName + " hat gewonnen!");
-		}
 		/*
 		 * float wahrscheinlichkeitFürPaar =
 		 * (Spieler1.getAnzahlBlattPaare()/runden)*100;
