@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
+
 public class hauptclass {
 
 	public static void main(String[] args) {
@@ -19,56 +20,64 @@ public class hauptclass {
 		Table Tisch = new Table(null, null, null, null, null);
 		Player1 Spieler1 = new Player1("Ich", true, false, null, null);
 		Player1 Spieler2 = new Player1("Spieler2", false, false, null, null);
-		
+
 		arrayMix(Karte);
 		setzeSpielerInRunde(Spieler1, Spieler2);
-		while (Spieler1.getInRunde() && Spieler2.getInRunde())
-		{
-			gibSpielerBlatt(Spieler1, Karte[0], Karte[12]);
-			gibSpielerBlatt(Spieler2, Karte[2], Karte[3]);
-			zeigSpielerBlatt(Spieler1);
-			//zugAusführen(Spieler1);
-			//zugAusführen(Spieler2);
-			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibFlop(Tisch, Karte[8], Karte[10], Karte[11]);
-			//zugAusführen(Spieler1);
-			//zugAusführen(Spieler2);
-			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibRiver(Tisch, Karte[9]);
-			//zugAusführen(Spieler1);
-			//zugAusführen(Spieler2);
-			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			gibTurn(Tisch, Karte[37]);
-			//zugAusführen(Spieler1);
-			//zugAusführen(Spieler2);
-			if(nur1Spieler(Spieler1, Spieler2)) {break;}
-			zeigSpielerBlatt(Spieler1);
-			zeigSpielerBlatt(Spieler2);
-			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
-			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
-			Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.Blatt());
-			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
-			//Spieler2Hände = Tisch.sortHands(Spieler2Hände);
-			gibausKartenStapel(Spieler1Hände[6]);
-			gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
-			if(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) > Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
-				System.out.println(Spieler1.spielerName + " hat gewonnen!");
-			}
-			else{System.out.println(Spieler2.spielerName + " hat gewonnen!");}
-			//System.out.println("Wer hat gewonnen?");
-			
-			//System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", " + tellCard(Tisch.getflop2()) + ", " + 
-			//tellCard(Tisch.getflop3()) + ", " + tellCard(Tisch.getRiver()) + ", " + tellCard(Tisch.getTurn()));
-			//System.out.println("Comp: Dein Blatt: " + tellCard(Spieler1.getBlatt1()) + ", " + tellCard(Spieler1.getBlatt2()));
-			//System.out.println("Comp: " + Spieler2.spielerName + " Blatt: " + tellCard(Spieler2.getBlatt1()) + ", "+ 
-			//tellCard(Spieler2.getBlatt2()));
-			//scanner = new Scanner(System.in);
-			//String inputSpieler = scanner.nextLine();
-			//if (Spieler1.spielerName == inputSpieler)  { Spieler2.setInRunde(false); break;}
-			//if (Spieler2.spielerName == inputSpieler)  { Spieler1.setInRunde(false); break;} 
-			break;
-		}	
+
+		gibSpielerBlatt(Spieler1, Karte[0], Karte[12]);
+		gibSpielerBlatt(Spieler2, Karte[2], Karte[3]);
+		zeigSpielerBlatt(Spieler1);
+		zugAusführen(Spieler1);
+		zugAusführen(Spieler2);
 		
+		gibFlop(Tisch, Karte[8], Karte[10], Karte[11]);
+		zugAusführen(Spieler1);
+		zugAusführen(Spieler2);
+		
+		gibRiver(Tisch, Karte[9]);
+		zugAusführen(Spieler1);
+		zugAusführen(Spieler2);
+	
+		gibTurn(Tisch, Karte[37]);
+		zugAusführen(Spieler1);
+		zugAusführen(Spieler2);
+		
+		zeigSpielerBlatt(Spieler1);
+		zeigSpielerBlatt(Spieler2);
+		Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
+		Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
+		Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.Blatt());
+		Spieler1Hände = Tisch.sortHands(Spieler1Hände);
+		Spieler2Hände = Tisch.sortHands(Spieler2Hände);
+		gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
+		gibausKartenStapel(Tisch.bestHand(Spieler2Hände));
+		if (Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) > Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
+			System.out.println(Spieler1.spielerName + " hat gewonnen!");
+		}
+		else if(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) == Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
+			System.out.println("unentschieden!");
+		}
+		else {
+			System.out.println(Spieler2.spielerName + " hat gewonnen!");
+		}
+		// System.out.println("Wer hat gewonnen?");
+
+		// System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", "
+		// + tellCard(Tisch.getflop2()) + ", " +
+		// tellCard(Tisch.getflop3()) + ", " + tellCard(Tisch.getRiver()) + ", " +
+		// tellCard(Tisch.getTurn()));
+		// System.out.println("Comp: Dein Blatt: " + tellCard(Spieler1.getBlatt1()) + ",
+		// " + tellCard(Spieler1.getBlatt2()));
+		// System.out.println("Comp: " + Spieler2.spielerName + " Blatt: " +
+		// tellCard(Spieler2.getBlatt1()) + ", "+
+		// tellCard(Spieler2.getBlatt2()));
+		// scanner = new Scanner(System.in);
+		// String inputSpieler = scanner.nextLine();
+		// if (Spieler1.spielerName == inputSpieler) { Spieler2.setInRunde(false);
+		// break;}
+		// if (Spieler2.spielerName == inputSpieler) { Spieler1.setInRunde(false);
+		// break;}
+
 		/*
 		 * float wahrscheinlichkeitFürPaar =
 		 * (Spieler1.getAnzahlBlattPaare()/runden)*100;
@@ -94,16 +103,15 @@ public class hauptclass {
 			case "fold":
 				Spieler.setInRunde(false);
 				System.out.println(Spieler.spielerName + ": fold!");
-				
+
 				break;
 			case "check":
 				System.out.println(Spieler.spielerName + ": Check!");
 				break;
 			default:
 				System.out.println("Fehler!");
-			}	
+			}
 		}
-		else{}
 	}
 
 	private static void gibFlop(Table t, Card karte1, Card karte2, Card karte3) {
@@ -116,16 +124,20 @@ public class hauptclass {
 		t.setRiver(karte);
 		System.out.println("Comp: River: " + hauptclass.tellCard(karte));
 	}
-	
+
 	private static void gibTurn(Table t, Card karte) {
 		t.setTurn(karte);
 		System.out.println("Comp: Turn: " + hauptclass.tellCard(karte));
 	}
+
 	private static boolean nur1Spieler(Player1 Spieler1, Player1 Spieler2) {
-		if(Spieler1.inRunde && Spieler2.inRunde) { return false; }
-		else {return true;}
+		if (Spieler1.inRunde && Spieler2.inRunde) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
+
 	// private static void findeSieger(Player1 Spieler1, Player1 Spieler2) {
 	// }
 
@@ -177,7 +189,6 @@ public class hauptclass {
 		return " " + farbeBuchstabe + nummerBuchstabe;
 	}
 
-	
 	private static void gibSpielerBlatt(Player1 Spieler, Card karte1, Card karte2) {
 		Spieler.setBlatt1(karte1);
 		Spieler.setBlatt2(karte2);
@@ -185,12 +196,12 @@ public class hauptclass {
 
 	private static void gibausKartenStapel(Card[] Karte) {
 		String Ausgabe = "";
-		for(int i = 0; i<Karte.length; i++) {
+		for (int i = 0; i < Karte.length; i++) {
 			Ausgabe = Ausgabe + hauptclass.tellCard(Karte[i]);
 		}
 		System.out.println(Ausgabe);
 	}
-	
+
 	private static Card[] arrayMix(Card[] karten) {
 		Card tmp;
 		int rand;
