@@ -5,43 +5,32 @@ public class Player1 {
 	boolean manuel;
 	float anzahlBlattpaare = 0;
 	int position;
-	Card Blatt1 = null;
-	Card Blatt2 = null;;
 	Card Flop1 = null;
 	Card Flop2 = null;
+	Card[] blatt = null;
+	
 	private Scanner scanner;
 
-	public Player1(String spielerName, boolean manuel, boolean inRunde, Card Blatt1, Card Blatt2) { // Konstruktor
+	public Player1(String spielerName, boolean manuel, boolean inRunde, Card[] blatt) { // Konstruktor
 		this.inRunde = inRunde;
 		this.manuel = manuel;
 		this.spielerName = spielerName;
-		this.Blatt1 = Blatt1;
-		this.Blatt2 = Blatt2;
+		this.blatt = blatt;
 	}
 	
-	public Card[] Blatt() {
-		Card[] Blatt = {Blatt1, Blatt2};
-		return Blatt;
+
+	public void setBlatt(Card[] blatt) {
+		this.blatt = blatt;
 	}
 
-	public void setBlatt1(Card Blatt) {
-		this.Blatt1 = Blatt;
-	}
-
-	public void setBlatt2(Card Blatt) {
-		this.Blatt2 = Blatt;
-	}
 
 	public void setInRunde(boolean inRunde) {
 		this.inRunde = inRunde;
 	}
 
-	public Card getBlatt1() {
-		return Blatt1;
-	}
 
-	public Card getBlatt2() {
-		return Blatt2;
+	public Card[] getBlatt() {
+		return blatt;
 	}
 
 	public boolean getInRunde() {
@@ -59,7 +48,7 @@ public class Player1 {
 			String input = scanner.nextLine();
 			return input;
 		}
-		if ((Blatt1.getNummer() == Blatt2.getNummer()) && Blatt1.getNummer() > 5) {
+		if ((blatt[0].getNummer() == blatt[1].getNummer()) && blatt[1].getNummer() > 5) {
 			return "check";
 		}
 		/*else if((Blatt1.getNummer() <= 8 && !(Blatt1.getNummer() == 1)) && (Blatt2.getNummer() <= 8 || !(Blatt1.getNummer() == 1))) {

@@ -227,14 +227,14 @@ public class Table {
 		}
 
 		// ----- HighCrad----
-		/*else {
+		else {
 			double wert1 = Karte[1].wert;
 			double wert2 = Karte[2].wert;
 			double wert3 = Karte[3].wert;
 			double wert4 = Karte[4].wert;
 
-			scoreWert = Karte[0].wert + ((wert1 + wert2 + wert3 + wert4) / 10);
-		}*/
+			scoreWert = Karte[0].wert + ((wert1 + (wert2)/10 + (wert3)/100 + (wert4)/1000) / 10);
+		}
 
 		return scoreWert;
 	}

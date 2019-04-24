@@ -18,35 +18,35 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table Tisch = new Table(null, null, null, null, null);
-		Player1 Spieler1 = new Player1("Ich", true, false, null, null);
-		Player1 Spieler2 = new Player1("Spieler2", false, false, null, null);
+		Player1 Spieler1 = new Player1("Ich", true, false, null);
+		Player1 Spieler2 = new Player1("Spieler2", false, false, null);
 
 		arrayMix(Karte);
 		setzeSpielerInRunde(Spieler1, Spieler2);
 
-		gibSpielerBlatt(Spieler1, Karte[0], Karte[12]);
+		gibSpielerBlatt(Spieler1, Karte[0], Karte[1]);
 		gibSpielerBlatt(Spieler2, Karte[2], Karte[3]);
 		zeigSpielerBlatt(Spieler1);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
 		
-		gibFlop(Tisch, Karte[8], Karte[10], Karte[11]);
+		gibFlop(Tisch, Karte[23], Karte[24], Karte[25]);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
 		
-		gibRiver(Tisch, Karte[9]);
+		gibRiver(Tisch, Karte[26]);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
 	
-		gibTurn(Tisch, Karte[37]);
+		gibTurn(Tisch, Karte[27]);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
 		
 		zeigSpielerBlatt(Spieler1);
 		zeigSpielerBlatt(Spieler2);
 		Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
-		Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.Blatt());
-		Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.Blatt());
+		Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.blatt);
+		Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.blatt);
 		Spieler1Hände = Tisch.sortHands(Spieler1Hände);
 		Spieler2Hände = Tisch.sortHands(Spieler2Hände);
 		gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
@@ -94,7 +94,7 @@ public class hauptclass {
 	}
 
 	private static void zeigSpielerBlatt(Player1 Spieler) {
-		System.out.println(Spieler.spielerName + ": " + tellCard(Spieler.Blatt1) + ", " + tellCard(Spieler.Blatt2));
+		System.out.println(Spieler.spielerName + ": " + tellCard(Spieler.blatt[0]) + ", " + tellCard(Spieler.blatt[1]));
 	}
 
 	private static void zugAusführen(Player1 Spieler) {
@@ -189,9 +189,9 @@ public class hauptclass {
 		return " " + farbeBuchstabe + nummerBuchstabe;
 	}
 
-	private static void gibSpielerBlatt(Player1 Spieler, Card karte1, Card karte2) {
-		Spieler.setBlatt1(karte1);
-		Spieler.setBlatt2(karte2);
+	private static void gibSpielerBlatt(Player1 Spieler, Card blatt1, Card blatt2) {
+		Card[] blatt = {blatt1, blatt2};
+		Spieler.blatt = blatt;
 	}
 
 	private static void gibausKartenStapel(Card[] Karte) {
