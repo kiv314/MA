@@ -20,6 +20,7 @@ public class hauptclass {
 		Player1 Spieler1 = new Player1("Ich", true, false, null, null);
 		Player1 Spieler2 = new Player1("Spieler2", false, false, null, null);
 		
+		arrayMix(Karte);
 		setzeSpielerInRunde(Spieler1, Spieler2);
 		while (Spieler1.getInRunde() && Spieler2.getInRunde())
 		{
@@ -49,7 +50,6 @@ public class hauptclass {
 			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
 			//Spieler2Hände = Tisch.sortHands(Spieler2Hände);
 			gibausKartenStapel(Spieler1Hände[6]);
-				System.out.println(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)));
 			gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
 			if(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) > Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
 				System.out.println(Spieler1.spielerName + " hat gewonnen!");

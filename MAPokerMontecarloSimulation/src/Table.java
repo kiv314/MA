@@ -134,63 +134,62 @@ public class Table {
 
 			if ((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && (Karte[3].nummer == 11)
 					&& (Karte[4].nummer == 10)) { // prüfen auf Royal flush
-				scoreWert = 14 * 10 ^ 9;
+				scoreWert = 14 * Math.pow(10, 9);
 			}
 
 			else if ((Karte[0].nummer > 1) && (Karte[1].nummer == (Karte[0].nummer) - 1) // Straight-FLush
 					&& (Karte[1].nummer == (Karte[2].nummer) - 1) && (Karte[2].nummer == (Karte[3].nummer) - 1)
 					&& (Karte[3].nummer == (Karte[4].nummer) - 1)) {
 
-				scoreWert = Karte[0].nummer * 10 ^ 9;
+				scoreWert = Karte[0].nummer * Math.pow(10, 9);
 
 			} else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 2) && (Karte[2].nummer == 3)// Wheel-flush
 					&& (Karte[3].nummer == 4) && (Karte[4].nummer == 5)) {
 
-				scoreWert = 5 * 10 ^ 9;
+				scoreWert = 5 * Math.pow(10, 9);
 			}
 		}
 
 		// ------ 4 of a Kind --------------
 		else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[1].nummer == Karte[2].nummer)
 				&& (Karte[1].nummer == Karte[3].nummer)) {// 4er mit 0,1,2,3
-			scoreWert = (Karte[0].wert * 10 ^ 8) + (Karte[5].wert * 10 ^ 5);
+			scoreWert = (Karte[0].wert * Math.pow(10, 8)) + (Karte[4].wert * Math.pow(10, 6));
 		} else if ((Karte[1].nummer == Karte[2].nummer) && (Karte[2].nummer == Karte[3].nummer)
 				&& (Karte[3].nummer == Karte[4].nummer)) {// 4er mit 1,2,3,4
-			scoreWert = (Karte[1].wert * 10 ^ 8) + (Karte[0].wert * 10 ^ 5);
+			scoreWert = (Karte[1].wert * Math.pow(10, 8)) + (Karte[0].wert * Math.pow(10, 6));
 		}
 
 		// ----- full House ---------------------
 		else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[1].nummer == Karte[2].nummer)
 				&& (Karte[3].nummer == Karte[4].nummer)) {// P1,P2,P3,Q1,Q2
-			scoreWert = (Karte[0].wert * 10 ^ 7) + (Karte[3].wert * 10 ^ 5);
+			scoreWert = (Karte[0].wert * Math.pow(10, 7)) + (Karte[3].wert * Math.pow(10, 5));
 		} else if ((Karte[2].nummer == Karte[3].nummer) && (Karte[3].nummer == Karte[4].nummer)
 				&& (Karte[0].nummer == Karte[1].nummer)) {// P1,P2,Q1,Q2,Q3
-			scoreWert = (Karte[2].wert * 10 ^ 7) + (Karte[0].wert * 10 ^ 5);
+			scoreWert = (Karte[2].wert * Math.pow(10, 7)) + (Karte[0].wert * Math.pow(10, 5));
 		}
 
 		// ---- Flush --------------
 		else if ((Karte[0].farbe == Karte[1].farbe) && (Karte[0].farbe == Karte[2].farbe) // testen auf Flush
 				&& (Karte[0].farbe == Karte[3].farbe) && (Karte[0].farbe == Karte[4].farbe)) {
 			if (Karte[0].nummer == 1) {// testen auf Ass-Flush
-				scoreWert = (14 * 10 ^ 6)
-						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * 10 ^ 4);
+				scoreWert = (14 * Math.pow(10, 6))
+						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * Math.pow(10, 4));
 			} else {// restliche FLush
-				scoreWert = (Karte[0].nummer * 10 ^ 6)
-						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * 10 ^ 4);
+				scoreWert = (Karte[0].nummer * Math.pow(10, 6))
+						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * Math.pow(10, 4));
 			}
 		}
 
 		// ----- Straight, inklusive Wheel------
 		else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && (Karte[3].nummer == 11)
 				&& (Karte[4].nummer == 10)) {// Ass straight
-			scoreWert = 14 * 10 ^ 5;
-			System.out.println("Strasse!");
+			scoreWert = 14 * Math.pow(10, 5);
 			
 		} else if ((Karte[0].nummer > 1) && (Karte[1].nummer == (Karte[0].nummer) - 1) // Straight K-2
 				&& (Karte[1].nummer == (Karte[2].nummer) - 1) && (Karte[2].nummer == (Karte[3].nummer) - 1)
 				&& (Karte[3].nummer == (Karte[4].nummer) - 1)) {
 
-			scoreWert = Karte[0].nummer * 10 ^ 5;
+			scoreWert = Karte[0].nummer * Math.pow(10, 5);
 			
 		} else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 2) && (Karte[2].nummer == 3)// Wheel
 				&& (Karte[3].nummer == 4) && (Karte[4].nummer == 5)) {
@@ -200,11 +199,11 @@ public class Table {
 		// ----- 3er -----
 		else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[1].nummer == Karte[2].nummer)) {// T1,T2,T3,X,Y
 
-			scoreWert = (Karte[0].wert * 10 ^ 4) + ((Karte[3].wert + Karte[4].wert) * 10 ^ 2);
+			scoreWert = (Karte[0].wert * Math.pow(10, 4)) + ((Karte[3].wert + Karte[4].wert) * Math.pow(10, 2));
 		} else if ((Karte[1].nummer == Karte[2].nummer) && (Karte[2].nummer == Karte[3].nummer)) {// X,T1,T2,T3,Y
-			scoreWert = (Karte[1].wert * 10 ^ 4) + ((Karte[0].wert + Karte[4].wert) * 10 ^ 2);
+			scoreWert = (Karte[1].wert * Math.pow(10, 4)) + ((Karte[0].wert + Karte[4].wert) * Math.pow(10, 2));
 		} else if ((Karte[2].nummer == Karte[3].nummer) && (Karte[3].nummer == Karte[4].nummer)) {// X,Y,T1,T2,T3
-			scoreWert = (Karte[2].wert * 10 ^ 4) + ((Karte[0].wert + Karte[1].wert) * 10 ^ 2);
+			scoreWert = (Karte[2].wert * Math.pow(10, 4)) + ((Karte[0].wert + Karte[1].wert) * Math.pow(10, 2));
 		}
 
 		// ---- 2 Pair ----------
