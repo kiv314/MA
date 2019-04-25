@@ -41,7 +41,7 @@ public class hauptclass {
 		gibTurn(Tisch, Karte[27]);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
-		//Laptop zeugs drauf getan
+		//Laptop zeugs drauf getan und nun gepusht
 		zeigSpielerBlatt(Spieler1);
 		zeigSpielerBlatt(Spieler2);
 		Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
