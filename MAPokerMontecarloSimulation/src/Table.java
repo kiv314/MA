@@ -7,7 +7,9 @@ public class Table {
 	Card flop3;
 	Card river;
 	Card turn;
-
+	double topScore;
+	int pot;
+	
 	public Table(Card flop1, Card flop2, Card flop3, Card river, Card turn) { // Konstruktor
 		this.flop1 = flop1;
 		this.flop2 = flop2;
@@ -125,10 +127,10 @@ public class Table {
 		return alteKarten;
 	}
 
-	public static double scoreHand(Card[] Karte, Player1 Spielr) {
+	public static double scoreHand(Card[] Karte, Player1 Spieler) {
 		//überprüfen ob er noch lebt
 		double scoreWert = 0;
-		if (!Spielr.inRunde) {
+		if ((!Spieler.inRunde) || (Spieler.chips <= 0)) {
 			scoreWert = 0;
 		}
 		// -------- RoyalFlush und Straight flush inlusive Wheel
@@ -196,7 +198,7 @@ public class Table {
 
 		} else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 2) && (Karte[2].nummer == 3)// Wheel
 				&& (Karte[3].nummer == 4) && (Karte[4].nummer == 5)) {
-			scoreWert = 5 * 10 ^ 5;
+			scoreWert = 5 * Math.pow(10, 5);
 		}
 
 		// ----- 3er -----
@@ -242,7 +244,7 @@ public class Table {
 		return scoreWert;
 	}
 
-	public static Player1[] Gewinner(Player1... Spieler) {
+	public Player1[] Gewinner(Player1... Spieler) {
 		Player1[] gewinner = {};
 		double aktScore = Spieler[0].score;
 		
@@ -251,7 +253,6 @@ public class Table {
 				aktScore = Spieler[i].score;
 			}
 		}
-		
 		for(int k=0; k<Spieler.length; k++) {//beste Spieler aussortieren
 			if(Spieler[k].score == aktScore) {
 				ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(gewinner));
@@ -264,7 +265,7 @@ public class Table {
 	}
 	
 	public void tellGewinner(Player1... Spieler) {
-		Player1[] gewinner = Table.Gewinner(Spieler);
+		Player1[] gewinner = Gewinner(Spieler);
 		for(int i=0; i<gewinner.length; i++) {
 			System.out.println(gewinner[i].spielerName + " hat gewonnen!");
 		}

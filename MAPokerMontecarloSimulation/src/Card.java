@@ -20,5 +20,9 @@ public class Card {
 	public int getfarbe() {
 		return this.farbe;
 	}
+	
+	public int getWert() {
+		return this.wert;
+	}
 
 }
