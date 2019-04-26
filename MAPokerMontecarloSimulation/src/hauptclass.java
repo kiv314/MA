@@ -25,7 +25,7 @@ public class hauptclass {
 		setzeSpielerInRunde(Spieler1, Spieler2);
 
 		gibSpielerBlatt(Spieler1, Karte[0], Karte[1]);
-		gibSpielerBlatt(Spieler2, Karte[2], Karte[3]);
+		gibSpielerBlatt(Spieler2, Karte[0], Karte[1]);
 		zeigSpielerBlatt(Spieler1);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
@@ -54,15 +54,9 @@ public class hauptclass {
 		
 		gibausKartenStapel(Spieler1.bestHand);
 		gibausKartenStapel(Spieler2.bestHand);
-		if (Spieler1.score > Spieler2.score) {
-			System.out.println(Spieler1.spielerName + " hat gewonnen!");
-		}
-		else if(Spieler1.score == Spieler2.score) {
-			System.out.println("unentschieden!");
-		}
-		else {
-			System.out.println(Spieler2.spielerName + " hat gewonnen!");
-		}
+		
+		Tisch.tellGewinner(Spieler1, Spieler2);
+		
 		// System.out.println("Wer hat gewonnen?");
 
 		// System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", "

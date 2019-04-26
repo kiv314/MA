@@ -242,6 +242,35 @@ public class Table {
 		return scoreWert;
 	}
 
+	public static Player1[] Gewinner(Player1... Spieler) {
+		Player1[] gewinner = {};
+		double aktScore = Spieler[0].score;
+		
+		for (int i=0; i<Spieler.length; i++) {// besten Score finden
+			if(Spieler[i].score > aktScore) {
+				aktScore = Spieler[i].score;
+			}
+		}
+		
+		for(int k=0; k<Spieler.length; k++) {//beste Spieler aussortieren
+			if(Spieler[k].score == aktScore) {
+				ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(gewinner));
+				liste.add(Spieler[k]);
+				gewinner = liste.toArray(gewinner);
+			}
+		}
+		
+		return gewinner;
+	}
+	
+	public void tellGewinner(Player1... Spieler) {
+		Player1[] gewinner = Table.Gewinner(Spieler);
+		for(int i=0; i<gewinner.length; i++) {
+			System.out.println(gewinner[i].spielerName + " hat gewonnen!");
+		}
+	}
+	
+	
 	public void gibSpielerBestHandAndScore(Card[][] Hand, Player1 Spieler) {
 		double aktScore = 0;
 		Card[] aktHand = Hand[0];
