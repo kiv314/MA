@@ -8,6 +8,8 @@ public class Player1 {
 	Card Flop1 = null;
 	Card Flop2 = null;
 	Card[] blatt = null;
+	Card[] bestHand = null;
+	double score = 0;
 	
 	private Scanner scanner;
 

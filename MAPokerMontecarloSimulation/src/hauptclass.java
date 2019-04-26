@@ -41,7 +41,7 @@ public class hauptclass {
 		gibTurn(Tisch, Karte[27]);
 		zugAusführen(Spieler1);
 		zugAusführen(Spieler2);
-		//Laptop zeugs drauf getan und nun gepusht
+		
 		zeigSpielerBlatt(Spieler1);
 		zeigSpielerBlatt(Spieler2);
 		Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
@@ -49,12 +49,15 @@ public class hauptclass {
 		Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.blatt);
 		Spieler1Hände = Tisch.sortHands(Spieler1Hände);
 		Spieler2Hände = Tisch.sortHands(Spieler2Hände);
-		gibausKartenStapel(Tisch.bestHand(Spieler1Hände));
-		gibausKartenStapel(Tisch.bestHand(Spieler2Hände));
-		if (Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) > Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
+		Tisch.gibSpielerBestHandAndScore(Spieler1Hände, Spieler1);
+		Tisch.gibSpielerBestHandAndScore(Spieler2Hände, Spieler2);
+		
+		gibausKartenStapel(Spieler1.bestHand);
+		gibausKartenStapel(Spieler2.bestHand);
+		if (Spieler1.score > Spieler2.score) {
 			System.out.println(Spieler1.spielerName + " hat gewonnen!");
 		}
-		else if(Tisch.scoreHand(Tisch.bestHand(Spieler1Hände)) == Tisch.scoreHand(Tisch.bestHand(Spieler2Hände))) {
+		else if(Spieler1.score == Spieler2.score) {
 			System.out.println("unentschieden!");
 		}
 		else {

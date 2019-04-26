@@ -125,11 +125,14 @@ public class Table {
 		return alteKarten;
 	}
 
-	public static double scoreHand(Card[] Karte) {
-
+	public static double scoreHand(Card[] Karte, Player1 Spielr) {
+		//überprüfen ob er noch lebt
 		double scoreWert = 0;
+		if (!Spielr.inRunde) {
+			scoreWert = 0;
+		}
 		// -------- RoyalFlush und Straight flush inlusive Wheel
-		if ((Karte[0].farbe == Karte[1].farbe) && (Karte[0].farbe == Karte[2].farbe)
+		else if ((Karte[0].farbe == Karte[1].farbe) && (Karte[0].farbe == Karte[2].farbe)
 				&& (Karte[0].farbe == Karte[3].farbe) && (Karte[0].farbe == Karte[4].farbe)) { // prüfen auf Flush
 
 			if ((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && (Karte[3].nummer == 11)
@@ -184,13 +187,13 @@ public class Table {
 		else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && (Karte[3].nummer == 11)
 				&& (Karte[4].nummer == 10)) {// Ass straight
 			scoreWert = 14 * Math.pow(10, 5);
-			
+
 		} else if ((Karte[0].nummer > 1) && (Karte[1].nummer == (Karte[0].nummer) - 1) // Straight K-2
 				&& (Karte[1].nummer == (Karte[2].nummer) - 1) && (Karte[2].nummer == (Karte[3].nummer) - 1)
 				&& (Karte[3].nummer == (Karte[4].nummer) - 1)) {
 
 			scoreWert = Karte[0].nummer * Math.pow(10, 5);
-			
+
 		} else if ((Karte[0].nummer == 1) && (Karte[1].nummer == 2) && (Karte[2].nummer == 3)// Wheel
 				&& (Karte[3].nummer == 4) && (Karte[4].nummer == 5)) {
 			scoreWert = 5 * 10 ^ 5;
@@ -233,23 +236,24 @@ public class Table {
 			double wert3 = Karte[3].wert;
 			double wert4 = Karte[4].wert;
 
-			scoreWert = Karte[0].wert + ((wert1 + (wert2)/10 + (wert3)/100 + (wert4)/1000) / 10);
+			scoreWert = Karte[0].wert + ((wert1 + (wert2) / 10 + (wert3) / 100 + (wert4) / 1000) / 10);
 		}
 
 		return scoreWert;
 	}
 
-	public Card[] bestHand(Card[][] Hand) {
+	public void gibSpielerBestHandAndScore(Card[][] Hand, Player1 Spieler) {
 		double aktScore = 0;
 		Card[] aktHand = Hand[0];
-		
+
 		for (int i = 0; i < Hand.length; i++) {
-			if (Table.scoreHand(Hand[i])> aktScore) {
-				aktScore = Table.scoreHand(Hand[i]);
+			if (Table.scoreHand(Hand[i], Spieler) > aktScore) {
+				aktScore = Table.scoreHand(Hand[i], Spieler);
 				aktHand = Hand[i];
 			}
 		}
-		return aktHand;
+		Spieler.score = aktScore;
+		Spieler.bestHand = aktHand;
 	}
 
 }
