@@ -20,7 +20,6 @@ public class Player1 {
 		this.inRunde = inRunde;
 		this.manuel = manuel;
 		this.spielerName = spielerName;
-		this.blatt = blatt;
 		this.taktik = taktik;
 	}
 

@@ -1,7 +1,7 @@
 import java.util.Random;
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.ArrayList;
+//import java.util.Scanner;
+//import java.util.Arrays;
+//import java.util.ArrayList;
 
 public class hauptclass {
 
@@ -160,25 +160,15 @@ public class hauptclass {
 		System.out.println("Comp: Turn: " + hauptclass.tellCard(karte));
 	}
 
-	private static boolean nur1Spieler(Player1 Spieler1, Player1 Spieler2) {
+	/*private static boolean nur1Spieler(Player1 Spieler1, Player1 Spieler2) {
 		if (Spieler1.inRunde && Spieler2.inRunde) {
 			return false;
 		} else {
 			return true;
 		}
-	}
+	}*/
 
-	// private static void findeSieger(Player1 Spieler1, Player1 Spieler2) {
-	// }
-
-	/*
-	 * private static boolean isflush(Card... Karte) { boolean isflush; if(Karte[2]
-	 * == null) { isflush = false; } else if(Karte.length == 5) { //if() } else {
-	 * isflush = false; }
-	 * 
-	 * return isflush; }
-	 */
-	// private static void
+	
 
 	private static String tellCard(Card card) {
 		String farbeBuchstabe = null;
