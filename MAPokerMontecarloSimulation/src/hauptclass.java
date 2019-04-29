@@ -1,7 +1,7 @@
 import java.util.Random;
-//import java.util.Scanner;
-//import java.util.Arrays;
-//import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class hauptclass {
 
@@ -23,29 +23,41 @@ public class hauptclass {
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
 		int n = 10;
-		
+
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
-		
+		Zug zugSpieler1 = new Zug(null, 0);
+		Spieler1.zug = zugSpieler1;
+		Zug zugSpieler2 = new Zug(null, 0);
+		Spieler2.zug = zugSpieler2;
+
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
+			Tisch.spielFortschrit = "preFlop";
+			Tisch.topRaise = 0;
 			setzeSpielerInRunde(Spieler1, Spieler2);
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
-			System.out.println("------------------\n Runde:" + (i+1) + "/" + n);
+			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
 			zeigSpielerBlatt(Spieler1);
 			zugAusführen(Spieler1, Tisch);
 			zugAusführen(Spieler2, Tisch);
 
 			gibFlop(Tisch, Karte[23], Karte[24], Karte[25]);
+			Tisch.spielFortschrit = "flop";
+			Tisch.topRaise = 0;
 			zugAusführen(Spieler1, Tisch);
 			zugAusführen(Spieler2, Tisch);
 
 			gibRiver(Tisch, Karte[26]);
+			Tisch.spielFortschrit = "river";
+			Tisch.topRaise = 0;
 			zugAusführen(Spieler1, Tisch);
 			zugAusführen(Spieler2, Tisch);
 
 			gibTurn(Tisch, Karte[27]);
+			Tisch.spielFortschrit = "turn";
+			Tisch.topRaise = 0;
 			zugAusführen(Spieler1, Tisch);
 			zugAusführen(Spieler2, Tisch);
 
@@ -79,7 +91,7 @@ public class hauptclass {
 			if ((Spieler1.chips <= 0) || (Spieler2.chips <= 0)) {
 				break;
 			}
-			
+
 			Tisch.pot = 0;
 			// System.out.println("Wer hat gewonnen?");
 
@@ -107,10 +119,14 @@ public class hauptclass {
 
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
-		System.out.println("Spieler 1: " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
-		System.out.println("Spieler 2: " + WinnerSpieler2 + ", chips: " + Spieler2.chips);
-		if (Spieler1.chips > Spieler2.chips) {System.out.println("Gratulation, Sie haben Gewonnen!");}
-		if (Spieler1.chips < Spieler2.chips) {System.out.println("Sie haben verloren!");}
+		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
+		System.out.println(Spieler2.spielerName + " " + WinnerSpieler2 + ", chips: " + Spieler2.chips);
+		if (Spieler1.chips > Spieler2.chips) {
+			System.out.println("Gratulation, Sie haben Gewonnen!");
+		}
+		if (Spieler1.chips < Spieler2.chips) {
+			System.out.println("Sie haben verloren!");
+		}
 	}
 
 	private static void setzeSpielerInRunde(Player1... Spieler) {
@@ -125,21 +141,23 @@ public class hauptclass {
 	}
 
 	private static void zugAusführen(Player1 Spieler, Table t) {
-		if (Spieler.getInRunde()) {
-			switch (Spieler.machZug(Spieler.taktik)) {
-			case "f":
-				Spieler.setInRunde(false);
-				System.out.println(Spieler.spielerName + ": fold!" + " chips: " + Spieler.chips);
+		if (Spieler.inRunde) {
+			if (Spieler.manuel) {
+				System.out.println("Machen sie einen Zug");
+				Scanner eingabewert = new Scanner(System.in);
+				if (eingabewert.hasNext("fold")) {
+					System.out.println(Spieler.spielerName + ": fold!");
+					Spieler.fold();
+				}
+				if (eingabewert.hasNext("raise")) {
+					System.out.println("Wieviel wollen sie raisen?");
+					Scanner eingabewert2 = new Scanner(System.in);
+					int raise = eingabewert2.nextInt();
+					Spieler.raise(raise, t);
+				}
 
-				break;
-			case "c":
-				System.out.println(Spieler.spielerName + ": Check!" + " chips: " + Spieler.chips);
-				Spieler.chips = Spieler.chips - 10;
-				t.pot = t.pot + 10;
-				break;
-			default:
-				System.out.println("Fehler! Try again!");
-				zugAusführen(Spieler, t);
+			} else {
+				Spieler.machZugNachTaktik(t);
 			}
 		}
 	}
@@ -160,15 +178,11 @@ public class hauptclass {
 		System.out.println("Comp: Turn: " + hauptclass.tellCard(karte));
 	}
 
-	/*private static boolean nur1Spieler(Player1 Spieler1, Player1 Spieler2) {
-		if (Spieler1.inRunde && Spieler2.inRunde) {
-			return false;
-		} else {
-			return true;
-		}
-	}*/
-
-	
+	/*
+	 * private static boolean nur1Spieler(Player1 Spieler1, Player1 Spieler2) { if
+	 * (Spieler1.inRunde && Spieler2.inRunde) { return false; } else { return true;
+	 * } }
+	 */
 
 	private static String tellCard(Card card) {
 		String farbeBuchstabe = null;

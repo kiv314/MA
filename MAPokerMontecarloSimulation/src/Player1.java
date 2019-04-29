@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public class Player1 {
 	String spielerName;
@@ -13,8 +13,7 @@ public class Player1 {
 	double score = 0;
 	int taktik;
 	int chips;
-
-	private Scanner scanner;
+	Zug zug;
 
 	public Player1(String spielerName, boolean manuel, boolean inRunde, int taktik) { // Konstruktor
 		this.inRunde = inRunde;
@@ -43,34 +42,51 @@ public class Player1 {
 		return anzahlBlattpaare;
 	}
 
-	public String machZug(int taktik) {
-		if (manuel) {
-			System.out.println("machen Sie einen Zug");
-			scanner = new Scanner(System.in);
-			String input = scanner.nextLine();
-			return input;
-		} else {
-			return machTaktik(taktik);
-		}
-	}
-
-	public String machTaktik(int taktik) {
+	public void machZugNachTaktik(Table t) {
 		if (taktik == 0) {
 			if ((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[1].getWert() > 5)) {
-				return "c";
-			} 
-			else if ((blatt[0].getfarbe() == blatt[1].getfarbe()) && (blatt[1].getWert() > 6)) {
-				return "c";
-			} 
-			else {
-				return "f";
+				call(t);
+			} else if ((blatt[0].getfarbe() == blatt[1].getfarbe()) && (blatt[1].getWert() > 6)) {
+				call(t);
+			} else {
+				fold();
 			}
+		} else if (taktik == 1) {
+			call(t);
+		} else {
+			fold();
 		}
-		else if (taktik == 1) {
-			return "c";
-		}
-		else {return "f";}	
 		
 	}
 
+	public void raise(int raise, Table t) {
+		if((raise > t.topRaise) && (raise <= chips)) {
+			zug.art = "raise";
+			zug.raise = raise;
+			chips = chips - raise;
+			t.pot = t.pot + raise;
+			t.topRaise = raise;
+			System.out.println(spielerName + ": rasie auf " + raise);
+		}
+		else {
+			System.out.println("Fehler! zu wenig chips oder raise zu gering!");
+		}		
+	}
+	
+	public void call(Table t) {
+		zug.art = "call";
+		zug.raise = 0;
+		chips = chips - t.topRaise;
+		t.pot = t.pot + t.topRaise;
+		System.out.println(spielerName + ": call");
+	}
+	
+	public void fold() {
+		inRunde = false;
+		System.out.println(spielerName + "fold");
+	}
+	
+	public void check(){
+		System.out.println(spielerName + "check");
+	}
 }
