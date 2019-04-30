@@ -19,7 +19,7 @@ public class hauptclass {
 		 */
 		Table Tisch = new Table(null, null, null, null, null);
 		Player1 Spieler1 = new Player1("Ich", true, false, 0);
-		Player1 Spieler2 = new Player1("Spieler2", false, false, 1);
+		Player1 Spieler2 = new Player1("Spieler2", false, false, 2);
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
 		int n = 10;
@@ -30,7 +30,7 @@ public class hauptclass {
 		Spieler1.zug = zugSpieler1;
 		Zug zugSpieler2 = new Zug(null, 0);
 		Spieler2.zug = zugSpieler2;
-
+		Player1[] Spieler = { Spieler1, Spieler2 };
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
 			Tisch.spielFortschrit = "preFlop";
@@ -40,26 +40,22 @@ public class hauptclass {
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
 			zeigSpielerBlatt(Spieler1);
-			zugAusführen(Spieler1, Tisch);
-			zugAusführen(Spieler2, Tisch);
+			zuegeAusführen(Spieler, Tisch);
 
 			gibFlop(Tisch, Karte[23], Karte[24], Karte[25]);
 			Tisch.spielFortschrit = "flop";
 			Tisch.topRaise = 0;
-			zugAusführen(Spieler1, Tisch);
-			zugAusführen(Spieler2, Tisch);
+			zuegeAusführen(Spieler, Tisch);
 
 			gibRiver(Tisch, Karte[26]);
 			Tisch.spielFortschrit = "river";
 			Tisch.topRaise = 0;
-			zugAusführen(Spieler1, Tisch);
-			zugAusführen(Spieler2, Tisch);
+			zuegeAusführen(Spieler, Tisch);
 
 			gibTurn(Tisch, Karte[27]);
 			Tisch.spielFortschrit = "turn";
 			Tisch.topRaise = 0;
-			zugAusführen(Spieler1, Tisch);
-			zugAusführen(Spieler2, Tisch);
+			zuegeAusführen(Spieler, Tisch);
 
 			zeigSpielerBlatt(Spieler1);
 			zeigSpielerBlatt(Spieler2);
@@ -93,30 +89,9 @@ public class hauptclass {
 			}
 
 			Tisch.pot = 0;
-			// System.out.println("Wer hat gewonnen?");
-
-			// System.out.println("---\\nComp: Tisch: " + tellCard(Tisch.getflop1()) + ", "
-			// + tellCard(Tisch.getflop2()) + ", " +
-			// tellCard(Tisch.getflop3()) + ", " + tellCard(Tisch.getRiver()) + ", " +
-			// tellCard(Tisch.getTurn()));
-			// System.out.println("Comp: Dein Blatt: " + tellCard(Spieler1.getBlatt1()) + ",
-			// " + tellCard(Spieler1.getBlatt2()));
-			// System.out.println("Comp: " + Spieler2.spielerName + " Blatt: " +
-			// tellCard(Spieler2.getBlatt1()) + ", "+
-			// tellCard(Spieler2.getBlatt2()));
-			// scanner = new Scanner(System.in);
-			// String inputSpieler = scanner.nextLine();
-			// if (Spieler1.spielerName == inputSpieler) { Spieler2.setInRunde(false);
-			// break;}
-			// if (Spieler2.spielerName == inputSpieler) { Spieler1.setInRunde(false);
-			// break;}
-
-			/*
-			 * float wahrscheinlichkeitFürPaar =
-			 * (Spieler1.getAnzahlBlattPaare()/runden)*100;
-			 * System.out.println(wahrscheinlichkeitFürPaar); tellCard(Spieler1.Blatt1);
-			 */
-
+			System.out.println(Spieler[0].spielerName + " chips: " + Spieler[0].chips);
+			System.out.println(Spieler[1].spielerName + " chips: " + Spieler[1].chips);
+			
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
 		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
@@ -142,22 +117,46 @@ public class hauptclass {
 
 	private static void zugAusführen(Player1 Spieler, Table t) {
 		if (Spieler.inRunde) {
-			if (Spieler.manuel) {
-				System.out.println("Machen sie einen Zug");
-				Scanner eingabewert = new Scanner(System.in);
-				if (eingabewert.hasNext("fold")) {
-					System.out.println(Spieler.spielerName + ": fold!");
-					Spieler.fold();
+			if (t.raiseMoeglich) {
+				if (Spieler.manuel) {
+					System.out.println("Machen sie einen Zug");
+					Scanner eingabewert = new Scanner(System.in);
+					if (eingabewert.hasNext("fold")) {// fold als zug
+						Spieler.fold();
+					}
+					if (eingabewert.hasNext("raise")) {// raise als Zug
+						System.out.println("Wieviel wollen sie raisen?");
+						Scanner eingabewert2 = new Scanner(System.in);
+						int raise = eingabewert2.nextInt();
+						Spieler.raise(raise, t);
+					}
+					if (eingabewert.hasNext("check")) {// check als Zug
+						if (t.topRaise == 0) {
+							Spieler.check();
+						} else {
+							System.out.println("check nicht möglich!!! try again");
+							zugAusführen(Spieler, t);
+						}
+						if (eingabewert.hasNext("call")) {
+							System.out.println(Spieler.spielerName + ": call!");
+							Spieler.call(t);
+						}
+					}
+				} else {
+					Spieler.machZugNachTaktik(t);
 				}
-				if (eingabewert.hasNext("raise")) {
-					System.out.println("Wieviel wollen sie raisen?");
-					Scanner eingabewert2 = new Scanner(System.in);
-					int raise = eingabewert2.nextInt();
-					Spieler.raise(raise, t);
+			}
+			if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
+				if (Spieler.manuel) {
+					System.out.println("raise ist bei: " + t.topRaise + ", callen oder folden");
+					Scanner eingabewert = new Scanner(System.in);
+					if (eingabewert.hasNext("fold")) {// fold als zug
+						Spieler.fold();
+					}
+					if (eingabewert.hasNext("call")) {
+						Spieler.call(t);
+					}
 				}
-
-			} else {
-				Spieler.machZugNachTaktik(t);
 			}
 		}
 	}
@@ -249,4 +248,33 @@ public class hauptclass {
 		return karten;
 	}
 
+	public static void zuegeAusführen(Player1[] Spieler, Table t) {
+		Player1[] lebendeSpieler = {};
+		for (int i = 0; i < Spieler.length; i++) {
+			if (Spieler[i].inRunde) {
+				ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(lebendeSpieler));
+				liste.add(Spieler[i]);
+				lebendeSpieler = liste.toArray(lebendeSpieler);
+			}
+		}
+		t.raiseMoeglich = true;
+		for (int j = 0; j < lebendeSpieler.length; j++) {
+			zugAusführen(lebendeSpieler[j], t);
+		}
+		Player1[] lebendeSpieler2 = {};
+		for (int k = 0; k < lebendeSpieler.length; k++) {
+			if (Spieler[k].inRunde) {
+				ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(lebendeSpieler2));
+				liste.add(Spieler[k]);
+				lebendeSpieler2 = liste.toArray(lebendeSpieler2);
+			}
+		}	
+		if (!(t.topRaise == 0)) {
+			t.raiseMoeglich = false;
+			for (int l = 0; l < lebendeSpieler2.length; l++) {
+				zugAusführen(lebendeSpieler2[l], t);
+			}
+		}
+	}
 }
+

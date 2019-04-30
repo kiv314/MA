@@ -11,6 +11,7 @@ public class Table {
 	int pot;
 	int topRaise;
 	String spielFortschrit; // preFlop, Flop, River, Turn 
+	boolean raiseMoeglich;
 	
 	public Table(Card flop1, Card flop2, Card flop3, Card river, Card turn) { // Konstruktor
 		this.flop1 = flop1;
