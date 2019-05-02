@@ -241,7 +241,7 @@ public class Table {
 			double wert3 = Karte[3].wert;
 			double wert4 = Karte[4].wert;
 
-			scoreWert = Karte[0].wert + ((wert1 + (wert2) / 10 + (wert3) / 100 + (wert4) / 1000) / 10);
+			scoreWert = Karte[0].wert + ((wert1/3 + (wert2/10) + (wert3/100) + (wert4/1000)));
 		}
 
 		return scoreWert;

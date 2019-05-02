@@ -36,9 +36,9 @@ public class hauptclass {
 			Tisch.spielFortschrit = "preFlop";
 			Tisch.topRaise = 0;
 			setzeSpielerInRunde(Spieler);
-			if(nurNoch1Spieler(Spieler)) {
+			if (nurNoch1Spieler(Spieler)) {
 				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
-				break;  
+				break;
 			}
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
@@ -147,19 +147,28 @@ public class hauptclass {
 						System.out.println("Wieviel wollen sie raisen?");
 						Scanner eingabewert2 = new Scanner(System.in);
 						int raise = eingabewert2.nextInt();
-						Spieler.raise(raise, t);
+						if (!(raise > Spieler.chips) && (raise > t.topRaise)) {
+							Spieler.raise(raise, t);
+						} else {
+							System.out.println("Fehler! Zu wenig chips oder raise zu Hoch! Try again");
+							zugAusführen(Spieler, t);
+						}
 					}
-					if (eingabewert.hasNext("check")) {// check als Zug
+					else if (eingabewert.hasNext("check")) {// check als Zug
 						if (t.topRaise == 0) {
 							Spieler.check();
 						} else {
 							System.out.println("check nicht möglich!!! try again");
 							zugAusführen(Spieler, t);
 						}
-						if (eingabewert.hasNext("call")) {
-							System.out.println(Spieler.spielerName + ": call!");
-							Spieler.call(t);
-						}
+					}
+					else if (eingabewert.hasNext("call")) {
+						System.out.println(Spieler.spielerName + ": call!");
+						Spieler.call(t);
+					}
+					else {
+						System.out.println("Fehler! Kein gültiger Zug! Try again");
+						zugAusführen(Spieler, t);
 					}
 				} else {
 					Spieler.machZugNachTaktik(t);

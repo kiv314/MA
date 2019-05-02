@@ -1,7 +1,7 @@
 public class Card {
 	int nummer;
 	int farbe; // Variablen
-	int wert;
+	double wert;
 	
 	public Card(int nummer, int farbe) { // Konstruktor
 		this.nummer = nummer;
@@ -21,7 +21,7 @@ public class Card {
 		return this.farbe;
 	}
 	
-	public int getWert() {
+	public double getWert() {
 		return this.wert;
 	}
 
