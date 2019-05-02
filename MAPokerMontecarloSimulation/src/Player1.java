@@ -53,13 +53,32 @@ public class Player1 {
 					fold();
 				}
 			} else if (taktik == 1) {
-				call(t);
+				if(t.spielFortschrit == "preFlop") {
+					if((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[0].getWert() > 8)) {
+						raise(20, t);
+					}
+				}
+				else {
+					if((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[0].getWert() > 8)) {
+						raise(20, t);
+					}
+					if(blatt[0].getWert() > 8) {
+						if(t.topRaise == 0) {
+							check();
+						}
+					}
+				}
 			} else if (taktik == 2) {
 				if((t.spielFortschrit == "preFlop") && (t.topRaise == 0)) {
 					raise(10, t);
 				}
 				else {
-					check();
+					if(t.topRaise == 0) {
+						check();
+					}
+					else {
+						call(t);
+					}
 				}
 			} else {
 				fold();
@@ -103,6 +122,7 @@ public class Player1 {
 		zug.raise = 0;
 		chips = chips - t.topRaise;
 		t.pot = t.pot + t.topRaise;
+		this.raise = t.topRaise;
 		System.out.println(spielerName + ": call");
 	}
 

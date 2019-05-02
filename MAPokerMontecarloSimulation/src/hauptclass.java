@@ -91,7 +91,7 @@ public class hauptclass {
 			Tisch.pot = 0;
 			System.out.println(Spieler[0].spielerName + " chips: " + Spieler[0].chips);
 			System.out.println(Spieler[1].spielerName + " chips: " + Spieler[1].chips);
-			
+
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
 		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
@@ -141,20 +141,25 @@ public class hauptclass {
 							System.out.println(Spieler.spielerName + ": call!");
 							Spieler.call(t);
 						}
-					}
-				} else {
-					Spieler.machZugNachTaktik(t);
+					} 
+					}else {
+						Spieler.machZugNachTaktik(t);
 				}
 			}
-			if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
+			if (!t.raiseMoeglich && !Spieler.manuel && t.topRaise != 0 && !(Spieler.raise == t.topRaise)) {
+				Spieler.machZugNachTaktik(t);
+			}
+			else if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
 				if (Spieler.manuel) {
 					System.out.println("raise ist bei: " + t.topRaise + ", callen oder folden");
 					Scanner eingabewert = new Scanner(System.in);
 					if (eingabewert.hasNext("fold")) {// fold als zug
 						Spieler.fold();
 					}
-					if (eingabewert.hasNext("call")) {
+					else if (eingabewert.hasNext("call")) {
 						Spieler.call(t);
+					} else {
+						System.out.println("Fehler! checken oder Folden!");
 					}
 				}
 			}
@@ -268,7 +273,7 @@ public class hauptclass {
 				liste.add(Spieler[k]);
 				lebendeSpieler2 = liste.toArray(lebendeSpieler2);
 			}
-		}	
+		}
 		if (!(t.topRaise == 0)) {
 			t.raiseMoeglich = false;
 			for (int l = 0; l < lebendeSpieler2.length; l++) {
@@ -277,4 +282,3 @@ public class hauptclass {
 		}
 	}
 }
-
