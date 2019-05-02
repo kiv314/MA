@@ -35,7 +35,11 @@ public class hauptclass {
 			arrayMix(Karte);
 			Tisch.spielFortschrit = "preFlop";
 			Tisch.topRaise = 0;
-			setzeSpielerInRunde(Spieler1, Spieler2);
+			setzeSpielerInRunde(Spieler);
+			if(nurNoch1Spieler(Spieler)) {
+				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
+				break;  
+			}
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
@@ -104,10 +108,25 @@ public class hauptclass {
 		}
 	}
 
-	private static void setzeSpielerInRunde(Player1... Spieler) {
+	public static boolean nurNoch1Spieler(Player1 Spieler[]) {
+		int anzahlSpieler = 0;
 		for (int i = 0; i < Spieler.length; i++) {
-			Spieler[i].setInRunde(true);
-			// System.out.println(Spieler[i].spielerName + ": " + Spieler[i].inRunde);
+			if (Spieler[i].inRunde) {
+				anzahlSpieler = anzahlSpieler + 1;
+			}
+		}
+		if (anzahlSpieler <= 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static void setzeSpielerInRunde(Player1[] Spieler) {
+		for (int i = 0; i < Spieler.length; i++) {
+			if (Spieler[i].chips > 0) {
+				Spieler[i].setInRunde(true);
+			}
 		}
 	}
 
@@ -141,25 +160,24 @@ public class hauptclass {
 							System.out.println(Spieler.spielerName + ": call!");
 							Spieler.call(t);
 						}
-					} 
-					}else {
-						Spieler.machZugNachTaktik(t);
+					}
+				} else {
+					Spieler.machZugNachTaktik(t);
 				}
 			}
 			if (!t.raiseMoeglich && !Spieler.manuel && t.topRaise != 0 && !(Spieler.raise == t.topRaise)) {
 				Spieler.machZugNachTaktik(t);
-			}
-			else if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
+			} else if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
 				if (Spieler.manuel) {
 					System.out.println("raise ist bei: " + t.topRaise + ", callen oder folden");
 					Scanner eingabewert = new Scanner(System.in);
 					if (eingabewert.hasNext("fold")) {// fold als zug
 						Spieler.fold();
-					}
-					else if (eingabewert.hasNext("call")) {
+					} else if (eingabewert.hasNext("call")) {
 						Spieler.call(t);
 					} else {
-						System.out.println("Fehler! checken oder Folden!");
+						System.out.println("Fehler! checken oder Folden! Try again");
+						zugAusführen(Spieler, t);
 					}
 				}
 			}

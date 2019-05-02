@@ -184,7 +184,7 @@ public class Table {
 						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * Math.pow(10, 4));
 			} else {// restliche FLush
 				scoreWert = (Karte[0].nummer * Math.pow(10, 6))
-						+ ((Karte[1].nummer + Karte[2].nummer + Karte[3].nummer + Karte[4].nummer) * Math.pow(10, 4));
+						+ ((Karte[1].nummer + (Karte[2].nummer)/10 + (Karte[3].nummer)/100 + (Karte[4].nummer)/1000) * Math.pow(10, 4));
 			}
 		}
 
@@ -207,31 +207,31 @@ public class Table {
 		// ----- 3er -----
 		else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[1].nummer == Karte[2].nummer)) {// T1,T2,T3,X,Y
 
-			scoreWert = (Karte[0].wert * Math.pow(10, 4)) + ((Karte[3].wert + Karte[4].wert) * Math.pow(10, 2));
+			scoreWert = (Karte[0].wert * Math.pow(10, 4)) + ((Karte[3].wert + (Karte[4].wert)/10) * Math.pow(10, 2));
 		} else if ((Karte[1].nummer == Karte[2].nummer) && (Karte[2].nummer == Karte[3].nummer)) {// X,T1,T2,T3,Y
-			scoreWert = (Karte[1].wert * Math.pow(10, 4)) + ((Karte[0].wert + Karte[4].wert) * Math.pow(10, 2));
-		} else if ((Karte[2].nummer == Karte[3].nummer) && (Karte[3].nummer == Karte[4].nummer)) {// X,Y,T1,T2,T3
-			scoreWert = (Karte[2].wert * Math.pow(10, 4)) + ((Karte[0].wert + Karte[1].wert) * Math.pow(10, 2));
+			scoreWert = (Karte[1].wert * Math.pow(10, 4)) + ((Karte[0].wert + (Karte[4].wert)/10) * Math.pow(10, 2));
+		} else if ((Karte[2].nummer == Karte[3].nummer) && (Karte[3].nummer == (Karte[4].nummer))) {// X,Y,T1,T2,T3
+			scoreWert = (Karte[2].wert * Math.pow(10, 4)) + ((Karte[0].wert + (Karte[1].wert)/10) * Math.pow(10, 2));
 		}
 
 		// ---- 2 Pair ----------
 		else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[2].nummer == Karte[3].nummer)) {// P1,P2,Q1,Q2,X
-			scoreWert = (((Karte[0].wert * 10) + (Karte[2].wert * 10)) * 10) + Karte[4].wert;
+			scoreWert = (((Karte[0].wert * 10) + (Karte[2].wert)) * 10) + Karte[4].wert;
 		} else if ((Karte[0].nummer == Karte[1].nummer) && (Karte[3].nummer == Karte[4].nummer)) {// P1,P2,X,Q1,Q2
-			scoreWert = (((Karte[0].wert * 10) + (Karte[3].wert * 10)) * 10) + Karte[2].wert;
+			scoreWert = (((Karte[0].wert * 10) + (Karte[3].wert)) * 10) + Karte[2].wert;
 		} else if ((Karte[1].nummer == Karte[2].nummer) && (Karte[3].nummer == Karte[4].nummer)) {// X,P1,P2,Q1,Q2
-			scoreWert = (((Karte[1].wert * 10) + (Karte[3].wert * 10)) * 10) + Karte[0].wert;
+			scoreWert = (((Karte[1].wert * 10) + (Karte[3].wert )) * 10) + Karte[0].wert;
 		}
 
 		// ---- Pair ----------
 		else if (Karte[0].nummer == Karte[1].nummer) {// P1,P2,X,Y,Z
-			scoreWert = (Karte[0].wert * 10) + (Karte[2].wert + Karte[3].wert + Karte[4].wert);
+			scoreWert = (Karte[0].wert * 10) + ((Karte[2].wert/10) + (Karte[3].wert/100) + (Karte[4].wert/1000));
 		} else if (Karte[1].nummer == Karte[2].nummer) {// X,P1,P2,Y,Z
-			scoreWert = (Karte[1].wert * 10) + (Karte[0].wert + Karte[3].wert + Karte[4].wert);
+			scoreWert = (Karte[1].wert * 10) + ((Karte[0].wert/10) + (Karte[3].wert/100) + (Karte[4].wert/1000));
 		} else if (Karte[2].nummer == Karte[3].nummer) {// X,Y,P1,P2,Z
-			scoreWert = (Karte[2].wert * 10) + (Karte[0].wert + Karte[1].wert + Karte[4].wert);
+			scoreWert = (Karte[2].wert * 10) + (Karte[0].wert/10) + (Karte[1].wert/100) + (Karte[4].wert/1000);
 		} else if (Karte[3].nummer == Karte[4].nummer) {// X,Y,Z,P1,P2,
-			scoreWert = (Karte[3].wert * 10) + (Karte[0].wert + Karte[1].wert + Karte[2].wert);
+			scoreWert = (Karte[3].wert * 10) + ((Karte[0].wert/10) + (Karte[1].wert/100) + (Karte[2].wert/1000));
 		}
 
 		// ----- HighCrad----
