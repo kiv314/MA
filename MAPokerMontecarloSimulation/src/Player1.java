@@ -12,8 +12,8 @@ public class Player1 {
 	double score = 0;
 	int taktik;
 	int chips;
-	Zug zug;
 	int raise;
+	String blind; //null, big, small 
 	
 	public Player1(String spielerName, boolean manuel, boolean inRunde, int taktik) { // Konstruktor
 		this.inRunde = inRunde;
@@ -69,7 +69,7 @@ public class Player1 {
 					}
 				}
 			} else if (taktik == 2) {
-				if((t.spielFortschrit == "preFlop") && (t.topRaise == 0)) {
+				if((t.spielFortschrit == "preFlop") && (t.topRaise <= 5)) {
 					raise(10, t);
 				}
 				else {
@@ -105,8 +105,6 @@ public class Player1 {
 
 	public void raise(int raise, Table t) {
 		if ((raise > t.topRaise) && (raise <= chips)) {
-			zug.art = "raise";
-			zug.raise = raise;
 			chips = chips - raise;
 			t.pot = t.pot + raise;
 			t.topRaise = raise;
@@ -118,8 +116,6 @@ public class Player1 {
 	}
 
 	public void call(Table t) {
-		zug.art = "call";
-		zug.raise = 0;
 		chips = chips - t.topRaise;
 		t.pot = t.pot + t.topRaise;
 		this.raise = t.topRaise;

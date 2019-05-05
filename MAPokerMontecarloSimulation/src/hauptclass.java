@@ -26,16 +26,13 @@ public class hauptclass {
 
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
-		Zug zugSpieler1 = new Zug(null, 0);
-		Spieler1.zug = zugSpieler1;
-		Zug zugSpieler2 = new Zug(null, 0);
-		Spieler2.zug = zugSpieler2;
+		
 		Player1[] Spieler = { Spieler1, Spieler2 };
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
 			Tisch.spielFortschrit = "preFlop";
 			Tisch.topRaise = 0;
-			setzeSpielerInRunde(Spieler);
+			Spieler = setzeSpielerInRunde(Spieler);
 			if (nurNoch1Spieler(Spieler)) {
 				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
 				break;
@@ -96,6 +93,7 @@ public class hauptclass {
 			System.out.println(Spieler[0].spielerName + " chips: " + Spieler[0].chips);
 			System.out.println(Spieler[1].spielerName + " chips: " + Spieler[1].chips);
 
+			Spieler = ändereSpielerReihenfolge(Spieler);
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
 		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
@@ -122,12 +120,17 @@ public class hauptclass {
 		}
 	}
 
-	private static void setzeSpielerInRunde(Player1[] Spieler) {
+	private static Player1[] setzeSpielerInRunde(Player1[] Spieler) {
+		Player1[] lebendeSpieler = {};
 		for (int i = 0; i < Spieler.length; i++) {
 			if (Spieler[i].chips > 0) {
 				Spieler[i].setInRunde(true);
+				ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(lebendeSpieler));
+				liste.add(Spieler[i]);
+				lebendeSpieler = liste.toArray(lebendeSpieler);
 			}
 		}
+		return lebendeSpieler;
 	}
 
 	private static void zeigSpielerBlatt(Player1 Spieler) {
@@ -307,5 +310,15 @@ public class hauptclass {
 				zugAusführen(lebendeSpieler2[l], t);
 			}
 		}
+	}
+	
+	public static Player1[] ändereSpielerReihenfolge(Player1[] Spieler) {
+		Player1[] neueReihenfolge = {Spieler[Spieler.length-1]};
+		for(int i=0; i<Spieler.length-1; i++) {
+			ArrayList<Player1> liste = new ArrayList<Player1>(Arrays.asList(neueReihenfolge));
+			liste.add(Spieler[i]);
+			neueReihenfolge = liste.toArray(neueReihenfolge);
+		}
+		return neueReihenfolge;
 	}
 }
