@@ -288,5 +288,13 @@ public class Table {
 		Spieler.score = aktScore;
 		Spieler.bestHand = aktHand;
 	}
-
+	public void gibBlind(Player1 Spieler, int blind, String blindTyp) {
+		Spieler.chips = Spieler.chips - blind;
+		Spieler.raise = blind;
+		pot = pot+blind;
+		if(topRaise < blind) {
+			topRaise = blind;
+		}
+		System.out.println(Spieler.spielerName + " hat " + blindTyp + ": " + blind);
+	}
 }

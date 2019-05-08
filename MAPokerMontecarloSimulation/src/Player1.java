@@ -116,9 +116,9 @@ public class Player1 {
 	}
 
 	public void call(Table t) {
-		chips = chips - t.topRaise;
-		t.pot = t.pot + t.topRaise;
-		this.raise = t.topRaise;
+		chips = chips - (t.topRaise-this.raise);
+		t.pot = t.pot + (t.topRaise-this.raise);
+		this.raise = (t.topRaise);
 		System.out.println(spielerName + ": call");
 	}
 

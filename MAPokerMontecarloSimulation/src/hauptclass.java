@@ -23,7 +23,7 @@ public class hauptclass {
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
 		int n = 10;
-
+		int blind = 10;
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
 		
@@ -40,6 +40,8 @@ public class hauptclass {
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
+			Tisch.gibBlind(Spieler[Spieler.length-2], blind, "small Blind");
+			Tisch.gibBlind(Spieler[Spieler.length-1], blind*2, "big Blind");
 			zeigSpielerBlatt(Spieler1);
 			zuegeAusführen(Spieler, Tisch);
 
@@ -141,7 +143,7 @@ public class hauptclass {
 		if (Spieler.inRunde) {
 			if (t.raiseMoeglich) {
 				if (Spieler.manuel) {
-					System.out.println("Machen sie einen Zug");
+					System.out.println("Machen sie einen Zug --- Ihre chips:          " + Spieler.chips);
 					Scanner eingabewert = new Scanner(System.in);
 					if (eingabewert.hasNext("fold")) {// fold als zug
 						Spieler.fold();
@@ -158,7 +160,7 @@ public class hauptclass {
 						}
 					}
 					else if (eingabewert.hasNext("check")) {// check als Zug
-						if (t.topRaise == 0) {
+						if (t.topRaise == 0 || t.topRaise == Spieler.raise) {
 							Spieler.check();
 						} else {
 							System.out.println("check nicht möglich!!! try again");
@@ -166,7 +168,6 @@ public class hauptclass {
 						}
 					}
 					else if (eingabewert.hasNext("call")) {
-						System.out.println(Spieler.spielerName + ": call!");
 						Spieler.call(t);
 					}
 					else {
@@ -321,4 +322,5 @@ public class hauptclass {
 		}
 		return neueReihenfolge;
 	}
+
 }
