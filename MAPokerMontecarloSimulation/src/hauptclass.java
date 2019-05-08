@@ -23,7 +23,7 @@ public class hauptclass {
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
 		int n = 10;
-		int blind = 10;
+		int bigBlind = 10;
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
 		
@@ -40,8 +40,9 @@ public class hauptclass {
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
-			Tisch.gibBlind(Spieler[Spieler.length-2], blind, "small Blind");
-			Tisch.gibBlind(Spieler[Spieler.length-1], blind*2, "big Blind");
+			Tisch.gibBlind(Spieler[Spieler.length-2], bigBlind/2, "small Blind");
+			Tisch.gibBlind(Spieler[Spieler.length-1], bigBlind, "big Blind");
+			Tisch.bigBlind = bigBlind;
 			zeigSpielerBlatt(Spieler1);
 			zuegeAusführen(Spieler, Tisch);
 

@@ -13,8 +13,8 @@ public class Player1 {
 	int taktik;
 	int chips;
 	int raise;
-	String blind; //null, big, small 
-	
+	String blind; // null, big, small
+
 	public Player1(String spielerName, boolean manuel, boolean inRunde, int taktik) { // Konstruktor
 		this.inRunde = inRunde;
 		this.manuel = manuel;
@@ -45,38 +45,16 @@ public class Player1 {
 	public void machZugNachTaktik(Table t) {
 		if (t.raiseMoeglich) {
 			if (taktik == 0) {
-				if ((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[1].getWert() > 5)) {
-					call(t);
-				} else if ((blatt[0].getfarbe() == blatt[1].getfarbe()) && (blatt[1].getWert() > 6)) {
-					call(t);
-				} else {
-					fold();
-				}
+				taktik0RM(t);
 			} else if (taktik == 1) {
-				if(t.spielFortschrit == "preFlop") {
-					if((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[0].getWert() > 8)) {
-						raise(20, t);
-					}
-				}
-				else {
-					if((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[0].getWert() > 8)) {
-						raise(20, t);
-					}
-					if(blatt[0].getWert() > 8) {
-						if(t.topRaise == 0) {
-							check();
-						}
-					}
-				}
+
 			} else if (taktik == 2) {
-				if((t.spielFortschrit == "preFlop") && (t.topRaise <= 5)) {
+				if ((t.spielFortschrit == "preFlop") && (t.topRaise <= 5)) {
 					raise(10, t);
-				}
-				else {
-					if(t.topRaise == 0) {
+				} else {
+					if (t.topRaise == 0) {
 						check();
-					}
-					else {
+					} else {
 						call(t);
 					}
 				}
@@ -116,8 +94,8 @@ public class Player1 {
 	}
 
 	public void call(Table t) {
-		chips = chips - (t.topRaise-this.raise);
-		t.pot = t.pot + (t.topRaise-this.raise);
+		chips = chips - (t.topRaise - this.raise);
+		t.pot = t.pot + (t.topRaise - this.raise);
 		this.raise = (t.topRaise);
 		System.out.println(spielerName + ": call");
 	}
@@ -130,4 +108,62 @@ public class Player1 {
 	public void check() {
 		System.out.println(spielerName + " check");
 	}
+
+	public void taktik0RM(Table t) {
+		if ((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[1].getWert() > 5)) {
+			call(t);
+		} else if ((blatt[0].getfarbe() == blatt[1].getfarbe()) && (blatt[1].getWert() > 6)) {
+			call(t);
+		} else {
+			fold();
+		}
+	}
+
+	public void taktik1RM(Table t) {//Passiv
+		if(t.spielFortschrit == "preFlop") {//preflop verhalten
+			if (t.topRaise == t.bigBlind) {//nur Blind
+				if(blattPairWertMoreThan(12)) {//bei AA, KK,
+					raise(t.bigBlind,t);
+				}
+				else if(blattPairWertMoreThan(6)) {// 77-DD
+					call(t);
+				}
+				else {
+					fold();
+				}
+			}
+			if (t.topRaise < t.bigBlind) {
+				
+			}
+		}
+		else {
+			if((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[0].getWert() > 8)) {
+				raise(20, t);
+			}
+			if(blatt[0].getWert() > 8) {
+				if(t.topRaise == 0) {
+					check();
+				}
+			}
+		} 
+	}
+
+	public boolean blattPairWertMoreThan(int wert) {
+		if ((blatt[0].getWert() > wert) && (blatt[0].getWert() == blatt[1].getWert())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean blattSameColorAndMoreThan(double wert) {
+		if((blatt[0].farbe == blatt[1].farbe)&& ((blatt[0].wert > wert)||(blatt[1].wert > wert))) {
+			return true;
+		}
+		else {
+		return false;
+	}
+	}
+	
 }
