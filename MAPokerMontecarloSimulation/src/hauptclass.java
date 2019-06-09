@@ -17,7 +17,7 @@ public class hauptclass {
 		/*
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
-		Table Tisch = new Table(null, null, null, null, null);
+		Table table = new Table(null, null, null, null, null);
 		Player1 Spieler1 = new Player1("Ich", true, false, 0);
 		Player1 Spieler2 = new Player1("Spieler2", false, false, 2);
 		int WinnerSpieler1 = 0;
@@ -27,76 +27,88 @@ public class hauptclass {
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
 		
-		Player1[] Spieler = { Spieler1, Spieler2 };
+		Player1[] spieler = { Spieler1, Spieler2 };
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
-			Tisch.spielFortschrit = "preFlop";
-			Tisch.topRaise = 0;
-			Spieler = setzeSpielerInRunde(Spieler);
-			if (nurNoch1Spieler(Spieler)) {
+			table.spielFortschrit = "preFlop";
+			table.topRaise = 0;
+			spieler = setzeSpielerInRunde(spieler);
+			if (nurNoch1Spieler(spieler)) {
 				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
 				break;
 			}
 			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
 			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
-			Tisch.gibBlind(Spieler[Spieler.length-2], bigBlind/2, "small Blind");
-			Tisch.gibBlind(Spieler[Spieler.length-1], bigBlind, "big Blind");
-			Tisch.bigBlind = bigBlind;
+			table.gibBlind(spieler[spieler.length-2], bigBlind/2, "small Blind");
+			table.gibBlind(spieler[spieler.length-1], bigBlind, "big Blind");
+			table.bigBlind = bigBlind;
 			zeigSpielerBlatt(Spieler1);
-			zuegeAusführen(Spieler, Tisch);
+			zuegeAusführen(spieler, table);
 
-			gibFlop(Tisch, Karte[23], Karte[24], Karte[25]);
-			Tisch.spielFortschrit = "flop";
-			Tisch.topRaise = 0;
-			zuegeAusführen(Spieler, Tisch);
+			gibFlop(table, Karte[23], Karte[24], Karte[25]);
+			table.spielFortschrit = "flop";
+			table.topRaise = 0;
+			zuegeAusführen(spieler, table);
 
-			gibRiver(Tisch, Karte[26]);
-			Tisch.spielFortschrit = "river";
-			Tisch.topRaise = 0;
-			zuegeAusführen(Spieler, Tisch);
+			gibRiver(table, Karte[26]);
+			table.spielFortschrit = "river";
+			table.topRaise = 0;
+			zuegeAusführen(spieler, table);
 
-			gibTurn(Tisch, Karte[27]);
-			Tisch.spielFortschrit = "turn";
-			Tisch.topRaise = 0;
-			zuegeAusführen(Spieler, Tisch);
+			gibTurn(table, Karte[27]);
+			table.spielFortschrit = "turn";
+			table.topRaise = 0;
+			zuegeAusführen(spieler, table);
 
 			zeigSpielerBlatt(Spieler1);
 			zeigSpielerBlatt(Spieler2);
-			Card[] tableCardsTurn = Tisch.tischKarten(Tisch.flop1, Tisch.flop2, Tisch.flop3, Tisch.river, Tisch.turn);
-			Card[][] Spieler1Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler1.blatt);
-			Card[][] Spieler2Hände = Tisch.HändeVonSpieler(tableCardsTurn, Spieler2.blatt);
-			Spieler1Hände = Tisch.sortHands(Spieler1Hände);
-			Spieler2Hände = Tisch.sortHands(Spieler2Hände);
-			Tisch.gibSpielerBestHandAndScore(Spieler1Hände, Spieler1);
-			Tisch.gibSpielerBestHandAndScore(Spieler2Hände, Spieler2);
+			Card[] tableCardsTurn = table.tischKarten(table.flop1, table.flop2, table.flop3, table.river, table.turn);
+			Card[][][] spielerHaende = new Card[spieler.length][][];
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaende[j] = table.HaendeVonSpieler(tableCardsTurn, spieler[j].blatt);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaende[j] = table.sortHands(spielerHaende[j]);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				table.gibSpielerBestHandAndScore(spielerHaende[j], spieler[j]);
+			}
 
-			gibausKartenStapel(Spieler1.bestHand);
-			gibausKartenStapel(Spieler2.bestHand);
-			Player1[] winner = Tisch.Gewinner(Spieler1, Spieler2);
-			Tisch.tellGewinner(Spieler1, Spieler2);
-			Tisch.topScore = winner[0].score;
+			for(int j=0; j<spieler.length; j++) {
+				gibausKartenStapel(spieler[j].bestHand);
+			}
+			
+			Player1[] winner = table.Gewinner(spieler);
+			table.tellGewinner(spieler);
+			table.topScore = winner[0].score;
 			if (winner.length > 1) {
-				Tisch.pot = Tisch.pot / winner.length;
+				table.pot = table.pot / winner.length;
 			}
-			if (Spieler1.score == Tisch.topScore) {
+			for(int j=0; j<spieler.length; j++) {
+				
+			}
+			
+			if (Spieler1.score == table.topScore) {
 				WinnerSpieler1 = WinnerSpieler1 + 1;
-				Spieler1.chips = Spieler1.chips + Tisch.pot;
+				Spieler1.chips = Spieler1.chips + table.pot;
 			}
-			if (Spieler2.score == Tisch.topScore) {
+			if (Spieler2.score == table.topScore) {
 				WinnerSpieler2 = WinnerSpieler2 + 1;
-				Spieler2.chips = Spieler2.chips + Tisch.pot;
+				Spieler2.chips = Spieler2.chips + table.pot;
 			}
 
 			if ((Spieler1.chips <= 0) || (Spieler2.chips <= 0)) {
 				break;
 			}
 
-			Tisch.pot = 0;
-			System.out.println(Spieler[0].spielerName + " chips: " + Spieler[0].chips);
-			System.out.println(Spieler[1].spielerName + " chips: " + Spieler[1].chips);
+			table.pot = 0;
+			System.out.println(spieler[0].spielerName + " chips: " + spieler[0].chips);
+			System.out.println(spieler[1].spielerName + " chips: " + spieler[1].chips);
 
-			Spieler = ändereSpielerReihenfolge(Spieler);
+			spieler = ändereSpielerReihenfolge(spieler);
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
 		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);

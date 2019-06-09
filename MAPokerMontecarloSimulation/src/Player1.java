@@ -2,6 +2,7 @@
 public class Player1 {
 	String spielerName;
 	boolean inRunde;
+	boolean inSpiel;
 	boolean manuel;
 	float anzahlBlattpaare = 0;
 	int position;

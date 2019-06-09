@@ -26,19 +26,19 @@ public class Table {
 		return Karte;
 	}
 
-	public Card[][] HändeVonSpieler(Card[] tk, Card[] Blatt) {
+	public Card[][] HaendeVonSpieler(Card[] tk, Card[] Blatt) {
 		if (tk.length == 3) {
-			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };
-			return Hände;
+			Card[][] Haende = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };
+			return Haende;
 		}
 		if (tk.length == 4) {
-			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
+			Card[][] Haende = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
 					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[3] },
 					{ Blatt[0], tk[0], tk[1], tk[2], tk[3] }, { Blatt[1], tk[0], tk[1], tk[2], tk[3] } };
-			return Hände;
+			return Haende;
 
 		} else {
-			Card[][] Hände = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
+			Card[][] Haende = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] }, { Blatt[0], Blatt[1], tk[0], tk[1], tk[3] },
 					{ Blatt[0], Blatt[1], tk[0], tk[1], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[2], tk[3] },
 					{ Blatt[0], Blatt[1], tk[0], tk[2], tk[4] }, { Blatt[0], Blatt[1], tk[0], tk[3], tk[4] },
 					{ Blatt[0], Blatt[1], tk[1], tk[2], tk[3] }, { Blatt[0], Blatt[1], tk[1], tk[2], tk[4] },
@@ -51,7 +51,7 @@ public class Table {
 					{ Blatt[1], tk[0], tk[1], tk[2], tk[3] }, { Blatt[1], tk[0], tk[1], tk[2], tk[4] },
 					{ Blatt[1], tk[0], tk[1], tk[3], tk[4] }, { Blatt[1], tk[0], tk[2], tk[3], tk[4] },
 					{ Blatt[1], tk[1], tk[2], tk[3], tk[4] }, { tk[0], tk[1], tk[2], tk[3], tk[4] } };
-			return Hände;
+			return Haende;
 		}
 	}
 
@@ -132,17 +132,17 @@ public class Table {
 	}
 
 	public static double scoreHand(Card[] Karte, Player1 Spieler) {
-		//überprüfen ob er noch lebt
+		//ueberpruefen ob er noch lebt
 		double scoreWert = 0;
 		if ((!Spieler.inRunde) || (Spieler.chips <= 0)) {
 			scoreWert = 0;
 		}
 		// -------- RoyalFlush und Straight flush inlusive Wheel
 		else if ((Karte[0].farbe == Karte[1].farbe) && (Karte[0].farbe == Karte[2].farbe)
-				&& (Karte[0].farbe == Karte[3].farbe) && (Karte[0].farbe == Karte[4].farbe)) { // prüfen auf Flush
+				&& (Karte[0].farbe == Karte[3].farbe) && (Karte[0].farbe == Karte[4].farbe)) { // pruefen auf Flush
 
 			if ((Karte[0].nummer == 1) && (Karte[1].nummer == 13) && (Karte[2].nummer == 12) && (Karte[3].nummer == 11)
-					&& (Karte[4].nummer == 10)) { // prüfen auf Royal flush
+					&& (Karte[4].nummer == 10)) { // pruefen auf Royal flush
 				scoreWert = 14 * Math.pow(10, 9);
 			}
 
