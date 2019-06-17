@@ -7,6 +7,7 @@ public class hauptclass {
 
 	public static void main(String[] args) {
 
+		Output output = new Output();
 		Card[] Karte;
 		Karte = new Card[52];
 		for (int i = 0; i < 52; i++) {
@@ -18,16 +19,17 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		Player1 Spieler1 = new Player1("Ich", true, false, 0);
+		Player1 Spieler1 = new Player1("Ich", false, false, 2);
 		Player1 Spieler2 = new Player1("Spieler2", false, false, 2);
+		Player1 Spieler3 = new Player1("Spieler3", false, false, 2);
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
-		int n = 10;
+		int n = 100;
 		int bigBlind = 10;
 		Spieler1.chips = 500;
 		Spieler2.chips = 500;
-		
-		Player1[] spieler = { Spieler1, Spieler2 };
+		Spieler3.chips = 500;
+		Player1[] spieler = { Spieler1, Spieler2, Spieler3 };
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
 			table.spielFortschrit = "preFlop";
@@ -37,8 +39,13 @@ public class hauptclass {
 				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
 				break;
 			}
-			gibSpielerBlatt(Spieler1, Karte[1], Karte[2]);
-			gibSpielerBlatt(Spieler2, Karte[3], Karte[4]);
+			
+			for(int j=0; j<spieler.length; j++) {
+				int kartenNummer1 = 0;
+				int kartenNummer2 = kartenNummer1 + 1;
+				gibSpielerBlatt(spieler[j], Karte[kartenNummer1], Karte[kartenNummer2]);
+				kartenNummer1 = kartenNummer1 + 2;
+			}
 			System.out.println("------------------\n Runde:" + (i + 1) + "/" + n);
 			table.gibBlind(spieler[spieler.length-2], bigBlind/2, "small Blind");
 			table.gibBlind(spieler[spieler.length-1], bigBlind, "big Blind");
@@ -105,8 +112,8 @@ public class hauptclass {
 			}
 
 			table.pot = 0;
-			System.out.println(spieler[0].spielerName + " chips: " + spieler[0].chips);
-			System.out.println(spieler[1].spielerName + " chips: " + spieler[1].chips);
+			
+			output.OutputChips(spieler);
 
 			spieler = ändereSpielerReihenfolge(spieler);
 		}
