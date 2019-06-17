@@ -19,16 +19,16 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		Player1 Spieler1 = new Player1("Ich", false, false, 2);
-		Player1 Spieler2 = new Player1("Spieler2", false, false, 2);
-		Player1 Spieler3 = new Player1("Spieler3", false, false, 2);
+		Player1 Spieler1 = new Player1("Ich", false, false, 0);
+		Player1 Spieler2 = new Player1("Spieler2", false, false, 0);
+		Player1 Spieler3 = new Player1("Spieler3", false, false, 0);
 		int WinnerSpieler1 = 0;
 		int WinnerSpieler2 = 0;
-		int n = 100;
+		int n = 1000;
 		int bigBlind = 10;
-		Spieler1.chips = 500;
-		Spieler2.chips = 500;
-		Spieler3.chips = 500;
+		Spieler1.chips = 100;
+		Spieler2.chips = 100;
+		Spieler3.chips = 100;
 		Player1[] spieler = { Spieler1, Spieler2, Spieler3 };
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
