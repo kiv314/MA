@@ -19,17 +19,20 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		Player1 Spieler1 = new Player1("Ich", false, false, 0);
-		Player1 Spieler2 = new Player1("Spieler2", false, false, 0);
-		Player1 Spieler3 = new Player1("Spieler3", false, false, 0);
-		int WinnerSpieler1 = 0;
-		int WinnerSpieler2 = 0;
+		Player1 Spieler1 = new Player1("Ich", false, false, 2);
+		Player1 Spieler2 = new Player1("Spieler2", false, false, 1);
+		Player1 Spieler3 = new Player1("Spieler3", false, false, 2);
+		Player1 Spieler4 = new Player1("Spieler4", false, false, 0);
 		int n = 1000;
 		int bigBlind = 10;
-		Spieler1.chips = 100;
-		Spieler2.chips = 100;
-		Spieler3.chips = 100;
-		Player1[] spieler = { Spieler1, Spieler2, Spieler3 };
+		int startChips = 100;
+		Player1[] spieler = { Spieler1, Spieler2, Spieler3, Spieler4 };
+		Player1[] spielerAnfang = spieler;
+		for(int i=0; i<spieler.length; i++) {
+			spieler[i].chips = startChips;
+		}
+		
+		
 		for (int i = 0; i < n; i++) {
 			arrayMix(Karte);
 			table.spielFortschrit = "preFlop";
@@ -94,38 +97,23 @@ public class hauptclass {
 			if (winner.length > 1) {
 				table.pot = table.pot / winner.length;
 			}
-			for(int j=0; j<spieler.length; j++) {
-				
+			for(int j=0; j<winner.length; j++) {
+				winner[j].chips = winner[j].chips + table.pot;
+				winner[j].winner = winner[j].winner + 1;
 			}
 			
-			if (Spieler1.score == table.topScore) {
-				WinnerSpieler1 = WinnerSpieler1 + 1;
-				Spieler1.chips = Spieler1.chips + table.pot;
-			}
-			if (Spieler2.score == table.topScore) {
-				WinnerSpieler2 = WinnerSpieler2 + 1;
-				Spieler2.chips = Spieler2.chips + table.pot;
-			}
 
-			if ((Spieler1.chips <= 0) || (Spieler2.chips <= 0)) {
-				break;
-			}
 
 			table.pot = 0;
 			
-			output.OutputChips(spieler);
+			output.OutputChips(spielerAnfang);
 
 			spieler = ändereSpielerReihenfolge(spieler);
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
-		System.out.println(Spieler1.spielerName + " " + WinnerSpieler1 + ", chips: " + Spieler1.chips);
-		System.out.println(Spieler2.spielerName + " " + WinnerSpieler2 + ", chips: " + Spieler2.chips);
-		if (Spieler1.chips > Spieler2.chips) {
-			System.out.println("Gratulation, Sie haben Gewonnen!");
-		}
-		if (Spieler1.chips < Spieler2.chips) {
-			System.out.println("Sie haben verloren!");
-		}
+		System.out.println(Spieler1.spielerName + " "  + ", chips: " + Spieler1.chips);
+		System.out.println(Spieler2.spielerName + " "  + ", chips: " + Spieler2.chips);
+		output.textOutput(spielerAnfang);
 	}
 
 	public static boolean nurNoch1Spieler(Player1 Spieler[]) {
@@ -342,5 +330,6 @@ public class hauptclass {
 		}
 		return neueReihenfolge;
 	}
+	
 
 }

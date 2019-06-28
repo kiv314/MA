@@ -1,0 +1,4 @@
+Spielername: , chips:,
+Spieler3, 77
+Spieler4, 77
+Ich, 52

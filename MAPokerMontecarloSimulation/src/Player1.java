@@ -14,8 +14,14 @@ public class Player1 {
 	int taktik;
 	int chips;
 	int raise;
+	int winner;
 	String blind; // null, big, small
-
+	
+	int statraise;
+	int statfold;
+	int statcall;
+	int statcheck;
+	
 	public Player1(String spielerName, boolean manuel, boolean inRunde, int taktik) { // Konstruktor
 		this.inRunde = inRunde;
 		this.manuel = manuel;
@@ -89,6 +95,7 @@ public class Player1 {
 			t.topRaise = raise;
 			this.raise = raise;
 			System.out.println(spielerName + ": raise auf " + raise);
+			statraise = statraise +1;
 		} else {
 			System.out.println("Fehler! zu wenig chips oder raise zu gering!");
 		}
@@ -99,26 +106,42 @@ public class Player1 {
 		t.pot = t.pot + (t.topRaise - this.raise);
 		this.raise = (t.topRaise);
 		System.out.println(spielerName + ": call");
+		statcall = statcall+1;
 	}
 
 	public void fold() {
 		inRunde = false;
 		System.out.println(spielerName + " fold");
+		statfold = statfold + 1;
 	}
 
 	public void check() {
 		System.out.println(spielerName + " check");
 	}
 
-	public void taktik0RM(Table t) {
-		if ((blatt[0].getNummer() == blatt[1].getNummer()) && (blatt[1].getWert() > 5)) {
+	public void taktik0RM(Table t) {//taktik 0 wen raise möglich
+		if ((((blatt[0].wert == 14) && (blatt[1].wert >9)) || ((blatt[1].wert == 14) && (blatt[0].wert >9))) && (t.spielFortschrit == "preFlop")) {
+			raise(t.bigBlind*3 , t);
+		}
+		else if ((blattPairWertMoreThan(7)) && t.topRaise < 3*t.bigBlind) {
 			call(t);
-		} else if ((blatt[0].getfarbe() == blatt[1].getfarbe()) && (blatt[1].getWert() > 6)) {
+		} else if (blattSameColorAndMoreThan(8)) {// kein paar aber suited
 			call(t);
 		} else {
 			fold();
 		}
 	}
+	
+	public void taktik0RNM(Table t) {
+		if ((blattPairWertMoreThan(7)) && t.topRaise < 3*t.bigBlind) {
+			call(t);
+		} else if (blattSameColorAndMoreThan(8)) {// kein paar aber suited
+			call(t);
+		} else {
+			fold();
+		}
+	}
+	
 
 	public void taktik1RM(Table t) {//Passiv
 		if(t.spielFortschrit == "preFlop") {//preflop verhalten
