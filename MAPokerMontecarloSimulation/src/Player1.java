@@ -40,7 +40,12 @@ abstract class Player1 {
 		t.pot = t.pot + (t.topRaise - this.raise);
 		this.raise = (t.topRaise);
 		System.out.println(spielerName + ": call");
-		statcall = statcall+1;
+		if(0 == (t.topRaise - this.raise)) {
+			statcheck += 1;
+		}
+		else {
+			statcall += 1;
+		}	
 	}
 
 	public void fold() {
