@@ -1,5 +1,3 @@
 Spielername: ; chips ; winns ; fold; check; call; raise
-Ich;171;1000;0;0;1000;0
-Spieler2;-3;28;12;0;12;0
-Spieler3;191;1000;0;0;1000;0
-Spieler4;-2;5;29;0;20;1
+Ich;5;255;191;0;254;5
+Spieler2;0;255;191;0;251;5
