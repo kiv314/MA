@@ -19,14 +19,13 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		Player1 Spieler1 = new Player1("Ich", false, false, 2);
-		Player1 Spieler2 = new Player1("Spieler2", false, false, 1);
-		Player1 Spieler3 = new Player1("Spieler3", false, false, 2);
-		Player1 Spieler4 = new Player1("Spieler4", false, false, 0);
+		PassivePlayer Spieler1 = new PassivePlayer("Ich", false, false);
+		PassivePlayer Spieler2 = new PassivePlayer("Spieler2", false, false);
+		
 		int n = 1000;
 		int bigBlind = 10;
 		int startChips = 100;
-		Player1[] spieler = { Spieler1, Spieler2, Spieler3, Spieler4 };
+		Player1[] spieler = { Spieler1, Spieler2, };
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
