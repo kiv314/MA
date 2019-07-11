@@ -1,3 +1,6 @@
-Spielername: ; chips ; winns ; fold; check; call; raise
-Ich;5;255;191;0;254;5
-Spieler2;0;255;191;0;251;5
+Pasive;Chicken;dummy;Spielername: ; chips ; winns ; fold; check; call; raise
+Pasive;0;2;10;6;2;2
+Chicken;0;13;20;39;6;2
+dummy;300;33;0;42;25;0
+Runden; Splitpots;
+33;14

@@ -19,13 +19,14 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		PassivePlayer Spieler1 = new PassivePlayer("Ich", false, false);
-		PassivePlayer Spieler2 = new PassivePlayer("Spieler2", false, false);
+		PassivePlayer Spieler1 = new PassivePlayer("Pasive", false, false);
+		Chicken chicken = new Chicken("Chicken", false, false);
+		Dummy dummy = new Dummy("dummy", false, false);
 		
 		int n = 1000;
 		int bigBlind = 10;
 		int startChips = 100;
-		Player1[] spieler = { Spieler1, Spieler2, };
+		Player1[] spieler = { Spieler1, chicken, dummy};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
@@ -33,6 +34,7 @@ public class hauptclass {
 		
 		
 		for (int i = 0; i < n; i++) {
+			table.runde = i;
 			arrayMix(Karte);
 			table.spielFortschrit = "preFlop";
 			table.topRaise = 0;
@@ -42,6 +44,7 @@ public class hauptclass {
 				break;
 			}
 			
+			table.anzahlSpieler = spieler.length;
 			for(int j=0; j<spieler.length; j++) {
 				int kartenNummer1 = 0;
 				int kartenNummer2 = kartenNummer1 + 1;
@@ -54,24 +57,28 @@ public class hauptclass {
 			table.bigBlind = bigBlind;
 			zeigSpielerBlatt(Spieler1);
 			zuegeAusführen(spieler, table);
-
+			
+			
 			gibFlop(table, Karte[23], Karte[24], Karte[25]);
 			table.spielFortschrit = "flop";
 			table.topRaise = 0;
 			zuegeAusführen(spieler, table);
+			
 
 			gibRiver(table, Karte[26]);
 			table.spielFortschrit = "river";
 			table.topRaise = 0;
 			zuegeAusführen(spieler, table);
+			
 
 			gibTurn(table, Karte[27]);
 			table.spielFortschrit = "turn";
 			table.topRaise = 0;
 			zuegeAusführen(spieler, table);
+			
 
-			zeigSpielerBlatt(Spieler1);
-			zeigSpielerBlatt(Spieler2);
+			zeigSpielerBlatt(spieler[0]);
+			zeigSpielerBlatt(spieler[1]);
 			Card[] tableCardsTurn = table.tischKarten(table.flop1, table.flop2, table.flop3, table.river, table.turn);
 			Card[][][] spielerHaende = new Card[spieler.length][][];
 			for(int j=0; j<spieler.length; j++) {
@@ -95,13 +102,14 @@ public class hauptclass {
 			table.topScore = winner[0].score;
 			if (winner.length > 1) {
 				table.pot = table.pot / winner.length;
+				table.splitPot += 1;
 			}
 			for(int j=0; j<winner.length; j++) {
 				winner[j].chips = winner[j].chips + table.pot;
 				winner[j].winner = winner[j].winner + 1;
 			}
 			
-
+			output.outputImSpiel(spielerAnfang);
 
 			table.pot = 0;
 			
@@ -110,9 +118,9 @@ public class hauptclass {
 			spieler = ändereSpielerReihenfolge(spieler);
 		}
 		System.out.println("-------------------------\nDas Spiel ist zu Ende! Punktestand:");
-		System.out.println(Spieler1.spielerName + " "  + ", chips: " + Spieler1.chips);
-		System.out.println(Spieler2.spielerName + " "  + ", chips: " + Spieler2.chips);
-		output.textOutput(spielerAnfang);
+		System.out.println(spielerAnfang[0].spielerName + " "  + ", chips: " + spielerAnfang[0].chips);
+		System.out.println(spielerAnfang[1].spielerName + " "  + ", chips: " + spielerAnfang[1].chips);
+		output.textOutput(spielerAnfang, table);
 	}
 
 	public static boolean nurNoch1Spieler(Player1 Spieler[]) {
@@ -129,6 +137,7 @@ public class hauptclass {
 		}
 	}
 
+	
 	private static Player1[] setzeSpielerInRunde(Player1[] Spieler) {
 		Player1[] lebendeSpieler = {};
 		for (int i = 0; i < Spieler.length; i++) {
@@ -148,12 +157,19 @@ public class hauptclass {
 
 	private static void zugAusführen(Player1 Spieler, Table t) {
 		if (Spieler.inRunde) {
-			if (t.raiseMoeglich) {
+			if(t.anzahlSpieler == 1) {
+				Spieler.chips += t.pot;
+				if(t.pot < 0) {
+					Spieler.winner +=1;
+				}
+				t.pot = 0;
+			}
+			else if (t.raiseMoeglich) {
 				if (Spieler.manuel) {
 					System.out.println("Machen sie einen Zug --- Ihre chips:          " + Spieler.chips);
 					Scanner eingabewert = new Scanner(System.in);
 					if (eingabewert.hasNext("fold")) {// fold als zug
-						Spieler.fold();
+						Spieler.fold(t);
 					}
 					if (eingabewert.hasNext("raise")) {// raise als Zug
 						System.out.println("Wieviel wollen sie raisen?");
@@ -185,14 +201,14 @@ public class hauptclass {
 					Spieler.machZugNachTaktik(t);
 				}
 			}
-			if (!t.raiseMoeglich && !Spieler.manuel && t.topRaise != 0 && !(Spieler.raise == t.topRaise)) {
+			else if (!t.raiseMoeglich && !Spieler.manuel && t.topRaise != 0 && !(Spieler.raise == t.topRaise)) {
 				Spieler.machZugNachTaktik(t);
 			} else if (!t.raiseMoeglich && t.topRaise != Spieler.raise) {
 				if (Spieler.manuel) {
 					System.out.println("raise ist bei: " + t.topRaise + ", callen oder folden");
 					Scanner eingabewert = new Scanner(System.in);
 					if (eingabewert.hasNext("fold")) {// fold als zug
-						Spieler.fold();
+						Spieler.fold(t);
 					} else if (eingabewert.hasNext("call")) {
 						Spieler.call(t);
 					} else {
@@ -203,7 +219,7 @@ public class hauptclass {
 			}
 		}
 	}
-
+	
 	private static void gibFlop(Table t, Card karte1, Card karte2, Card karte3) {
 		t.gibFlopTisch(karte1, karte2, karte3);
 		System.out.println("Comp: Flop: " + hauptclass.tellCard(karte1) + ", " + hauptclass.tellCard(karte2) + ", "

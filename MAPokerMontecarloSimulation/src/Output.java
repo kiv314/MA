@@ -4,17 +4,21 @@ import java.io.PrintWriter;
 
 
 public class Output {
-	public void textOutput(Player1[] spieler) {
+	public void textOutput(Player1[] spieler, Table t) {
 		String fileName = "Daten1.csv";
 		String s = ";" ; 
 		try {
 			PrintWriter outputStream = new PrintWriter(fileName);
+			for(int i=0; i<spieler.length; i++) {
+				outputStream.print(spieler[i].spielerName + ";");
+			}
 			outputStream.println("Spielername: ; chips ; winns ; fold; check; call; raise");
 			for(int i=0; i<spieler.length; i++) {
 				outputStream.println(spieler[i].spielerName + s + spieler[i].chips + s + spieler[i].winner + s + spieler[i].statfold 
 						+ s + spieler[i].statcheck + s + spieler[i].statcall + s + spieler[i].statraise);
 			}
-			
+			outputStream.println("Runden; Splitpots;");
+			outputStream.println(t.runde + s + t.splitPot );
 			outputStream.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block hhh
@@ -28,5 +32,22 @@ public class Output {
 		for(int i=0; i<spieler.length; i++) {
 			System.out.println(spieler[i].spielerName + " chips: " + spieler[i].chips);
 		}
+			
+	}
+	
+	public void outputImSpiel(Player1[] spieler) {
+		String fileName = "Daten1.csv";
+		PrintWriter outputStream;
+		try {
+			outputStream = new PrintWriter(fileName);
+			for(int i=0; i<spieler.length; i++) {
+				outputStream.print(spieler[i].chips + ";");
+			}
+			outputStream.println();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

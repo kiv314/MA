@@ -24,7 +24,7 @@ public class PassivePlayer extends Player1 {
 		} else if (blattSameColorAndMoreThan(8)) {// kein paar aber suited
 			call(t);
 		} else {
-			fold();
+			fold(t);
 		}
 	}
 
@@ -34,7 +34,7 @@ public class PassivePlayer extends Player1 {
 		} else if (blattSameColorAndMoreThan(8)) {// kein paar aber suited
 			call(t);
 		} else {
-			fold();
+			fold(t);
 		}
 	}
 	

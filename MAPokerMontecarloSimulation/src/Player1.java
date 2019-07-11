@@ -19,8 +19,8 @@ abstract class Player1 {
 	
 	int statraise;
 	int statfold;
-	int statcall;
-	int statcheck;
+	int statcall = 0;
+	int statcheck = 0;
 	
 	public void raise(int raise, Table t) {
 		if ((raise > t.topRaise) && (raise <= chips)) {
@@ -40,7 +40,7 @@ abstract class Player1 {
 		t.pot = t.pot + (t.topRaise - this.raise);
 		this.raise = (t.topRaise);
 		System.out.println(spielerName + ": call");
-		if(0 == (t.topRaise - this.raise)) {
+		if(0 == this.raise) {
 			statcheck += 1;
 		}
 		else {
@@ -48,10 +48,11 @@ abstract class Player1 {
 		}	
 	}
 
-	public void fold() {
+	public void fold(Table t) {
 		inRunde = false;
 		System.out.println(spielerName + " fold");
 		statfold = statfold + 1;
+		t.anzahlSpieler = t.anzahlSpieler - 1;
 	}
 
 	public void check() {

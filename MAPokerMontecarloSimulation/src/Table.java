@@ -10,9 +10,12 @@ public class Table {
 	double topScore;
 	int pot;
 	int topRaise;
+	int splitPot = 0;
+	int runde;
 	String spielFortschrit; // preFlop, Flop, River, Turn 
 	boolean raiseMoeglich;
 	int bigBlind;
+	int anzahlSpieler = 0;
 	
 	public Table(Card flop1, Card flop2, Card flop3, Card river, Card turn) { // Konstruktor
 		this.flop1 = flop1;
