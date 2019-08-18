@@ -1,0 +1,25 @@
+1 Einleitung
+	1.1 Um was genau geht es
+	1.2 Weswegen dieses Thema 
+	1.3 Poker - Glücksspiel oder Strategie?
+	1.4 Theorien, die 4 Pokerstrategien
+		1.4.1 The Stonekiller - tight-agressiv
+		1.4.2 The Rock - tight-passive
+		1.4.3 The Maniac - loose-agressive
+		1.4.4 The Calling Station - loose-passive
+	1.4 Stand der Forschung
+		1.4.1 KI schlägt erstmals Poker Weltmeister
+		1.4.2 Strategien der Weltmeister
+2 Methode
+	2.1 beschreibung meiner Methode
+	2.2 Vorteile meiner Methode
+	2.3 Nachteile meiner Methode
+	2.4 alternative Methoden
+	2.5 Mein Code
+		2.5.1 Ablauf
+		2.5.2 Kartensystem
+		2.5.3 Bewertungsystem
+		2.5.4 Meine Spieler
+		
+3.Ergebnisse
+4.Diskusion
