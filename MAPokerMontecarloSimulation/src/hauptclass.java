@@ -23,10 +23,12 @@ public class hauptclass {
 		Chicken chicken = new Chicken("Chicken", false, false);
 		Dummy dummy = new Dummy("dummy", false, false);
 		
+		
+		
 		int n = 1000;
 		int bigBlind = 10;
-		int startChips = 100;
-		Player1[] spieler = { Spieler1, chicken, dummy};
+		int startChips = 10000;
+		Player1[] spieler = { Spieler1, chicken, dummy, };
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
@@ -43,10 +45,9 @@ public class hauptclass {
 				System.out.println("---------------\nEnde! Nur noch ein Spieler!!\n--------------");
 				break;
 			}
-			
+			int kartenNummer1 = 0;
 			table.anzahlSpieler = spieler.length;
 			for(int j=0; j<spieler.length; j++) {
-				int kartenNummer1 = 0;
 				int kartenNummer2 = kartenNummer1 + 1;
 				gibSpielerBlatt(spieler[j], Karte[kartenNummer1], Karte[kartenNummer2]);
 				kartenNummer1 = kartenNummer1 + 2;
@@ -114,6 +115,7 @@ public class hauptclass {
 			table.pot = 0;
 			
 			output.OutputChips(spielerAnfang);
+			output.outputImSpiel(spielerAnfang);
 
 			spieler = ändereSpielerReihenfolge(spieler);
 		}

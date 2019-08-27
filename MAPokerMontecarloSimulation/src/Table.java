@@ -295,6 +295,7 @@ public class Table {
 	public void gibBlind(Player1 Spieler, int blind, String blindTyp) {
 		Spieler.chips = Spieler.chips - blind;
 		Spieler.raise = blind;
+		if(blind == bigBlind) {Spieler.bigblind = true;}
 		pot = pot+blind;
 		if(topRaise < blind) {
 			topRaise = blind;

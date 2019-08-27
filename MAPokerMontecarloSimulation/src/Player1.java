@@ -4,6 +4,7 @@ abstract class Player1 {
 	boolean inRunde;
 	boolean inSpiel;
 	boolean manuel;
+	boolean bigblind;
 	float anzahlBlattpaare = 0;
 	int position;
 	Card Flop1 = null;
@@ -21,6 +22,7 @@ abstract class Player1 {
 	int statfold;
 	int statcall = 0;
 	int statcheck = 0;
+	int statPreflopFold =0;
 	
 	public void raise(int raise, Table t) {
 		if ((raise > t.topRaise) && (raise <= chips)) {
@@ -53,6 +55,7 @@ abstract class Player1 {
 		System.out.println(spielerName + " fold");
 		statfold = statfold + 1;
 		t.anzahlSpieler = t.anzahlSpieler - 1;
+		if(t.spielFortschrit == "preFlop") {statPreflopFold += 1;}
 	}
 
 	public void check() {

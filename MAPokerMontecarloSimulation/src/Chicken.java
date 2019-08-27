@@ -13,7 +13,7 @@ public class Chicken extends Player1 {
 				if (t.topRaise > 39) {
 					call(t);
 				} else {
-					raise(90, t);
+					raise(400, t);
 				}
 			}
 			else{
