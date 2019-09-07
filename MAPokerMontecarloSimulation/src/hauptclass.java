@@ -25,7 +25,7 @@ public class hauptclass {
 		
 		
 		
-		int n = 1000;
+		int n = 10000;
 		int bigBlind = 10;
 		int startChips = 10000;
 		Player1[] spieler = { Spieler1, chicken, dummy, };
