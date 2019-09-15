@@ -17,7 +17,7 @@ public class PassivePlayer extends Player1 {
 	
 	public void taktik0RM(Table t) {// taktik 0 wen raise möglich
 		if ((((blatt[0].wert == 14) && (blatt[1].wert > 9)) || ((blatt[1].wert == 14) && (blatt[0].wert > 9)))
-				&& (t.spielFortschrit == "preFlop")) {
+				&& (t.spielFortschrit == "preFlop")) {//geht mit bei Ass und Kicker >9
 			raise(t.bigBlind * 10, t);
 		} else if ((blattPairWertMoreThan(7)) && t.topRaise < 3 * t.bigBlind) {
 			if(t.spielFortschrit == "preFlop") {

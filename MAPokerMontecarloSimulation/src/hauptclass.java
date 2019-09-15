@@ -22,13 +22,12 @@ public class hauptclass {
 		PassivePlayer Spieler1 = new PassivePlayer("Pasive", false, false);
 		Chicken chicken = new Chicken("Chicken", false, false);
 		Dummy dummy = new Dummy("dummy", false, false);
+		Chicken chicken2 = new Chicken("Chicken2", false, false);
 		
-		
-		
-		int n = 10000;
+		int n = 100000;
 		int bigBlind = 10;
-		int startChips = 10000;
-		Player1[] spieler = { Spieler1, chicken, dummy, };
+		int startChips = 1000;
+		Player1[] spieler = { Spieler1, chicken, dummy, chicken2};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;

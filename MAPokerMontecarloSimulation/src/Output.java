@@ -6,13 +6,16 @@ import java.io.PrintWriter;
 public class Output {
 	public void textOutput(Player1[] spieler, Table t) {
 		String fileName = "Daten1.csv";
-		String s = ";" ; 
+		String s = ";" ;
 		try {
 			PrintWriter outputStream = new PrintWriter(fileName);
-			outputStream.println("Spielername: ; chips ; winns ; fold; check; call; raise; PreFlopFolds");
+			outputStream.println("Spielername: ; chips ; winns ; fold; check; call; raise; PreFlopFolds; tughtness");
 			for(int i=0; i<spieler.length; i++) {
+				float calcstatPreflopFold = spieler[i].statPreflopFold;
+				float calcRound = t.runde;
+				float tightness = (calcRound-calcstatPreflopFold)/calcRound;
 				outputStream.println(spieler[i].spielerName + s + spieler[i].chips + s + spieler[i].winner + s + spieler[i].statfold 
-						+ s + spieler[i].statcheck + s + spieler[i].statcall + s + spieler[i].statraise + s + spieler[i].statPreflopFold);
+						+ s + spieler[i].statcheck + s + spieler[i].statcall + s + spieler[i].statraise + s + spieler[i].statPreflopFold + s + tightness);
 			}
 			outputStream.println("Runden; Splitpots;");
 			outputStream.println(t.runde + s + t.splitPot );
