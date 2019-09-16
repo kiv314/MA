@@ -190,4 +190,21 @@ abstract class Player1 {
 		}
 		return false;
 	}
+	public boolean hasPair(Card [][] card) {
+		for(int i=0; i<card.length; i++) {
+			
+			if (card[i][0].nummer == card[i][1].nummer) {// P1,P2,X,Y,Z
+				return true;
+			} else if (card[i][1].nummer == card[i][2].nummer) {// X,P1,P2,Y,Z
+				return true;
+			} else if (card[i][2].nummer == card[i][3].nummer) {// X,Y,P1,P2,Z
+				return true;
+			} else if (card[i][3].nummer == card[i][4].nummer) {// X,Y,Z,P1,P2,
+				return true;
+			}
+			
+		}
+		return false;
+		
+	}
 }

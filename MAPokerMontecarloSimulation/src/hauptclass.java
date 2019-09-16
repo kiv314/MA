@@ -20,14 +20,15 @@ public class hauptclass {
 		 */
 		Table table = new Table(null, null, null, null, null);
 		PassivePlayer Spieler1 = new PassivePlayer("Pasive", false, false);
-		Chicken chicken = new Chicken("Chicken", false, false);
 		Dummy dummy = new Dummy("dummy", false, false);
 		Chicken chicken2 = new Chicken("Chicken2", false, false);
+		Dummy dummy1 = new Dummy("dummy1", false, false);
+		Dummy dummy2 = new Dummy("dummy2", false, false);
 		
-		int n = 100000;
-		int bigBlind = 10;
+		int n = 1000;
+		int bigBlind = 1;
 		int startChips = 1000;
-		Player1[] spieler = { Spieler1, chicken, dummy, chicken2};
+		Player1[] spieler = { Spieler1, dummy, chicken2, dummy1, dummy2};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
