@@ -25,9 +25,9 @@ public class hauptclass {
 		Dummy dummy1 = new Dummy("dummy1", false, false);
 		Dummy dummy2 = new Dummy("dummy2", false, false);
 		
-		int n = 1000;
-		int bigBlind = 1;
-		int startChips = 1000;
+		int n = 10000;
+		int bigBlind = 10;
+		int startChips = 3000;
 		Player1[] spieler = { Spieler1, dummy, chicken2, dummy1, dummy2};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
@@ -57,6 +57,9 @@ public class hauptclass {
 			table.gibBlind(spieler[spieler.length-1], bigBlind, "big Blind");
 			table.bigBlind = bigBlind;
 			zeigSpielerBlatt(Spieler1);
+			for(int j=0; j<spieler.length; j++) {
+				spieler[j].statrounds += 1;
+			}
 			zuegeAusführen(spieler, table);
 			
 			

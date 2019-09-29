@@ -9,13 +9,14 @@ public class Output {
 		String s = ";" ;
 		try {
 			PrintWriter outputStream = new PrintWriter(fileName);
-			outputStream.println("Spielername: ; chips ; winns ; fold; check; call; raise; PreFlopFolds; tughtness");
+			outputStream.println("Spielername: ; chips ; winns ; fold; check; call; raise; Teilgenommene Runden; PreFlopFolds; tughtness; winratio");
 			for(int i=0; i<spieler.length; i++) {
 				float calcstatPreflopFold = spieler[i].statPreflopFold;
-				float calcRound = t.runde;
-				float tightness = (calcRound-calcstatPreflopFold)/calcRound;
+				float calcRound = spieler[i].statrounds;
+				float calcRoundinGame = calcRound- calcstatPreflopFold;
+				float tightness = calcRoundinGame/calcRound;
 				outputStream.println(spieler[i].spielerName + s + spieler[i].chips + s + spieler[i].winner + s + spieler[i].statfold 
-						+ s + spieler[i].statcheck + s + spieler[i].statcall + s + spieler[i].statraise + s + spieler[i].statPreflopFold + s + tightness);
+						+ s + spieler[i].statcheck + s + spieler[i].statcall + s + spieler[i].statraise + s + calcRoundinGame + s + spieler[i].statPreflopFold + s + tightness +s+ spieler[i].winner/calcRoundinGame);
 			}
 			outputStream.println("Runden; Splitpots;");
 			outputStream.println(t.runde + s + t.splitPot );

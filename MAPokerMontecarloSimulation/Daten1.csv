@@ -1,8 +1,8 @@
-Spielername: ; chips ; winns ; fold; check; call; raise; PreFlopFolds; tughtness
-Pasive;-1;47;503;411;621;44;503;0.4964965
-dummy;1198;287;0;3000;1260;0;0;1.0
-Chicken2;1278;109;670;990;0;330;670;0.32932934
-dummy1;1214;317;0;3000;1095;0;0;1.0
-dummy2;1299;290;0;3000;1170;0;0;1.0
+Spielername: ; chips ; winns ; fold; check; call; raise; Teilgenommene Runden; PreFlopFolds; tughtness; winratio
+Pasive;-118;18;159;180;204;15;60.0;159;0.2739726;0.3
+dummy;4672;3458;0;30000;10075;0;10000.0;0;1.0;0.3458
+Chicken2;-8;59;1253;399;10;110;133.0;1253;0.0959596;0.44360903
+dummy1;5288;3444;0;30000;10032;0;10000.0;0;1.0;0.3444
+dummy2;5153;3474;0;30000;10056;0;10000.0;0;1.0;0.3474
 Runden; Splitpots;
-999;44
+9999;395

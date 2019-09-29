@@ -24,6 +24,7 @@ abstract class Player1 {
 	String blind; // null, big, small
 
 	int statraise;
+	int statrounds;
 	int statfold;
 	int statcall = 0;
 	int statcheck = 0;

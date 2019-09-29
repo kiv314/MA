@@ -11,11 +11,7 @@ public class Chicken extends Player1 {
 		if (t.spielFortschrit == "preFlop") {// Verhalten, raise noch möglich bei PreFLop
 			if (t.raiseMoeglich) {
 				if (chickenCasePreFlop(t)) {
-					if (t.topRaise > 199) {
-						call(t);
-					} else {
-						raise(20, t);
-					}
+						raise(400, t);
 				} else {
 					fold(t);
 				}
@@ -23,41 +19,21 @@ public class Chicken extends Player1 {
 				if (chickenCasePreFlop(t)) {
 					call(t);
 				} else {
-					if (t.topRaise > 650) {
-						call(t);
-					}
 					fold(t);
 				}
 			}
 		}
-		else if (t.spielFortschrit == "Flop") {
-			if (t.raiseMoeglich) {
-				if (chickenCaseFlop(t)) {
-					if (t.topRaise < 199) {
-						raise(250, t);
-					}
-					call(t);
-				}
-				if (t.topRaise < 199) {
-					call(t);
-				}
-			}
-			if (!t.raiseMoeglich) {
-				if (chickenCaseFlop(t)) {
-					call(t);
-				}
-				if (t.topRaise < 200) {
-					call(t);
-				}
-				fold(t);
-			}
-		} else {
+		if(t.spielFortschrit == "preFlop") {
+			
+		}
+		else {
 			call(t);
 		}
+		
 	}
 
 	boolean chickenCasePreFlop(Table t) {
-		if (blattPairWertMoreThan(6) || ((blatt[0].wert > 10) && (blatt[0].wert > 10))) {
+		if (blattPairWertMoreThan(7) || ((blatt[0].wert > 10) && (blatt[1].wert > 10))) {
 			return true;
 		} else {
 			return false;
