@@ -1,5 +1,5 @@
 
-public class Chicken extends Player1 {
+public class Chicken extends Player1 {//StoneKIller
 
 	public Chicken(String spielerName, boolean manuel, boolean inRunde) {
 		super(spielerName, manuel, inRunde);
@@ -11,7 +11,7 @@ public class Chicken extends Player1 {
 		if (t.spielFortschrit == "preFlop") {// Verhalten, raise noch möglich bei PreFLop
 			if (t.raiseMoeglich) {
 				if (chickenCasePreFlop(t)) {
-						raise(400, t);
+						raise(50, t);
 				} else {
 					fold(t);
 				}
@@ -23,7 +23,27 @@ public class Chicken extends Player1 {
 				}
 			}
 		}
-		if(t.spielFortschrit == "preFlop") {
+		if(t.spielFortschrit == "Flop") {
+			if(t.raiseMoeglich) {
+				if(chickenCaseFlop(t)) {
+					raise(600, t);
+				}
+				else if(t.topRaise == 0) {
+					check();
+				}
+				else {
+					fold(t);
+				}
+			}
+			else {
+				if(chickenCaseFlop(t)) {
+					call(t);
+				}
+				else {
+					fold(t);
+				}
+				
+			}
 			
 		}
 		else {
@@ -33,7 +53,7 @@ public class Chicken extends Player1 {
 	}
 
 	boolean chickenCasePreFlop(Table t) {
-		if (blattPairWertMoreThan(7) || ((blatt[0].wert > 10) && (blatt[1].wert > 10))) {
+		if (blattPairWertMoreThan(7) || ((blatt[0].wert > 8) && (blatt[1].wert > 8))) {
 			return true;
 		} else {
 			return false;
@@ -53,7 +73,7 @@ public class Chicken extends Player1 {
 		}
 
 		if (super.hasPair(hands)) {
-			return true;
+			return false;
 		}
 
 		else if (tableFlopHand[0].wert == blatt[0].wert || tableFlopHand[0].wert == blatt[1].wert) {// check auf Top
@@ -65,7 +85,6 @@ public class Chicken extends Player1 {
 			return true;
 		} else if ((isBlattSuited() && super.isFlushDrew(hands, 4)) && blatt[1].farbe == super.flushFarbe) {// check auf
 																											// FlushDrew
-			super.hasFlush = true;
 			return false;
 		} else if (super.isStreat(hands)) {// check if is streat
 			return true;

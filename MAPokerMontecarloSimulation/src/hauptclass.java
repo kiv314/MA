@@ -24,11 +24,12 @@ public class hauptclass {
 		Chicken chicken2 = new Chicken("Chicken2", false, false);
 		Dummy dummy1 = new Dummy("dummy1", false, false);
 		Dummy dummy2 = new Dummy("dummy2", false, false);
+		Maniac maniac1 = new Maniac("Maniac1", false, false);
 		
 		int n = 10000;
 		int bigBlind = 10;
 		int startChips = 3000;
-		Player1[] spieler = { Spieler1, dummy, chicken2, dummy1, dummy2};
+		Player1[] spieler = { Spieler1, chicken2,  maniac1};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
