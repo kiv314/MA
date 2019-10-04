@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt]{report}
 
-\author{A.~Umbach}
+\author{K.~Kosch}
 \title{Mein Maturaarbeitsthema}
 
 \usepackage[ngerman]{babel}
@@ -19,39 +19,27 @@
 %create links in the pdf
 \usepackage[colorlinks]{hyperref}
 
-%a glossary
-\usepackage[toc]{glossaries}
 
 
-\newglossaryentry{glossar}
-{
-  name=Glossar,
-  description={Im Glossar werden Fachausdrï¿½cke und Abkï¿½rzungen erklï¿½rt}
-}
-\newglossaryentry{blahblah}
-{
-  name=blahblah,
-  description={\blindtext}
-}
-
-\makeglossary
 
 \begin{document}
 \maketitle
 \tableofcontents
-
 \chapter{Vorwort}
-Hier kommt das Vorwort
-\section{Warum \LaTeX{}}
-Der Hauptgrund \LaTeX{} zu verwenden ist, damit man sich auf den Inhalt der Arbeit konzentrieren kann. Wie das ganze am Schluss aussehen soll, ï¿½berlï¿½sst man dem Programm. Je weniger eigene konkrete Vorstellungen vom Layout man mitbringt, desto einfacher wird es.
 \chapter{Einleitung}
-In dieser Arbeit geht es um P
+\section{Abstract}
+Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit am ehsten zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebenen Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige wie mein Code genau funktioniert, beziehungsweise erkläre wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute die das Pokerspiel (Texas Hold’em, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: "Die Pokerschule von Jan Meinert" \cite{diePokerschule} als Lektüre empfehlen. Programierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. 
+\section{Grundsätzliches}
 
-\chapter{Voraussetzungen}
-\section{Vorwissen}
-Um mit \LaTeX{} zu arbeiten, ist wenig Vorwissen notwendig. Allerdings sollte die Bereitschaft vorhanden sein, auch mal einen Blick ins Handbuch zu werfen, und wenn das nicht weiterhilft, Google nach der Lï¿½sung zu fragen.
 
-\section{Ein wenig Text}
+\chapter{Methode}
+\section{Monte-Carlo-Simulation}
+Mein Projekt ist im Grunde genommen eine Monte-Carlo-Simulation. Dies ist im Prinzip ein Versuch, um eine Wahrscheinlichkeit oder ein Ergebnis zu bestimmen, zum Beispiel die Frage: Wie hoch ist die Wahrscheinlichkeit mit einem normalen Würfel eine 6 zu würfeln? Diese Frage lässt sich ganz einfach mit de La Place Ansatz beantworten: die 6 als günstiges Ereignis und die andern Zahlen als Mögliche, führt zu einer Wahrscheinlichkeit von $\frac{1}{6}$. Dies ist sozusagen eine rechnerische Methode, im Gegensatz zur Monte-Carlo-Simulation, denn ihr Versuch wäre einfach ganz oft zu würfeln und dann zu zählen, wie oft die 6 gekommen wäre. Bei genügend vielen Wiederholungen kommt man auch ziemlich genau an $\frac{1}{6}$ als Ergebnis heran. \cite{MonteCarloSimulation}
+
+Diese Methode mag auf den ersten Blick ein wenig blödsinnig und dazu noch sehr aufwendig erscheinen, aber genau das ist ihre Stärke. Ein komplexeres Problem, wie in meinem Fall die verschiedenen Pokerstrategien, lässt sich Mathematisch gar nicht mehr ausrechnen, aber mit Hilfe eines Versuches hingegen ist es möglich eine Lösung zu finden. Ein analoger Versuch wäre natürlich sehr aufwendig, aber zum Glück gibt es Computer, denn deren Stärke liegt darin einfache, dafür sehr aufwendige, Probleme zu lösen. Mit Computern lassen sich Versuche in kurzer Zeit tausende Male wiederholen. \cite{MonteCarloSimulation}
+Somit ist die Monte-Carlo-Simulation perfekt geeignet um herauszufinden, wie sich verschiedene Pokerstrategien Verhalten, wenn sie gegeneinander antreten.
+\section{Java}
+
 \blindtext
 
 \chapter{Grundlagen}
@@ -59,46 +47,45 @@ Um mit \LaTeX{} zu arbeiten, ist wenig Vorwissen notwendig. Allerdings sollte di
 \label{kapitelunterkapitel}
 Mit \textbackslash chapter und \textbackslash section, bzw. \textbackslash subsection und \textbackslash subsubsection erstellt man Kapitel.
 
-Abschnitte werden erzeugt, indem man einfach eine leere Zeile einfï¿½gt. Um
-Zeilenumbrï¿½che muss man sich nicht kï¿½mmern, diese entstehen automatisch.
+Abschnitte werden erzeugt, indem man einfach eine leere Zeile einfÃ¼gt. Um
+ZeilenumbrÃ¼che muss man sich nicht kÃ¼mmern, diese entstehen automatisch.
 
 \section{Abbildung}
-Eine Abbildung ist auch mit ein paar Zeilen eingefï¿½gt. Die Abbildungen werden auch automatisch nummeriert. Lena's Bild ist Abbildung \ref{lena}.
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.6\textwidth]{lena.jpg}
-\caption{Lena ist eins der Standardbilder aus der Bildverarbeitung}
-\label{lena}
-\end{center}
-\end{figure}
+Eine Abbildung ist auch mit ein paar Zeilen eingefÃ¼gt. Die Abbildungen werden auch automatisch nummeriert. Lena's Bild ist Abbildung \ref{lena}.
+{
+
+\includegraphics[width=0.7\textwidth]{lena.jpg}
+\centering
+}
 
 \blindtext
 \section{Verweise}
-Mit \textbackslash ref und \textbackslash pageref kï¿½nnen Verweise auf andere Kapitel bzw. Seiten erstellt werden. \emph{Kapitel und Unterkapitel} ist Kapitel \ref{kapitelunterkapitel} auf Seite \pageref{kapitelunterkapitel}.
+Mit \textbackslash ref und \textbackslash pageref kÃ¶nnen Verweise auf andere Kapitel bzw. Seiten erstellt werden. \emph{Kapitel und Unterkapitel} ist Kapitel \ref{kapitelunterkapitel} auf Seite \pageref{kapitelunterkapitel}.
 
 \blindtext[2]
 
 \section{Literaturverzeichnis}
-Wie Tobias Oetiker \cite{lshort} schreibt, verwendet man \textbackslash cite um Literaturverweise und \textbackslash bibitem um das Literaturverzeichnis zu erstellen. Die \textbackslash bibitem Kommandos kï¿½nnen dabei an einem beliebigen Ort, z.B. in einer separaten Datei oder am Ende des Dokuments stehen.
+Wie Tobias Oetiker \cite{lshort} schreibt, verwendet man \textbackslash cite um Literaturverweise und \textbackslash bibitem um das Literaturverzeichnis zu erstellen. Die \textbackslash bibitem Kommandos kÃ¶nnen dabei an einem beliebigen Ort, z.B. in einer separaten Datei oder am Ende des Dokuments stehen.
 
 \begin{thebibliography}{99}
 \bibitem{lshort} T. Oetiker:
 \emph{The not so short introduction to \LaTeX{}}, Version 5.01, 2011
+\bibitem{diePokerschule} Jan Meinert:
+\emph{Die Pokerschule}, 2007 Kanaur Verlag, 2018 Droemer Verlag
+\bibitem{MonteCarloSimulation} riskNET.de:
+\emph{https://www.risknet.de/wissen/rm-methoden/monte-carlo-simulation/}, 10.2019
 \end{thebibliography}
 
-
-
-\chapter{Fï¿½r Fortgeschrittene}
-\section{Das Glossar}
-Im \gls{glossar} werden Fachausdrï¿½cke und Abkï¿½rzungen erklï¿½rt. Und hier noch ein weiterer Glossar-Eintrag: \gls{blahblah}
-
-Gemeinerweise kann \LaTeX{} das Glossar nicht ganz alleine erstellen, es ist auf das externe Programm \emph{makeindex} angewiesen, um einen Index zu erzeugen. Dieses wird ï¿½ber die Kommanozeile aufgerufen. Fï¿½r diese Arbeit habe ich den Index mit
-\\ \\
-makeindex -s Maturaarbeit.ist -t Maturaarbeit.glg -o Maturaarbeit.gls Maturaarbeit.glo
-\\ \\
-erzeugt und anschliessend \LaTeX{} noch zweimal laufen lassen.
-
-\printglossary[nonumberlist,title=Glossar]
-
-
 \end{document}
+Â© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
