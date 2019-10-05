@@ -35,7 +35,6 @@ public class hauptclass {
 			spieler[i].chips = startChips;
 		}
 		
-		
 		for (int i = 0; i < n; i++) {
 			table.runde = i;
 			arrayMix(Karte);

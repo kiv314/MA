@@ -27,45 +27,38 @@
 \tableofcontents
 \chapter{Vorwort}
 \chapter{Einleitung}
-\section{Abstract}
-Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit am ehsten zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebenen Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige wie mein Code genau funktioniert, beziehungsweise erkläre wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute die das Pokerspiel (Texas Hold’em, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: "Die Pokerschule von Jan Meinert" \cite{diePokerschule} als Lektüre empfehlen. Programierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. 
-\section{Grundsätzliches}
+Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit am ehsten zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebenen Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige wie mein Code genau funktioniert, beziehungsweise erkläre wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute die das Pokerspiel (Texas Holdem, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich Pokerstrategien zu simulieren, damit man so die Möglichkeit hat herauszufinden wie gut sie gegeneinander abschneiden. Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch die Pokerschule \cite{diePokerschule} beschrieben sind in meinem Programm gegeneinander antreten lasse. Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{alexMeyer}
 
+\chapter{Theorie}
+\section{Poker ein Glückspiel?}
+Ob und wie stark Poker als Glückspiel gilt, damit haben sich schon viele Leute befasst. Das deutsche Bundesverwaltungsgericht teilte in einem Urteil mit, dass Pokern stärker vom Zufall als der Geschicklichkeit des Spielers abhinge \cite{Gluck1}. Trotzdem gibt es einige professionelle Pokerspieler, einige sehr gute sogar. Solche die mehrmals in die Endrunden von grossen Pokerturnieren stiessen. Da kann man schon darauf schliessen das Poker mehr als nur ein Glückspiel ist. Mit viel Glück könnte ein Anfänger an einem Turnier gegen eine sehr guten Pokerspieler gewinnen, aber garantiert nicht mehrmals. Poker enthält Elemente von beidem, einem Glückspiel aber auch einem Taktischen Spiel und vor allem bei den Profis geht es sehr taktisch zu. 2019 ist es einer künstlichen Intelligenz zum ersten Mal gelungen gegen 5 Mitspieler zu gewinnen, und dass bei Weltklassespielern. Auch das beweist das Poker mehr ist als ein reines Glückspiel, wie zum Beispiel Roulette.\cite{Gluck2}
 
+\section{Die verschiedenen Poker Strategien}
+123
 \chapter{Methode}
 \section{Monte-Carlo-Simulation}
 Mein Projekt ist im Grunde genommen eine Monte-Carlo-Simulation. Dies ist im Prinzip ein Versuch, um eine Wahrscheinlichkeit oder ein Ergebnis zu bestimmen, zum Beispiel die Frage: Wie hoch ist die Wahrscheinlichkeit mit einem normalen Würfel eine 6 zu würfeln? Diese Frage lässt sich ganz einfach mit de La Place Ansatz beantworten: die 6 als günstiges Ereignis und die andern Zahlen als Mögliche, führt zu einer Wahrscheinlichkeit von $\frac{1}{6}$. Dies ist sozusagen eine rechnerische Methode, im Gegensatz zur Monte-Carlo-Simulation, denn ihr Versuch wäre einfach ganz oft zu würfeln und dann zu zählen, wie oft die 6 gekommen wäre. Bei genügend vielen Wiederholungen kommt man auch ziemlich genau an $\frac{1}{6}$ als Ergebnis heran. \cite{MonteCarloSimulation}
 
-Diese Methode mag auf den ersten Blick ein wenig blödsinnig und dazu noch sehr aufwendig erscheinen, aber genau das ist ihre Stärke. Ein komplexeres Problem, wie in meinem Fall die verschiedenen Pokerstrategien, lässt sich Mathematisch gar nicht mehr ausrechnen, aber mit Hilfe eines Versuches hingegen ist es möglich eine Lösung zu finden. Ein analoger Versuch wäre natürlich sehr aufwendig, aber zum Glück gibt es Computer, denn deren Stärke liegt darin einfache, dafür sehr aufwendige, Probleme zu lösen. Mit Computern lassen sich Versuche in kurzer Zeit tausende Male wiederholen. \cite{MonteCarloSimulation}
+Diese Methode mag auf den ersten Blick ein wenig blödsinnig und dazu noch sehr aufwendig erscheinen, aber genau das ist ihre Stärke. Ein komplexeres Problem, wie in meinem Fall die verschiedenen Pokerstrategien, lässt sich Mathematisch gar nicht mehr ausrechnen, aber mit Hilfe eines Versuches hingegen ist es möglich eine Lösung zu finden. Ein analoger Versuch wäre natürlich sehr aufwendig, aber zum Glück gibt es Computer, denn deren Stärke liegt darin einfache, dafür sehr aufwendige, Probleme zu lösen. Mit Computern lassen sich Versuche in kurzer Zeit tausende Male wiederholen. \cite{MonteCarloSimulation}. Die Monte-Carlo-Simulation bildet also eine Problemsituation im Computer ab und spielt sie so viele Male durch und gibt danach ein Ergebnis aus. 
 Somit ist die Monte-Carlo-Simulation perfekt geeignet um herauszufinden, wie sich verschiedene Pokerstrategien Verhalten, wenn sie gegeneinander antreten.
-\section{Java}
 
-\blindtext
+\section{Java}
+Zum Coden verwendete ich Java mit Eclipse. Die Gründe waren hierfür zum einen, dass ich diese Sprache schon kannte zum anderen ist sie relativ einfach, sicher und robust. Ausserdem kann man mit ihr objektorientiert programmieren. Dies eignet sich gut für die Spieler und die Karten, da man sie miteinander in Interaktion treten lassen kann.
+
+\section{Gerüst}
+Das Gerüst oder der Hauptteil des Codes ist in einer Schleife\cite[hauptclass z. 8-124]{MeinGit}, die eine Pokerrunde darstellt, diese Schleife wird so viele Male wiederholt, wie man das bei der Variable n eingegeben hat. In der Schleife werden zuerst die Karten gemischt. Darauffolgend die Spieler in die Runde gesetzt, die Karten verteilt, die Blinds abkassiert und darauf führt jeder Spieler seinen Zug aus, also entweder rausgehen(fold), checken, mitgehen (call) oder erhöhen (raise). Beim Flop werden die drei Tischkarten aufgedeckt. Danach dürfen die Spieler wieder ihre Züge ausführen und es folgen der Turn und der River. Am Schluss wird ausgewertet wer das beste Blatt hat und so der oder die Gewinner bestimmt. Diesen wird dann ihr Pot zugesprochen. Wenn ein Spieler kein Geld mehr hat spielt er nicht mehr mit.
+
+\section{Karte}
+Für die Karten, bzw den Kartenstapel, kreierte ich ein Objekt namens Card \cite[Card]{MeinGit} mit den Eigenschaften Farbe, Nummer und Wert. Die Farben sind die 4 Möglichen französischen Spielkarten Farben Herz(H), Karo(D), Pick(S) und Kreuz(C) und in dieser Reihenfolg nummeriert von 0 bis 3. Die Kartennummern sind von 1 mit dem Ass aufsteigend bis zur 13 für den König nummeriert. Die Eigenschaft Wert ist genau gleich wie die Eigenschaft Nummer, ausser beim Ass, denn das hat den Wert 14, da es in den meisten Fällen den grössten Wert hat. Mit diesem Datentyp wird ein Array erzeugt aus 52 Elementen, nummeriert von 0-51. In einer Schleife wird dann Mithilfe von Modulo Operationen, also dem Rest vom Ergebnis einer Division die Nummer oder die Farbe zugeordnet. z.B Karte Nummer 51 ist demnach 51 mod. 4 = 3 also Kreuz und für die Nummerierung 51 mod. 13 = 12, wenn man da noch +1 rechnet (da die Kartennummer 0 nicht existiert) ergibt sich 13 und somit ein König. Die Karte 51 ist also Kreuz König.\cite[hauptclas z.11-15]{MeinGit}
+Um die Karten zu mischen habe ich die Funktion arrayMix\cite[hauptclass z. 302]{MeinGit} geschrieben, diese Funktion ändert zufällig die Reihenfolge in dem Array der Karten und "mischt" sie so. Wie gut zufällig das ist lässt sich nicht genau sagen, denn Computer können fast keine echten Zufälle erzeugen.\cite{Pseudozufall} Dennoch ist es \glqq zufällig\grqq  genug, denn beim Testen in wie vielen Fällen eine bestimmte Hand vorkommt, habe ich die gleichen Ergebnisse bekommen wie mathematisch errechnet.
 
 \chapter{Grundlagen}
-\section{Kapitel und Unterkapitel}
-\label{kapitelunterkapitel}
-Mit \textbackslash chapter und \textbackslash section, bzw. \textbackslash subsection und \textbackslash subsubsection erstellt man Kapitel.
 
-Abschnitte werden erzeugt, indem man einfach eine leere Zeile einfÃ¼gt. Um
-ZeilenumbrÃ¼che muss man sich nicht kÃ¼mmern, diese entstehen automatisch.
-
-\section{Abbildung}
-Eine Abbildung ist auch mit ein paar Zeilen eingefÃ¼gt. Die Abbildungen werden auch automatisch nummeriert. Lena's Bild ist Abbildung \ref{lena}.
 {
 
 \includegraphics[width=0.7\textwidth]{lena.jpg}
 \centering
 }
-
-\blindtext
-\section{Verweise}
-Mit \textbackslash ref und \textbackslash pageref kÃ¶nnen Verweise auf andere Kapitel bzw. Seiten erstellt werden. \emph{Kapitel und Unterkapitel} ist Kapitel \ref{kapitelunterkapitel} auf Seite \pageref{kapitelunterkapitel}.
-
-\blindtext[2]
-
-\section{Literaturverzeichnis}
-Wie Tobias Oetiker \cite{lshort} schreibt, verwendet man \textbackslash cite um Literaturverweise und \textbackslash bibitem um das Literaturverzeichnis zu erstellen. Die \textbackslash bibitem Kommandos kÃ¶nnen dabei an einem beliebigen Ort, z.B. in einer separaten Datei oder am Ende des Dokuments stehen.
 
 \begin{thebibliography}{99}
 \bibitem{lshort} T. Oetiker:
@@ -74,6 +67,16 @@ Wie Tobias Oetiker \cite{lshort} schreibt, verwendet man \textbackslash cite um 
 \emph{Die Pokerschule}, 2007 Kanaur Verlag, 2018 Droemer Verlag
 \bibitem{MonteCarloSimulation} riskNET.de:
 \emph{https://www.risknet.de/wissen/rm-methoden/monte-carlo-simulation/}, 10.2019
+\bibitem{AlexMeyer} Alex Meyer:
+\emph{https://medium.com/@alexcmeyer/augmenting-thinking-54deff7735c5}, 10.2019
+\bibitem{MeinGit} Kevin Kosch:
+\emph{Mein Programm: https://github.com/kiv314/MA}, 10.2019
+\bibitem{Pseudozufall} Wikipedia:
+\emph{https://de.wikipedia.org/wiki/Pseudozufall}, 10.2019
+\bibitem{Gluck1} Die Welt:
+\emph{https://www.welt.de/vermischtes/article124138734/Pokern-gilt-nicht-per-se-als-Gluecksspiel.html}, 10.2019
+\bibitem{Gluck2} Nadja Podbregar:
+\emph{https://www.scinexx.de/news/technik/ki-gewinnt-gegen-pokerprofis/}, 10.2019
 \end{thebibliography}
 
 \end{document}
