@@ -15,26 +15,23 @@
 \fancyhf{}
 \fancyhead[C]{\nouppercase{\leftmark}}
 \fancyfoot[C]{\thepage}
-
 %create links in the pdf
 \usepackage[colorlinks]{hyperref}
-
-
-
 
 \begin{document}
 \maketitle
 \tableofcontents
 \chapter{Vorwort}
 \chapter{Einleitung}
-Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit am ehsten zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebenen Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige wie mein Code genau funktioniert, beziehungsweise erkläre wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute die das Pokerspiel (Texas Holdem, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich Pokerstrategien zu simulieren, damit man so die Möglichkeit hat herauszufinden wie gut sie gegeneinander abschneiden. Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch die Pokerschule \cite{diePokerschule} beschrieben sind in meinem Programm gegeneinander antreten lasse. Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{alexMeyer}
+Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit am ehsten zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebenen Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige wie mein Code genau funktioniert, beziehungsweise erkläre wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute die das Pokerspiel (Texas Holdem, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich Pokerstrategien zu simulieren, damit man so die Möglichkeit hat herauszufinden wie gut sie gegeneinander abschneiden. Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch die Pokerschule \cite{diePokerschule} beschrieben sind in meinem Programm gegeneinander antreten lasse. Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{AlexMeyer}
 
 \chapter{Theorie}
 \section{Poker ein Glückspiel?}
-Ob und wie stark Poker als Glückspiel gilt, damit haben sich schon viele Leute befasst. Das deutsche Bundesverwaltungsgericht teilte in einem Urteil mit, dass Pokern stärker vom Zufall als der Geschicklichkeit des Spielers abhinge \cite{Gluck1}. Trotzdem gibt es einige professionelle Pokerspieler, einige sehr gute sogar. Solche die mehrmals in die Endrunden von grossen Pokerturnieren stiessen. Da kann man schon darauf schliessen das Poker mehr als nur ein Glückspiel ist. Mit viel Glück könnte ein Anfänger an einem Turnier gegen eine sehr guten Pokerspieler gewinnen, aber garantiert nicht mehrmals. Poker enthält Elemente von beidem, einem Glückspiel aber auch einem Taktischen Spiel und vor allem bei den Profis geht es sehr taktisch zu. 2019 ist es einer künstlichen Intelligenz zum ersten Mal gelungen gegen 5 Mitspieler zu gewinnen, und dass bei Weltklassespielern. Auch das beweist das Poker mehr ist als ein reines Glückspiel, wie zum Beispiel Roulette.\cite{Gluck2}
+Ob und wie stark Poker als Glückspiel gilt, damit haben sich schon viele Leute befasst. Das deutsche Bundesverwaltungsgericht teilte in einem Urteil mit, dass Pokern stärker vom Zufall als der Geschicklichkeit des Spielers abhinge \cite{Gluck1}. Trotzdem gibt es einige professionelle Pokerspieler, einige sehr gute sogar. Solche die mehrmals in die Endrunden von grossen Pokerturnieren stiessen. Da kann man schon darauf schliessen das Poker mehr als nur ein Glückspiel ist. Mit viel Glück könnte ein Anfänger an einem Turnier gegen eine sehr guten Pokerspieler gewinnen, aber garantiert nicht mehrmals. Poker enthält Elemente von beidem, einem Glückspiel aber auch einem Taktischen Spiel und vor allem bei den Profis geht es sehr taktisch zu. 2019 ist es einer künstlichen Intelligenz zum ersten Mal gelungen gegen 5 Mitspieler zu gewinnen, und dass bei Weltklassespielern. Auch das beweist, dass Poker mehr ist als ein reines Glückspiel, wie zum Beispiel Roulette.\cite{Gluck2}
 
 \section{Die verschiedenen Poker Strategien}
-123
+Die Grundstrategien im Poker nach Jan Meinert\cite{diePokerschule} werden nach 2 Kriterien aufgeteilt, zum einen nach der Tightnes und zum anderen nach Aggressivität. Die Tightnes gibt an wie oft man an Runden teilnimmt. Je tighter ein Spieler ist, an desto weniger Runden nimmt er teil. Als Richtwert für eine normale Tightness gilt 30\%, also man sollte am Ende bei 30\% aller Runden dabei gewesen sein und beim Rest den Preflop folden. Spielt ein Spieler mehr als 30\% der PreFlops dann spielt er loose, also das Gegenteil von Tight. Die Aggressivität gibt an wie aggressiv oder eben defensiv sich ein Spieler verhält. Ein aggressiver Spieler erhöht oft und stark, er will das Spiel also kontrollieren. Der defensivere Spieler hält sich lieber zurück, er geht lieber mit und lässt die anderen Spieler für sich erhöhen. 
+
 \chapter{Methode}
 \section{Monte-Carlo-Simulation}
 Mein Projekt ist im Grunde genommen eine Monte-Carlo-Simulation. Dies ist im Prinzip ein Versuch, um eine Wahrscheinlichkeit oder ein Ergebnis zu bestimmen, zum Beispiel die Frage: Wie hoch ist die Wahrscheinlichkeit mit einem normalen Würfel eine 6 zu würfeln? Diese Frage lässt sich ganz einfach mit de La Place Ansatz beantworten: die 6 als günstiges Ereignis und die andern Zahlen als Mögliche, führt zu einer Wahrscheinlichkeit von $\frac{1}{6}$. Dies ist sozusagen eine rechnerische Methode, im Gegensatz zur Monte-Carlo-Simulation, denn ihr Versuch wäre einfach ganz oft zu würfeln und dann zu zählen, wie oft die 6 gekommen wäre. Bei genügend vielen Wiederholungen kommt man auch ziemlich genau an $\frac{1}{6}$ als Ergebnis heran. \cite{MonteCarloSimulation}
@@ -55,7 +52,6 @@ Um die Karten zu mischen habe ich die Funktion arrayMix\cite[hauptclass z. 302]{
 \chapter{Grundlagen}
 
 {
-
 \includegraphics[width=0.7\textwidth]{lena.jpg}
 \centering
 }
