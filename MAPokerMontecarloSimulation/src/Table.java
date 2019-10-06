@@ -137,7 +137,7 @@ public class Table {
 	public static double scoreHand(Card[] Karte, Player1 Spieler) {
 		//ueberpruefen ob er noch lebt
 		double scoreWert = 0;
-		if ((!Spieler.inRunde) || (Spieler.chips <= 0)) {
+		if ((!Spieler.inRunde)) {
 			scoreWert = 0;
 		}
 		// -------- RoyalFlush und Straight flush inlusive Wheel
