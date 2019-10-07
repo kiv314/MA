@@ -19,17 +19,17 @@ public class hauptclass {
 		 * for(int i = 0; i<20; i++) { System.out.println(Karte[i].getfarbe()); }
 		 */
 		Table table = new Table(null, null, null, null, null);
-		PassivePlayer Spieler1 = new PassivePlayer("Pasive", false, false);
-		CallingStation dummy = new CallingStation("dummy", false, false);
-		StoneKiller chicken2 = new StoneKiller("Chicken2", false, false);
-		CallingStation dummy1 = new CallingStation("dummy1", false, false);
-		CallingStation dummy2 = new CallingStation("dummy2", false, false);
+		Rock rock= new Rock("rock", false, false);
+		CallingStation cstation1 = new CallingStation("callingSation1", false, false);
+		CallingStation cstation2 = new CallingStation("callingSation2", false, false);
+		CallingStation cstation3 = new CallingStation("callingSation3", false, false);
+		StoneKiller sKiller = new StoneKiller("stoneKiller", false, false);
 		Maniac maniac1 = new Maniac("Maniac1", false, false);
 		
 		int n = 10000;
-		int bigBlind = 10;
+		int bigBlind = 0;
 		int startChips = 3000;
-		Player1[] spieler = { Spieler1, chicken2,  maniac1};
+		Player1[] spieler = { rock, cstation1,  maniac1, sKiller};
 		Player1[] spielerAnfang = spieler;
 		for(int i=0; i<spieler.length; i++) {
 			spieler[i].chips = startChips;
@@ -56,7 +56,6 @@ public class hauptclass {
 			table.gibBlind(spieler[spieler.length-2], bigBlind/2, "small Blind");
 			table.gibBlind(spieler[spieler.length-1], bigBlind, "big Blind");
 			table.bigBlind = bigBlind;
-			zeigSpielerBlatt(Spieler1);
 			for(int j=0; j<spieler.length; j++) {
 				spieler[j].statrounds += 1;
 			}

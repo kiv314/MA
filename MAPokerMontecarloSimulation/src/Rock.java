@@ -1,7 +1,7 @@
 
-public class PassivePlayer extends Player1 {// ROCK
+public class Rock extends Player1 {// ROCK
 
-	public PassivePlayer(String spielerName, boolean manuel, boolean inRunde) {
+	public Rock(String spielerName, boolean manuel, boolean inRunde) {
 		super(spielerName, manuel, inRunde);
 		// TODO Auto-generated constructor stub
 	}
