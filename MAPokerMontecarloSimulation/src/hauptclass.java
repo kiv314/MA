@@ -20,10 +20,10 @@ public class hauptclass {
 		 */
 		Table table = new Table(null, null, null, null, null);
 		PassivePlayer Spieler1 = new PassivePlayer("Pasive", false, false);
-		Dummy dummy = new Dummy("dummy", false, false);
-		Chicken chicken2 = new Chicken("Chicken2", false, false);
-		Dummy dummy1 = new Dummy("dummy1", false, false);
-		Dummy dummy2 = new Dummy("dummy2", false, false);
+		CallingStation dummy = new CallingStation("dummy", false, false);
+		StoneKiller chicken2 = new StoneKiller("Chicken2", false, false);
+		CallingStation dummy1 = new CallingStation("dummy1", false, false);
+		CallingStation dummy2 = new CallingStation("dummy2", false, false);
 		Maniac maniac1 = new Maniac("Maniac1", false, false);
 		
 		int n = 10000;
@@ -66,18 +66,57 @@ public class hauptclass {
 			gibFlop(table, Karte[23], Karte[24], Karte[25]);
 			table.spielFortschrit = "flop";
 			table.topRaise = 0;
+			Card[] flopcards = {table.flop1, table.flop2, table.flop3};
+			Card[][][] spielerHaendeFlop = new Card[spieler.length][][];
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeFlop[j] = table.HaendeVonSpieler(flopcards, spieler[j].blatt);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeFlop[j] = table.sortHands(spielerHaendeFlop[j]);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				table.gibSpielerBestHandAndScore(spielerHaendeFlop[j], spieler[j]);
+			}
 			zuegeAusführen(spieler, table);
 			
 
 			gibRiver(table, Karte[26]);
 			table.spielFortschrit = "river";
 			table.topRaise = 0;
+			Card[] riverCards = {table.flop1, table.flop2, table.flop3, table.river};
+			Card[][][] spielerHaendeRiver = new Card[spieler.length][][];
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeRiver[j] = table.HaendeVonSpieler(riverCards, spieler[j].blatt);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeRiver[j] = table.sortHands(spielerHaendeRiver[j]);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				table.gibSpielerBestHandAndScore(spielerHaendeRiver[j], spieler[j]);
+			}
 			zuegeAusführen(spieler, table);
 			
 
 			gibTurn(table, Karte[27]);
 			table.spielFortschrit = "turn";
 			table.topRaise = 0;
+			Card[] turnCards = {table.flop1, table.flop2, table.flop3, table.river};
+			Card[][][] spielerHaendeTurn = new Card[spieler.length][][];
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeTurn[j] = table.HaendeVonSpieler(turnCards, spieler[j].blatt);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				spielerHaendeTurn[j] = table.sortHands(spielerHaendeTurn[j]);
+			}
+			
+			for(int j=0; j<spieler.length; j++) {
+				table.gibSpielerBestHandAndScore(spielerHaendeTurn[j], spieler[j]);
+			}
 			zuegeAusführen(spieler, table);
 			
 

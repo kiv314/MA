@@ -1,7 +1,7 @@
 
-public class Dummy extends Player1 {
+public class CallingStation extends Player1 {
 
-	public Dummy(String spielerName, boolean manuel, boolean inRunde) {
+	public CallingStation(String spielerName, boolean manuel, boolean inRunde) {
 		super(spielerName, manuel, inRunde);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,7 +1,7 @@
 
-public class Chicken extends Player1 {//StoneKIller
+public class StoneKiller extends Player1 {//StoneKIller
 
-	public Chicken(String spielerName, boolean manuel, boolean inRunde) {
+	public StoneKiller(String spielerName, boolean manuel, boolean inRunde) {
 		super(spielerName, manuel, inRunde);
 		// TODO Auto-generated constructor stub
 	}
@@ -89,7 +89,7 @@ public class Chicken extends Player1 {//StoneKIller
 		} else if (super.isStreat(hands)) {// check if is streat
 			return true;
 		} else if (super.isDoubleEndStreatDrew(hands)) {// check if DESD
-			return false;
+			return true;
 		} else {
 			return false;
 		}

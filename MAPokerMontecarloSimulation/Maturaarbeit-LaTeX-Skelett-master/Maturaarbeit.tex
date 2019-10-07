@@ -97,12 +97,14 @@ Für 2 Paare verhält es sich genau gleich wie beim Drilling, es gibt auch 3 versc
 
 Ein Paar hat 4 verschiedene Möglichkeiten in der Hand vorzukommen. Der Wert der Paarkarte wird mit 10 multipliziert und die Beikarten, ihrem Wert entsprechend dividiert, dazu addiert.
 
-Fals alle diese Fälle nicht greifen, handelt es sich um eine Highcard-Hand. In diesem Fall wird der Wert der höchsten Karte genommen und ihrer Wichtigkeit entsprechende weitere Karten dividert, wieder dazu gezählt. eine der schlechtesten Hände wäre somit folgende: $ \clubsuit 7,\diamondsuit 5,\heartsuit 4,\diamondsuit 3,\diamondsuit, 2\spadesuit $.
+Fals alle diese Fälle nicht greifen, handelt es sich um eine Highcard-Hand. In diesem Fall wird der Wert der höchsten Karte genommen und ihrer Wichtigkeit entsprechende weitere Karten dividert, wieder dazu gezählt. Eine der schlechtesten Hände wäre somit folgende: $ \clubsuit 7,\diamondsuit 5,\heartsuit 4,\diamondsuit 3,\diamondsuit, 2\spadesuit $.
 \\ \\
-So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen die beste Hand eines Spieler und danach die von allen. Falls 2 oder mehr Spieler die gleiche Hand haben, haben sie auch den gleichen ScoreWert. In diesem Fall wird der Pot geteilt und jedem Spieler zugewiesen.   
+So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen dazu, die beste Hand eines Spieler und danach die beste Hand am Tisch. Falls 2 oder mehr Spieler die Siegerhand haben, werden sie auch den gleichen ScoreWert haben. In diesem Fall wird der Pot auf die Sieger aufgeteilt.   
 
 \section{der Spieler}
-Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen.  
+Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente, die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen oder um bestimmte Karten zu erkennen. Hier werden ausserdem Werte für die Statistik gespeichert, wie z.B wie oft gefolded oder geraised wurde. Die Menge des vorhandenen Geldes und ob der Spieler noch in der Runde ist, wird hier auch festgehalten.
+
+\section{Output}   
 
 \begin{thebibliography}{99}
 \bibitem{diePokerschule} Jan Meinert:

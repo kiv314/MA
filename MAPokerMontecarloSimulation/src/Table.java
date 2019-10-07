@@ -25,11 +25,11 @@ public class Table {
 		this.turn = turn;
 	}
 
-	public Card[] tischKarten(Card... Karte) {
+	public static Card[] tischKarten(Card... Karte) {
 		return Karte;
 	}
 
-	public Card[][] HaendeVonSpieler(Card[] tk, Card[] Blatt) {
+	public static Card[][] HaendeVonSpieler(Card[] tk, Card[] Blatt) {
 		if (tk.length == 3) {
 			Card[][] Haende = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };
 			return Haende;
