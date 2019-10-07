@@ -89,11 +89,20 @@ Das Fullhouse wird erkennt, in dem gecheckd wird, ob zu erst 3 gleiche Karten vo
 Der Flush wird wie anfangs aufgespührt, in dem nach 5 gleichen Farben gesucht wird, ist dies der Fall, wird der Wert der wertvollsten Karte mit $ 10^{6} $ multipliziert. Der Wert der 2., 3., etc. wichtigsten Karte wird durch 10 bzw. 100 oder 1000
 dividiert und die Summe dieser Quotienten mit $ 10^{4}$ multipliziert. Der ScoreWert wird dann errechnet, in dem die beiden Werte wieder zusammen gezählt werden. Die Divisionen der weniger wichtigen Karten werden benötigt da, beim Poker diese Karten erst zählen, wenn vorher exakt die gleichen Werte vorliegen. Würde man die Kartenwerte an sich zusammenzählen, hätte der Flush: $\heartsuit Ass, \heartsuit 10, \heartsuit 9, \heartsuit 8, \heartsuit 7$ mehr Wert, als der Flush: $ \diamondsuit Ass, \diamondsuit K, \diamondsuit 6, \diamondsuit 5, \diamondsuit 4$ . Da $ 14+10+9+8+7=48>42=14+13+6+5+4$.
 
-Die Straight wird gefilterted, in dem auch wie beim Straight-Flush, bei jeder Karte überprüfed wird, ob die nächste Karte genau den Wert um 1 weniger besitzt. Ist dies der Fall, wird der Wert der höchste Karte mit $10^{5}$ multipliziert. Auch hier wird das Wheel extra getestet und in diesem Spezialfall die 5 als höchsten Wert genommen. 
+Die Straight wird gefiltert, in dem auch wie beim Straight-Flush, bei jeder Karte überprüft wird, ob die nächste Karte genau den Wert um 1 weniger besitzt, ist dies der Fall, wird der Wert der höchsten Karte mit $10^{5}$ multipliziert. Auch hier wird das Wheel extra getestet und in diesem Spezialfall die 5 als höchsten Wert genommen. 
 
-Für den Drilling gibt es 3 verschiedene Möglichkeit
+Für den Drilling gibt es 3 verschiedene Möglichkeiten, dieser kann entweder am Anfang vorkommen, wie bei dieser Hand: $ \diamondsuit K, \heartsuit K, \spadesuit K, \clubsuit 10, \clubsuit 9$ , in der Mitte, wie hier: $ \diamondsuit Ass, \heartsuit K, \spadesuit K, \clubsuit K, \clubsuit 9$ oder am Ende, wie bei folgender Hand: $ \diamondsuit Ass, \heartsuit K, \spadesuit D, \clubsuit D, \diamondsuit D$. Für die Bewertung wird der Wert einer Dreierkarte mit $ 10^{4} $ multipliziert und zusammen gezählt mit den beiden Nebenkarten, welche ihrer Wichtigkeit entsprechend bewertet und mit 100 multipliziert werden. 
 
- 
+Für 2 Paare verhält es sich genau gleich wie beim Drilling, es gibt auch 3 verschiedene Möglichkeiten, wo aber in diesem Fall die Beikarte sein kann. Die beiden Paarwerte werden je mit 100 multipliziert und zusammen gezählt, dazu addiert wird noch der Wert der Beikarte.
+
+Ein Paar hat 4 verschiedene Möglichkeiten in der Hand vorzukommen. Der Wert der Paarkarte wird mit 10 multipliziert und die Beikarten, ihrem Wert entsprechend dividiert, dazu addiert.
+
+Fals alle diese Fälle nicht greifen, handelt es sich um eine Highcard-Hand. In diesem Fall wird der Wert der höchsten Karte genommen und ihrer Wichtigkeit entsprechende weitere Karten dividert, wieder dazu gezählt. eine der schlechtesten Hände wäre somit folgende: $ \clubsuit 7,\diamondsuit 5,\heartsuit 4,\diamondsuit 3,\diamondsuit, 2\spadesuit $.
+\\ \\
+So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen die beste Hand eines Spieler und danach die von allen. Falls 2 oder mehr Spieler die gleiche Hand haben, haben sie auch den gleichen ScoreWert. In diesem Fall wird der Pot geteilt und jedem Spieler zugewiesen.   
+
+\section{der Spieler}
+Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen.  
 
 \begin{thebibliography}{99}
 \bibitem{diePokerschule} Jan Meinert:
