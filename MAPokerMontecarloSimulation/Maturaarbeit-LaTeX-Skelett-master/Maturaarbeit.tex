@@ -102,13 +102,11 @@ Fals alle diese Fälle nicht greifen, handelt es sich um eine Highcard-Hand. In d
 So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen dazu, die beste Hand eines Spieler und danach die beste Hand am Tisch. Falls 2 oder mehr Spieler die Siegerhand haben, werden sie auch den gleichen ScoreWert haben. In diesem Fall wird der Pot auf die Sieger aufgeteilt.   
 
 \section{Output}
-Die Klasse Output ist dafür da, dass ich Ergebnisse aus dem ganzen Versuch kriege. In der Konsole wird zwar jeder Zug angezeigt, aber das manuel auszuwerten ist unmöglich. Als Output wird ein cvv file erstellt, dies hat den Vorteil, dass es sich mit Excel öffnen lässt. Ausgegeben werden für jeden Spieler folgende Daten: Spielername, Geld am Ende, Die Anzahl gewonnener Pots, Wie oft erhöht, geschoben und raus- oder mitgegangen wurde, Wie oft der Preflop gefolded wurde($ PF $), die Anzahl teilgenommener Runden($ R $), die Tightness und der Winratio. Die Tightness wird wie folgt berechnet: $\frac{R-PF}{R}\cdot 100 $, sie gibt in Prozent an wie tight oder loose ein Spieler war. Der Winratio ist das Verhältnis von Gewonne pots über mitgeangen Runden, er gibt also an wie oft der Pot geholt wurde, wenn die Runde vom Spieler gespielt wurde.  
+Die Klasse Output ist dafür da, dass ich Ergebnisse aus dem ganzen Versuch kriege. In der Konsole wird zwar jeder Zug angezeigt, aber das manuel auszuwerten ist unmöglich. Als Output wird ein cvv file erstellt, dies hat den Vorteil, dass es sich mit Excel öffnen lässt. Ausgegeben werden für jeden Spieler folgende Daten: Spielername, Geld am Ende, Die Anzahl gewonnener Pots, Wie oft erhöht, geschoben und raus- oder mitgegangen wurde, Wie oft der Preflop gefolded wurde($ PF $), die Anzahl teilgenommener Runden($ R $), die Tightness und der Winratio. Die Tightness wird wie folgt berechnet: $\frac{R-PF}{R}\cdot 100 $, sie gibt in Prozent an wie tight oder loose ein Spieler war. Der Winratio ist das Verhältnis von gewonnen Pots über den mitgeangen Runden, er gibt also an, wie oft der Pot geholt wurde, wenn die Runde vom Spieler mitgespielt wurde.  
 
 \section{der Spieler}
 Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente, die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen oder um bestimmte Karten zu erkennen. Hier werden ausserdem Werte für die Statistik gespeichert, wie z.B wie oft gefolded oder geraised wurde. Die Menge des vorhandenen Geldes und ob der Spieler noch in der Runde ist, wird hier auch festgehalten.
 
-    
-   
 
 \begin{thebibliography}{99}
 \bibitem{diePokerschule} Jan Meinert:
