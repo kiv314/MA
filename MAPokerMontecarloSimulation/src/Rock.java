@@ -9,13 +9,13 @@ public class Rock extends Player1 {// ROCK
 	public void machZugNachTaktik(Table t) {
 		if (t.spielFortschrit == "preFlop") {// Verhalten, raise noch möglich bei PreFLop
 			if (t.raiseMoeglich) {
-				if (RockCasePreFlop(t)) {
+				if (rockCasePreFlop(t)) {
 					raise(50, t);
 				} else {
 					fold(t);
 				}
 			} else { // Verhalten, raise unmöglch bei Preflop
-				if (RockCasePreFlop(t)) {
+				if (rockCasePreFlop(t)) {
 					call(t);
 				} else {
 					fold(t);
@@ -23,14 +23,22 @@ public class Rock extends Player1 {// ROCK
 			}
 		}
 		if (t.spielFortschrit == "Flop") {
-			call(t);
+			if(rockCaseFlop(t)) {
+				call(t);
+			}
+			else if(t.topRaise == 0) {
+				check();
+			}
+			else {
+				fold(t);
+			}
 		} else {
 			call(t);
 		}
 
 	}
 
-	boolean RockCasePreFlop(Table t) {
+	boolean rockCasePreFlop(Table t) {
 		if (blattPairWertMoreThan(8) || ((blatt[0].wert > 10) && (blatt[1].wert > 10))) {
 			return true;
 		} else {
@@ -38,7 +46,7 @@ public class Rock extends Player1 {// ROCK
 		}
 	}
 
-	boolean RockcaseFlop(Table t) {
+	boolean rockCaseFlop(Table t) {
 		if(super.score > 25) {
 			return true;
 		}

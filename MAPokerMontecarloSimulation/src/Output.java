@@ -36,24 +36,15 @@ public class Output {
 			
 	}
 	
-	public void outputImSpiel(Player1[] spieler)  {
+	public void outputImSpiel(String out)  {
 		String fileName = "Daten2.csv";
-		PrintWriter outputStream1;
 		try {
-			outputStream1 = new PrintWriter(fileName);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			outputStream1 = new PrintWriter(fileName);
-			for(int i=0; i<spieler.length; i++) {
-				outputStream1.print(spieler[i].chips + ";");
-			}
-			outputStream1.println();
+			PrintWriter outputStream1 = new PrintWriter(fileName);
+			
+			outputStream1.print(out);
 			outputStream1.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block hhh
 			e.printStackTrace();
 		}
 		

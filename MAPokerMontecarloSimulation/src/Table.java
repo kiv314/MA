@@ -8,7 +8,7 @@ public class Table {
 	Card river;
 	Card turn;
 	double topScore;
-	int pot;
+	float pot;
 	int topRaise;
 	int splitPot = 0;
 	int runde;
@@ -29,7 +29,7 @@ public class Table {
 		return Karte;
 	}
 
-	public static Card[][] HaendeVonSpieler(Card[] tk, Card[] Blatt) {
+	public Card[][] HaendeVonSpieler(Card[] tk, Card[] Blatt) {
 		if (tk.length == 3) {
 			Card[][] Haende = { { Blatt[0], Blatt[1], tk[0], tk[1], tk[2] } };
 			return Haende;
@@ -294,12 +294,10 @@ public class Table {
 	}
 	public void gibBlind(Player1 Spieler, int blind, String blindTyp) {
 		Spieler.chips = Spieler.chips - blind;
-		Spieler.raise = blind;
+		Spieler.givenChips = blind;
 		if(blind == bigBlind) {Spieler.bigblind = true;}
 		pot = pot+blind;
-		if(topRaise < blind) {
-			topRaise = blind;
-		}
+		topRaise = blind;
 		System.out.println(Spieler.spielerName + " hat " + blindTyp + ": " + blind);
 	}
 }

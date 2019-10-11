@@ -19,7 +19,8 @@ abstract class Player1 {
 	double score = 0;
 	int taktik;
 	int chips;
-	int raise;
+	float givenChips; //chips given in Betround
+	float raise; //chips wich were raised to
 	int winner;
 	String blind; // null, big, small
 
@@ -31,12 +32,13 @@ abstract class Player1 {
 	int statPreflopFold = 0;
 
 	public void raise(int raise, Table t) {
-		if ((raise > t.topRaise) && (raise <= chips)) {
+		if ((raise > t.topRaise)) {
 			chips = chips - raise;
 			t.pot = t.pot + raise;
 			t.topRaise = raise;
+			this.givenChips = raise;
 			this.raise = raise;
-			System.out.println(spielerName + ": raise auf " + raise);
+			System.out.println(spielerName + ": raise auf " + raise +", pot bei " + t.pot);
 			statraise = statraise + 1;
 		} else {
 			System.out.println("Fehler! zu wenig chips oder raise zu gering!");
@@ -44,10 +46,12 @@ abstract class Player1 {
 	}
 
 	public void call(Table t) {
-		chips = chips - (t.topRaise - this.raise);
-		t.pot = t.pot + (t.topRaise - this.raise);
+		chips = chips - (int)(t.topRaise-givenChips);
+		//System.out.println("Rechnung =" + t.pot + "=" + t.pot + "+" + "(" + t.topRaise + "-" + this.raise+")");
+		t.pot = t.pot + (t.topRaise-givenChips);
+		
 		this.raise = (t.topRaise);
-		System.out.println(spielerName + ": call");
+		System.out.println(spielerName + ": call"+", pot bei " + t.pot);
 		if (0 == this.raise) {
 			statcheck += 1;
 		} else {

@@ -13,7 +13,7 @@ public class Maniac extends Player1 {
 		if (t.spielFortschrit == "preFlop") {// Verhalten, raise noch möglich bei PreFLop
 			if (t.raiseMoeglich) {
 				if (ManiacCasePreFlop(t)) {
-						raise(10, t);
+						raise(20, t);
 				} else {
 					fold(t);
 				}

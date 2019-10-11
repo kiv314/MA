@@ -1,5 +1,6 @@
 
-public class StoneKiller extends Player1 {//StoneKIller
+public class StoneKiller extends Player1 {// StoneKIller
+	boolean permaCall = false;
 
 	public StoneKiller(String spielerName, boolean manuel, boolean inRunde) {
 		super(spielerName, manuel, inRunde);
@@ -11,7 +12,7 @@ public class StoneKiller extends Player1 {//StoneKIller
 		if (t.spielFortschrit == "preFlop") {// Verhalten, raise noch möglich bei PreFLop
 			if (t.raiseMoeglich) {
 				if (chickenCasePreFlop(t)) {
-						raise(50, t);
+					raise(100, t);
 				} else {
 					fold(t);
 				}
@@ -23,37 +24,35 @@ public class StoneKiller extends Player1 {//StoneKIller
 				}
 			}
 		}
-		if(t.spielFortschrit == "Flop") {
-			if(t.raiseMoeglich) {
-				if(chickenCaseFlop(t)) {
-					raise(600, t);
-				}
-				else if(t.topRaise == 0) {
+		else if (t.spielFortschrit == "Flop") {
+			if (t.raiseMoeglich) {
+				if (chickenCaseFlop(t)) {
+					raise(1200, t);
+				} else if (t.topRaise == 0) {
 					check();
-				}
-				else {
+				} else {
 					fold(t);
 				}
-			}
-			else {
-				if(chickenCaseFlop(t)) {
+			} else {
+				if (chickenCaseFlop(t)) {
 					call(t);
-				}
-				else {
+				} else {
 					fold(t);
 				}
-				
+
 			}
-			
-		}
-		else {
+
+		} else {
 			call(t);
+			System.out.println("hier ist der scheiss");
 		}
-		
+
 	}
 
 	boolean chickenCasePreFlop(Table t) {
-		if (blattPairWertMoreThan(7) || ((blatt[0].wert > 8) && (blatt[1].wert > 8))) {
+		if (permaCall) {
+			return true;
+		} else if (blattPairWertMoreThan(7) || ((blatt[0].wert > 9) && (blatt[1].wert > 9))) {
 			return true;
 		} else {
 			return false;

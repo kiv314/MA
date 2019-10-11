@@ -9,7 +9,6 @@ public class CallingStation extends Player1 {
 	@Override
 	public void machZugNachTaktik(Table t) {
 		call(t);
-
 	}
 
 }
