@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{report}
 
 \author{K.~Kosch}
-\title{Mein Maturaarbeitsthema}
+\title{4 Spieler, 10'000 Runden Poker, in 17 Sekunden}
 
 \usepackage[ngerman]{babel}
 \usepackage[latin1]{inputenc}
@@ -23,7 +23,8 @@
 \tableofcontents
 \chapter{Vorwort}
 \chapter{Einleitung}
-Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebene Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige, wie mein Code genau funktioniert, beziehungsweise erkläre, wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute, die das Pokerspiel (Texas Holdem, no Limit) kennen. Falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programmierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich, Pokerstrategien zu simulieren, damit man so die Möglichkeit hat, herauszufinden, wie gut sie gegeneinander abschneiden. Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch: die Pokerschule \cite{diePokerschule} beschrieben sind, in meinem Programm gegeneinander antreten lasse. Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden, wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{AlexMeyer}
+Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebene Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige, wie mein Code genau funktioniert, beziehungsweise erkläre, wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute, die das Pokerspiel (Texas Holdem, no Limit) kennen, falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programmierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich, Pokerstrategien zu simulieren, damit man so die Möglichkeit hat, herauszufinden, wie gut sie gegeneinander abschneiden? Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch: die Pokerschule \cite{diePokerschule} beschrieben sind, in meinem Programm gegeneinander antreten lasse. Sollte dies Der Fall sein will ich so herausfinden, bei welchen Bedingungen welche Strategie gewinnt und wie sie im Kampfg gegeneinander abschneiden.
+Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden, wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{AlexMeyer} Ein solches Programm, wie ich geschrieben habe fand ich nicht.
 
 \chapter{Theorie}
 \section{Poker ein Glückspiel?}
@@ -104,9 +105,27 @@ So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen dazu, di
 \section{Output}
 Die Klasse Output ist dafür da, dass ich Ergebnisse aus dem ganzen Versuch kriege. In der Konsole wird zwar jeder Zug angezeigt, aber das manuel auszuwerten ist unmöglich. Als Output wird ein cvv file erstellt, dies hat den Vorteil, dass es sich mit Excel öffnen lässt. Ausgegeben werden für jeden Spieler folgende Daten: Spielername, Geld am Ende, Die Anzahl gewonnener Pots, Wie oft erhöht, geschoben und raus- oder mitgegangen wurde, Wie oft der Preflop gefolded wurde($ PF $), die Anzahl teilgenommener Runden($ R $), die Tightness und der Winratio. Die Tightness wird wie folgt berechnet: $\frac{R-PF}{R}\cdot 100 $, sie gibt in Prozent an wie tight oder loose ein Spieler war. Der Winratio ist das Verhältnis von gewonnen Pots über den mitgeangen Runden, er gibt also an, wie oft der Pot geholt wurde, wenn die Runde vom Spieler mitgespielt wurde.  
 
-\section{der Spieler}
+\section{der Spieler als ganzes}
 Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente, die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen oder um bestimmte Karten zu erkennen. Hier werden ausserdem Werte für die Statistik gespeichert, wie z.B wie oft gefolded oder geraised wurde. Die Menge des vorhandenen Geldes und ob der Spieler noch in der Runde ist, wird hier auch festgehalten.
 
+Die Spieler an sich haben alle eine ähnliche Grundstruktur, jede Wettrunde ist in zwei Bereiche aufgeteilt, den einen, in dem das Erhöhen noch möglich ist und den anderen in dem nicht mehr erhöht werden darf.
+  
+Der Stonekiller geht nur beim Preflop mit, wenn beide Karten mindestens den wert 10 haben oder er im Besitz eines Pocketpairs von mindestens 8 ist. Wenn er den Preflop spielt erhöt der Stonekiller um 100. Im Flop geht er bei folgenden Situationen mit: Fals er ein Pocketpair ohne Flushdrew auf dem Tisch hat, Er das Topair bilden kann(Paar mit Handkarte und höchster Tischkarte), Falls ein Flush oder Flushdrew  mit der passenden suited Hand vorliegt oder er eine Strasse bzw. ein DoubleendStreetDraw hat (Eine Strasse, bei der aber die vorderste oder hinterste Karte fehlt). Tritt eine dieser Situationen ein erhöt der Spieler um 1200. Danach geht der Spieler nurnoch mit bis zum Showdown.
+
+Der Rock spielt den Preflop ähnlich wie der Stonekiller nur noch bischen konservativer, denn er geht erst mit ab einem Pocketpair von 9 oder wenn beide Karten mindestens ein Junge sind. Tritt diese Situation ein erhöht er um 50. Den Flop geht der Rock nur mit (ohne zu erhöhen) falls der ScoreWert seiner Hand mehr als 25 beträgt. Danach geht auch dieser Spieler nur noch mit.
+
+Der Maniac spielt den Preflop eher loose in dem er mitgeht bei einem Poketpair ab 4 und wenn beide Karten mindestens den Wert 6 haben, ist dies der Fall erhöht er um 20. Den Flop spielt er zufällig in dem er eine Zufallszahl von null bis 10 erstellt. Hat er eine 10, dann folded er. Hat der Maniac eine 5 oder höher erhöht er um diese Zahl mit 10 multipliziert. Hat er eine Zahl von 0 bis 4, dann geht er nur mit. Die anderen Wettrunden callt auch dieser Spieler nurnoch.
+
+Die Callingstation geht einfach immer mit.
+
+\section{Meine Versuche}
+Ich führe folgende Versuche mit meiner Softwear durch: Ich lasse jede Taktik im 1 gegen 1 bei verschiednen Blinds antreten und erstelle so eine Matrix in der man sieht, welche Taktik welche, bei welche Blinds schlägt. Zum anderen teste ich auch wie sich die Situation ändert wenn weitere Spieler dabei sind.  
+
+\chapter{Ergebnisse}
+Ich habe folgende Ergebnisse Erzielt
+
+\chapter{Diskusion}
+Was sagen uns nun diese Ergebnisse.
 
 \begin{thebibliography}{99}
 \bibitem{diePokerschule} Jan Meinert:
