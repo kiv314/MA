@@ -24,13 +24,23 @@ public class hauptclass {
 		CallingStation cstation1 = new CallingStation("callingStation1", false, false);
 		CallingStation cstation2 = new CallingStation("callingStation2", false, false);
 		CallingStation cstation3 = new CallingStation("callingStation3", false, false);
-		StoneKiller sKiller = new StoneKiller("stoneKiller", false, false);
-		Maniac maniac1 = new Maniac("Maniac1", false, false);
+		CallingStation cstation4 = new CallingStation("callingStation4", false, false);
+		CallingStation cstation5 = new CallingStation("callingStation5", false, false);
 
+		StoneKiller sKiller1 = new StoneKiller("stoneKiller", false, false);
+		StoneKiller sKiller2 = new StoneKiller("stoneKiller", false, false);
+		StoneKiller sKiller3 = new StoneKiller("stoneKiller", false, false);
+		StoneKiller sKiller4 = new StoneKiller("stoneKiller", false, false);
+		
+		Maniac maniac1 = new Maniac("Maniac1", false, false);
+		Maniac maniac2 = new Maniac("Maniac2", false, false);
+		Maniac maniac3 = new Maniac("Maniac3", false, false);
+		Maniac maniac4 = new Maniac("Maniac4", false, false);
+		
 		int n = 10000;
-		int bigBlind = 20;
+		int bigBlind = 0;
 		int startChips = 6000;
-		Player1[] spieler = {sKiller, cstation1, cstation2, cstation3};
+		Player1[] spieler = {sKiller1, sKiller2, sKiller3, cstation1};
 		Player1[] spielerAnfang = spieler;
 		String outputDaten2 = "";
 		for (int i = 0; i < spielerAnfang.length; i++) {

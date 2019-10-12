@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{report}
 
 \author{K.~Kosch}
-\title{4 Spieler, 10'000 Runden Poker, in 17 Sekunden}
+\title{4 Spieler, 10'000 Runden Poker, in 17 Sekunden - Pokerstrategien Simuliert}
 
 \usepackage[ngerman]{babel}
 \usepackage[latin1]{inputenc}
@@ -22,6 +22,10 @@
 \maketitle
 \tableofcontents
 \chapter{Vorwort}
+\section{Begründung der Themenwahl}
+Die Idee für meine Arbeit kam mir während des Besuches des freiwilligen Kurses unserer Schule zur Unterstüzung bei der Maturaarbeit, dem Roten Faden. Ich wusste schon früh, dass sich meine Arbeit um Informatik handeln sollte, da ich mich schon sehr lange für diesen Fachbereich intressiere. Die Idee das ganze mit Poker zu verbinden, kam mir beim Clustern in diesem Kurs. Ich fand die Idee Informatik mit Poker sehr spannend, da ich mich so mit etwas alltäglichem und nicht ganz so abstraktem Beschäftigen kann, trotzdem aber einiges Programmieren muss. Viele meiner Mitschüler haben mich gewarnt, dass das ganze recht kompliziert werden würde, sie hatten zum teil Recht, dennoch habe ich es geschaft und dabei sehr viel gelernt. Durch diese Arbeit habe ich überhaupt dass erste Mal ein grössers Projekt und objektorientiert programmiert. 
+Ich möchte mich bei meiner Betreungsperson Andreas Umbach für die Unterstüzug bedanken. Durch sie habe ich sehr viel neues gelernt, wie Git und \LaTeX{} zu verwenden und auch besser Programmieren zu können. 
+Ein weiteres Dankeschön geht an meine Familie, Freunde und Mitschüler für die nette emotionale Unterstüzung. 
 \chapter{Einleitung}
 Tausende Pokerpartien gespielt in wenigen Sekunden, so lässt sich das Thema dieser Arbeit zusammenfassen. Diese Arbeit handelt von der Beschreibung, dem Aufbau und der Durchführung eines naturwissenschaftlichen Versuches, in dem in einem von mir selbst geschriebenem Computer Programm, auch Framework genannt, verschiedene von mir geschriebene Pokertaktiken, tausende Male gegen einander spielen können. Sie erklärt nicht die perfekte Pokerstrategie, sondern zeigt wie ich dieses Framework erstellt habe und welche Ergebnisse meine Versuche zutage brachten. Ich zeige, wie mein Code genau funktioniert, beziehungsweise erkläre, wie ich ihn geschrieben habe. Diese Arbeit richtet sich an Leute, die das Pokerspiel (Texas Holdem, no Limit) kennen, falls dies nicht der Fall sein sollte, kann ich das Buch: Die Pokerschule von Jan Meinert \cite{diePokerschule} als Lektüre empfehlen. Programmierkenntnise sind von Vorteil, aber nicht unbedingt nötig, da ich den Code erkläre. Die Fragen, die ich beantworten will, sind zum einen: Ist es möglich, Pokerstrategien zu simulieren, damit man so die Möglichkeit hat, herauszufinden, wie gut sie gegeneinander abschneiden? Testen werde ich dies, in dem ich die 4 typischen Pokerstrategien, die im Buch: die Pokerschule \cite{diePokerschule} beschrieben sind, in meinem Programm gegeneinander antreten lasse. Sollte dies Der Fall sein will ich so herausfinden, bei welchen Bedingungen welche Strategie gewinnt und wie sie im Kampfg gegeneinander abschneiden.
 Es haben schon andere Personen Poker mit Simulationen verknüpft. Alex Meyer hat so versucht herausfinden, wie stark die Wahrscheinlichkeiten sind mit bestimmten Händen zu gewinnen. \cite{AlexMeyer} Ein solches Programm, wie ich geschrieben habe fand ich nicht.
@@ -103,7 +107,7 @@ Fals alle diese Fälle nicht greifen, handelt es sich um eine Highcard-Hand. In d
 So lässt sich der ScoreWert jeder Hand bestimmen, mit einigen Schleifen dazu, die beste Hand eines Spieler und danach die beste Hand am Tisch. Falls 2 oder mehr Spieler die Siegerhand haben, werden sie auch den gleichen ScoreWert haben. In diesem Fall wird der Pot auf die Sieger aufgeteilt.   
 
 \section{Output}
-Die Klasse Output ist dafür da, dass ich Ergebnisse aus dem ganzen Versuch kriege. In der Konsole wird zwar jeder Zug angezeigt, aber das manuel auszuwerten ist unmöglich. Als Output wird ein cvv file erstellt, dies hat den Vorteil, dass es sich mit Excel öffnen lässt. Ausgegeben werden für jeden Spieler folgende Daten: Spielername, Geld am Ende, Die Anzahl gewonnener Pots, Wie oft erhöht, geschoben und raus- oder mitgegangen wurde, Wie oft der Preflop gefolded wurde($ PF $), die Anzahl teilgenommener Runden($ R $), die Tightness und der Winratio. Die Tightness wird wie folgt berechnet: $\frac{R-PF}{R}\cdot 100 $, sie gibt in Prozent an wie tight oder loose ein Spieler war. Der Winratio ist das Verhältnis von gewonnen Pots über den mitgeangen Runden, er gibt also an, wie oft der Pot geholt wurde, wenn die Runde vom Spieler mitgespielt wurde.  
+Die Klasse Output ist dafür da, dass ich Ergebnisse aus dem ganzen Versuch kriege. In der Konsole wird zwar jeder Zug angezeigt, aber das manuel auszuwerten ist unmöglich. Als Output wird ein csv-file erstellt, dies hat den Vorteil, dass es sich mit Excel öffnen lässt. Ausgegeben werden für jeden Spieler folgende Daten: Spielername, Geld am Ende, Die Anzahl gewonnener Pots, Wie oft erhöht, geschoben und raus- oder mitgegangen wurde, Wie oft der Preflop gefolded wurde($ PF $), die Anzahl teilgenommener Runden($ R $), die Tightness und der Winratio. Die Tightness wird wie folgt berechnet: $\frac{R-PF}{R}\cdot 100 $, sie gibt in Prozent an wie tight oder loose ein Spieler war. Der Winratio ist das Verhältnis von gewonnen Pots über den mitgeangen Runden, er gibt also an, wie oft der Pot geholt wurde, wenn die Runde vom Spieler mitgespielt wurde. Als 2. wird noch ein weiteres csv-file in welchem der Geldbestand nach jeder Runde erfasst wird und danach mithilfe von excel zu einer Kurve erstellt werden kann. 
 
 \section{der Spieler als ganzes}
 Für die Spieler habe ich die Klasse Player1 definiert, diese Klasse ist als Abstractklasse definiert, das heisst, sie kann mit Unterklassen erweitert werden. Die Unterklassen sind dann die verschiedenen Taktiken. Die Player1 Klasse enthält alle Elemente, die alle Taktiken als Spieler brauchen, wie die Funktionen um Züge auszüführen oder um bestimmte Karten zu erkennen. Hier werden ausserdem Werte für die Statistik gespeichert, wie z.B wie oft gefolded oder geraised wurde. Die Menge des vorhandenen Geldes und ob der Spieler noch in der Runde ist, wird hier auch festgehalten.
@@ -114,19 +118,52 @@ Der Stonekiller geht nur beim Preflop mit, wenn beide Karten mindestens den wert
 
 Der Rock spielt den Preflop ähnlich wie der Stonekiller nur noch bischen konservativer, denn er geht erst mit ab einem Pocketpair von 9 oder wenn beide Karten mindestens ein Junge sind. Tritt diese Situation ein erhöht er um 50. Den Flop geht der Rock nur mit (ohne zu erhöhen) falls der ScoreWert seiner Hand mehr als 25 beträgt. Danach geht auch dieser Spieler nur noch mit.
 
-Der Maniac spielt den Preflop eher loose in dem er mitgeht bei einem Poketpair ab 4 und wenn beide Karten mindestens den Wert 6 haben, ist dies der Fall erhöht er um 20. Den Flop spielt er zufällig in dem er eine Zufallszahl von null bis 10 erstellt. Hat er eine 10, dann folded er. Hat der Maniac eine 5 oder höher erhöht er um diese Zahl mit 10 multipliziert. Hat er eine Zahl von 0 bis 4, dann geht er nur mit. Die anderen Wettrunden callt auch dieser Spieler nurnoch.
+Der Maniac spielt den Preflop eher loose in dem er mitgeht bei einem Poketpair ab 4 und wenn beide Karten mindestens den Wert 6 haben, ist dies der Fall erhöht er um 20. Den Flop spielt er zufällig in dem er eine Zufallszahl von null bis 10 erstellt. Hat er eine 10, dann folded er. Hat der Maniac eine 5 oder höher erhöht er um diese Zahl mit 10 multipliziert. Hat er eine Zahl von 0 bis 4, dann geht er nur mit. Die anderen Wettrunden callt auch dieser Spieler nur noch.
 
 Die Callingstation geht einfach immer mit.
 
 \section{Meine Versuche}
-Ich führe folgende Versuche mit meiner Softwear durch: Ich lasse jede Taktik im 1 gegen 1 bei verschiednen Blinds antreten und erstelle so eine Matrix in der man sieht, welche Taktik welche, bei welche Blinds schlägt. Zum anderen teste ich auch wie sich die Situation ändert wenn weitere Spieler dabei sind.  
+Ich führe folgende Versuche mit meiner Softwear durch: Ich lasse jede Taktik im 1 gegen 1 bei verschiednen Blindes antreten und erstelle so eine Matrix in der man sieht, welche Taktik welche, bei welche Blinds schlägt. Im Gegensatz zu einem echten Pokerspiel bleiben hier aber die Blindes stabil.  Zum anderen teste ich auch wie sich die Situation ändert, wenn weitere Spieler dabei sind. Die Spieler starten alle mit 6000 Chips und spielen entweder bis nur noch einer übrig bleibt oder 10000 Runden gespielt wurden. 
 
 \chapter{Ergebnisse}
-Ich habe folgende Ergebnisse Erzielt
+Ich habe folgende Ergebnisse erzielt: Diese Matrix zeigt horizontal betrachtet welche Taktik gegen welche andere Taktik im 1 gegen 1 (Heads-up) gewinnt (grün) oder verliert(rot). Bei den Fällen, wo es auf die Blindsitauation ankommt ist dies vermerkt, also der Rock verliert immer gegen den Stonekiller und den Maniac, gewinnt aber solange der Blind unter 2 ist gegen die Callingstation. Erstellt habe ich das, in dem ich  im Programm jede Taktik gegen jede bei verschiednen Blinds spielen lies und die Daten zusammengetragen habe.
+\\ \\
+\includegraphics[width=\textwidth ]{TaktikTabelle.png}
+Die Statistiken für ein Spiel in dem die 4 Taktiken gegeneinader spielen sind wie sind folgende; das sind auch in etwa die durchschnittlichen Werte der Tightness dieser Taktiken. Der  Winratio ändert sich je nach zusammenstellung stark.
+\\ \\
+\includegraphics{Alle4gegeneinadner}
 
+Der Graph dazu sieht so aus: Er stellt das Geld der Spieler in Abhängigkeit zum Spielfortschritt dar. Bei diesem Versuch war der Blind bei 7. Es sind 2 Graphen mit den gleichen Parametern und Spielern mit leicht anderen Ergebnissen, da das ganze ja Zufalls basiert ist. 
+\\ \\ \includegraphics[width=\textwidth]{KurveAlle4.png}
+\\ \\ \includegraphics[width=\textwidth]{KurveAlle4_2.png}
+
+Zwei weitere Ergebnisse sind folgende: Als erstes ein Versuch in dem der Stonkiller gegen eine Callingstation spielt, bei einem Blind von 10 und darauf ein Versuch in dem der Stonekiller gegen 5 Callingstations zusammen spielt, bei einem Blind von 15.
+\\ \\ \includegraphics[width=\textwidth]{SKvs1CSB10.png}
+\\ \\ \includegraphics[width=\textwidth]{SKvs5CSB15.png}
+
+Auch für den Rock  sieht es bei 4 Callingstations und einem Blind von 5 deutlich besser aus, als wenn er gegen eine alleine Antritt.
+\\ \\ \includegraphics[width=\textwidth]{Rvs1CSB3.png}
+\\ \\ \includegraphics[width=\textwidth]{Rvs4CSB5.png}
+
+   
 \chapter{Diskusion}
-Was sagen uns nun diese Ergebnisse.
+\section{Interpretation der Ergebnisse}
+Was sagen uns nun diese Ergebnisse? Als erstes kann man sagen, dass mein Versuch funktioniert hat und es möglich ist, Pokerstrategien so zu testen und zu analysieren. Kommen wir zu der Matrix, hier können wir sehen, dass die Blinds die Ergebnisse stark beeinflussen können. Thighte Spielweisen profitieren von tiefen Blinds, da sie so sehr viel geringere Verluste einfahren, wenn sie kein gutes Blatt haben. Spannend und sehr verwunderlich ist auch, dass die Callingstation hier sehr gut abschneidet, obwohl diese Taktik als sehr dämlich betrachtet wird und in einem echten Pokerturnier auch sehr schnell rausfliegt. Was ist hier also vorgeffallen? Das ist sogar logisch zu erklären, denn diese Matrix stellt genau genommen nur eine Heads-Up-Situation dar, in der ja nur noch 2 Spieler vorhanden sind. Die Wahrscheinlichkeit, dass der Gegenüber von einem die bessere Hand hat ist ja nur bei 50\%, also kann hier sehr gut eine eher schlecht Hand gewinnen. Da in einem echten Pokerturnier in einem Heads-up die Blinds sehr hoch sind, heisst es, dass man sehr oft mitgehen muss. Aus der Matrix lässt sich auch schliessen, dass wie in der Theorie beschrieben der Rock zu wenig Geld verdient. Der Maniac kann laut der Matrix in so einer Heads-Up-Situation sehr lukrativ sein.
 
+Aus den Daten der verschiednen Strategien sieht man, dass sie sich so verhalten wie sie sollten, also der Rock und der Stonekiller tight spielen und die anderen entsprechend loose.
+
+Die Kurve der Versuche mit allen 4 Taktiken gegeneinander zeigt, dass der Stonekiller bei diesem Blind den anderen gegenüber überlegen ist, wenn alle miteinander zusammen spielen. Ausserdem sieht man, dass der Versuch reproduzierbar ist und immer ähnliche Werte ergibt aber nicht die gleichen. 
+Aus der Kurve sieht man weiter, dass der Rock und der Maniac ziemlich schnell raus fliegen. Weiter ist ersichtlich, dass die Callingstation durch den Rock und den Maniac stark profitiert, gegen Ende aber gegen den Stonekiller Verluste einfährt, dies ist aber nur der Fall da die Blinds nicht zu hoch sind.
+
+Die spannendste Grafik ist der Versuch, in dem der Stonekiller gegen 5 Callinstations spielt bei einem Blind von 15. Hier sieht man deutlich, wie der Stonkiller am Anfang viel Geld von den Callingstations durch seine Spielweise abkassiert, danach aber seine Gewinne mit dem rausfliegen jeder Callingstation stagnieren und er am Schluss im Heads-Up verliert. Ähnliches beweisen auch die beiden letzten Grafiken, hier schneidet wieder eine thigte Taktik bei mehreren Gegnern besser ab, als im Heads-Up.
+
+Zusammenfassend lässt sich also festhalten, dass je mehr Spieler am Tisch sind, desto thigter sollte gespielt werden und dafür natürlich bei wenigen Spieler looser.  Auch ist festzuhalten, dass reines zufälliges agieren und auch eine zu defensive Spielweise langfristig zum rausfliegen führen. Im Grossen und Ganzen lässt sich auch feststellen, dass Jan Meinert in seinem Buch Recht hatte.\cite{diePokerschule}
+
+\section{die Grenzen meines Versueches zur Realität und echten Pokerrunden}    
+Obwohl mein Versuch einige spannende Ergebnisse zu Tage brachte, hat er trotzdem seine Grenzen zur Realität. Als erstes sind meine Taktiken sehr primitiv und eher extrem, haben also nur entfernt ähnlich zu echten Pokerstrategien. Beim realen Poker werden die Strategien permannent angepasst und neu abgestimmt, die Übergänge der verschiedenen Spielweisen sind in der regel fliesend und bleiben nicht starr. 
+Des Weiteren habe ich hier keine richtigen Bluffs, geschweige überhaupt eine Psychologische Komponennte integriert, welche im realen Poker sehr wichtig ist. Auch auf die Position am Tisch, mit der Entfernung zum Dealer Button, auf die es beim Poker auch ankommt, wurde nicht Rücksicht genommen.
+Zum Schluss muss man sagen dass sich 10'000 Runden, obwohl sie sich nach viel anhören, eine sehr niedriege Zahl ist für representative Ergebnisse.
+ 
 \begin{thebibliography}{99}
 \bibitem{diePokerschule} Jan Meinert:
 \emph{Die Pokerschule}, 2007 Kanaur Verlag, 2018 Droemer Verlag
