@@ -38,9 +38,9 @@ public class hauptclass {
 		Maniac maniac4 = new Maniac("Maniac4", false, false);
 		
 		int n = 10000;
-		int bigBlind = 0;
+		int bigBlind = 5;
 		int startChips = 6000;
-		Player1[] spieler = {sKiller1, sKiller2, sKiller3, cstation1};
+		Player1[] spieler = {sKiller1, maniac1, maniac2, cstation1};
 		Player1[] spielerAnfang = spieler;
 		String outputDaten2 = "";
 		for (int i = 0; i < spielerAnfang.length; i++) {
